@@ -1,0 +1,3 @@
+?package(qldt):needs="x11" section="Games" \
+  title="Config Editor" command="/usr/games/qldtce" \
+  icon="/usr/share/icons/qldtce_icon.xpm"

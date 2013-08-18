@@ -1,0 +1,3 @@
+?package(qldt):needs="x11" section="Games" \
+  title="QLDT" command="/usr/games/qldt" \
+  icon="/usr/share/icons/qldt_icon.xpm"

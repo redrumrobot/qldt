@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en" />
+<title>QLDT Help</title>
+<style type="text/css">/* <![CDATA[  */
+    a:link { color: #044a64; text-decoration: underline }
+    a:visited { color: #044a64; text-decoration: underline }
+    a:active { color: red }
+    a:hover { color: red; text-decoration: underline }
+/* ]] */></style>
+</head>
+<body>
+<table border="0"><tr><td><img src=":/res/qldt.png" /></td><td width="10px">&nbsp;</td><td style="vertical-align:middle"><h2>QLDT Help</h2></td></tr></table>
+<hr /><br /><br />
+<a href="#supported-games"><b>Supported Games</b></a>
+<br /><br />
+
+<a href="#plugin-options"><b>Quake Live Plugin Options</b></a>
+<br /><br />
+
+<a href="#management"><b>Management</b></a>
+<ul type="circle">
+  <li><a href="#tables">Tables</a></li>
+  <li><a href="#demo-headers">Demo Headers</a></li>
+  <li><a href="#broken-demos">Broken Demos</a></li>
+  <li><a href="#drag-n-drop">Drag'n'Drop</a></li>
+  <li><a href="#autorenaming">Autorenaming</a></li>
+  <li><a href="#organizing">Organizing</a></li>
+  <li><a href="#directory-tree">Directory Tree</a></li>
+  <li><a href="#the-new-directory">The "New" Directory</a></li>
+  <li><a href="#file-assotiations">File Associations</a></li>
+  <li><a href="#opening-links">Opening Links</a></li>
+</ul><br />
+
+<a href="#playback"><b>Playback</b></a>
+<ul type="circle">
+  <li><a href="#keyboard-filter">Quake Live Keyboard Filter</a></li>
+  <li><a href="#the-connection-menu">The "Connection" Menu</a></li>
+  <li><a href="#quake-live-config-files">Quake Live Config Files</a></li>
+  <li><a href="#playing-without-delay">Playing Without Delay</a></li>
+  <li><a href="#quake-3-arena">Quake 3 Arena</a></li>
+  <li><a href="#other-programs-support">Other Programs Support</a></li>
+</ul><br />
+
+<a href="#demo-editor"><b>Demo Editor</b></a>
+<ul type="circle">
+  <li><a href="#demo-editor-tables">Tables</a></li>
+  <li><a href="#timeline">Timeline</a></li>
+  <li><a href="#removing-warmup-and-pauses">Removing of Warmup And Pauses</a></li>
+  <li><a href="#removing-lags">Removing Lags</a></li>
+  <li><a href="#saving">Saving</a></li>
+</ul><br />
+
+<a href="#other-tools"><b>Other Tools</b></a>
+<ul type="circle">
+  <li><a href="#find-demos">Find Demos</a></li>
+  <li><a href="#find-frags">Find Frags</a></li>
+  <li><a href="#find-chat">Find Chat</a></li>
+  <li><a href="#xml-tools">XML Tools</a></li>
+  <li><a href="#demo-converters">Demo Converters</a><br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#old-beta-fix">Old QL Beta Demos Fix</a></li>
+</ul><br />
+
+<a href="#config-editor"><b>Config Editor</b></a>
+<br /><br /><br />
+
+<h3><a name="supported-games"></a>Supported Games</h3>
+<hr />
+<p>QLDT supports two games: Quake Live with dm_73 demo extension and Quake 3 Arena with dm_68 extension. Support here means compatibility with the mentioned extensions on a software level. There can be a logical differences under the same protocol, caused, for example, by mods (Quake 3), or the gradual evolution of the game (Quake Live). And if the changes introduced to the protocol by Quake Live is minor, the changes introduced by Quake 3 mods cause to support each of them separately. From the Quake 3 mods, now supported (in addition to vanilla mode) only OSP and CPMA, and all program features also apply to them as well.</p>
+<br />
+
+<h3><a name="plugin-options"></a>Quake Live Plugin Options</h3>
+<hr />
+<p>Firefox plugin is used for the Quake Live demos <a href="#playback">playback</a>. Plugin itself is a library, bearing different names depending on the platform: npquakelive.i386.so on Linux x86, npquakelive.x64.so on Linux x86_64 and npquakezero.dll in Win32. The path to this library is determined automatically when you first start the program, but you still can change it or enter it manually in the options. In addition to the plugin path, the path to home directory (home path) is also needed, and also determined automatically. The path to home directory is the path to directory which contains a <b>baseq3</b> folder, with your screenshots, demos and configs.</p>
+
+<p>Running two instances of the Firefox plugin in the same time (in browser, and, from other username,
+in demotools) will lead to crash. Close firefox page before using demotools or, if you are on Linux,
+use the same username, and it will log out automatically. Also, running of two Quake Live game 
+instances in the same time will cause a crash immediately.</p>
+<br />
+
+<h3><a name="management"></a>Management</h3>
+<hr />
+<h4><a name="tables"></a>Tables</h4>
+<p>There are two types of demo lists: the main list (it is always opened in the first tab) through which manages the demos in the home directory of the game, and the list of search results. All of the lists have a two tables with an information from the <a href="#demo-headers">demo headers</a> at the right side. The top one, lists the player names without a clan tags and colors, the spectators in the list are always lower than the players which are sorted by teams, first red then blue. The bottom table lists all server variables from the selected demo header. The players table clan tags display can be enabled in the <b>View</b> menu.</p>
+
+<p>Not counting the find demo results table, that is similar to the main table, the search result lists come in two forms, depending on the search type. Not counting the displayed information, the difference between them only in the fact that when viewing segments of the frags search, their length are equal to the time from first to last frags, plus double segments boundaries extension time, when the length of the segments of the text search is only twice segments boundaries extension time.</p>
+
+<p>Records from the results tables initially are not a files on your hard drive, despite the fact that they can work as well as entries from the main table. When you delete a records from the demo search results table, the files are not deleted.</p>
+
+<p>Control, Shift or Insert keys are used for selecting multiple table records. Delete - deletes the record, Enter or double click - plays it. In addition, in the main table following keys can be used: F5 - to update the table, F9 - to rename the file.</p>
+
+<p>Tables sorted by clicking on a desired column header. Clicking on a title of already sorted column changes the sort order.</p>
+
+<p>You can drag demos in the tables, changing their order relative to each other.</p>
+
+<p>Other features are in the context menu of tables (right-click).</p>
+
+<p>Table columns display is configured in the <b>View</b> menu.</p>
+
+<p>All tables are joined by a resizable splitters.</p>
+
+<p>Alternate row and selection colors can be adjusted in the options by changing its lightness/darkness
+factors. Factor is the percentage which should lighten or darken the color. That is, if the color 
+of your system theme is dark, the factor will be used for lighting, and vice versa.</p>
+
+<p>Automatically saved when you exit the program: column widths, splitter sizes, column sorting and their order, as well as the size and location of the main window (in Linux, the desktop environment is responsible for the location, so it is not saved).</p>
+
+<h4><a name="demo-headers"></a>Demo Headers</h4>
+<p>Demo header reading is used for filling the main table with an information. Header is the first message of the game, it contains all the information needed for client initialization before viewing the demo. Demo headers contain only information that is available in the game at the record starting time. When you open a folder, QLDT reads the headers of all the demos that it contains, but, because on slower machines reading of thousands demo headers may take a minutes, all the information read while indexing, stored in the database, and fetched from there when you reopen an indexed directories. The database is located in user's home directory in the <b> Application Data\QLDT\db </b> on Windows or <b>.qldt/db</b> in GNU/Linux. It is sufficient to remove the above <b>db</b> directory for clearing the entire demo database.</p>
+
+<h4><a name="broken-demos"></a>Broken Demos</h4>
+<p>Demos with a header read errors are marked with the special icon. If a demo is corrupted somewhere inside, it will be probably couldn't be opened for <a href="#demo-editor">editing</a>, and, in this case, <a href="#xml-tools">exporting to XML</a> can be used for its reading or correction.</p>
+
+<h4><a name="drag-n-drop"></a>Drag'n'drop</h4>
+<p>The main window accept drops of files with the extensions: dm_68, dm_73, zip, rar, 7z, cfg, menu, h. Dropped archives will be unpacked, and text files are opened in the <a href="#config-editor">config editor</a>. In addition, demo tables records can be dragged to the opened <a href="#directory-tree">directory tree</a>, or to other program window.</p>
+
+<h4><a name="autorenaming"></a>Autorenaming</h4>
+<p>This function renames the selected demos in accordance with the specified format, using data from their headers. You can not rename the demos that are opened for editing.</p>
+
+<h4><a name="organizing"></a>Organizing</h4>
+<p>Organize moves all selected demos to subdirectories under the specified format. For example, if you use the format <b>&lt;T&gt;/&lt;Y&gt;</b> (you can also use the backslash in the path - <b>\</b>), the selected demos will be grouped by game type and year of record, and moved into the appropriate subdirectories (if necessary, specified directory structure will be created automatically). If none of the demos is selected, the operation will be performed with all demos in the directory.</p>
+
+<h4><a name="directory-tree"></a>Directory Tree</h4>
+<p>Directory tree is used for navigating through the subdirectories of the <b>demos</b> directory and game selection. By default, the tree is invoked by clicking on the game logo at the left of the main demo list tab. Also, it can be placed at the left of the main table and keep it always opened here, by enabling the appropriate option in the settings. Directories in the tree is selected by double-clicking, and expanded by pressing the arrow at the left of folder icons. Use the context menu of a tree for creating a new directory, as well as renaming, deleting, or packing it.</p>
+
+<h4><a name="the-new-directory"></a>The New Directory</h4>
+<p>This directory, by default, contains all the demos opened by the application. It is temporary and cleared by closing or opening the program. Its use can be turned off and all new demos will be transferred to the current chosen directory.</p>
+
+<h4><a name="file-assotiations"></a>File Assotiations</h4>
+<p>When you install QLDT through Windows setup or Debian package, it associates files with the extensions <b>dm_68</b>, <b>dm_73</b>, <b>cfg</b> and <b>menu</b>. It is possible to optionally not associate QLDT with any extensions in the Windows installer. When you open a file associated with QLDT via the system file manager, file will be opened in the program.</p>
+
+<p>For enabling the file assotiations on a non-Debian Linux distros, manually copy these files from the <b>desktop</b> directory:</p>
+
+<p>
+*.desktop to /usr/share/applications<br />
+*.xml to /usr/share/mime/packages<br />
+*.png to /usr/share/pixmaps</p>
+
+<p>Update mime database after the copying:</p>
+
+<p>$ update-mime-database /usr/share/mime</p>
+
+<h4><a name="opening-links"></a>Opening Links</h4>
+<p>When you open a link, the file it points will be downloaded and unpacked, if it is archive. Also, links can be sent from Firefox, via its context menu item <b>Send Link</b>. A link can be dropped on the main window, like a file, in this case it will also be downloaded.</p>
+<br />
+
+<h3><a name="playback"></a>Playback</h3>
+<hr />
+
+<h4><a name="keyboard-filter"></a>Keyboard Filter</h4>
+<p>By default all keys are filtered by the program, and you able to use some of the demo player 
+functions, like next/prev demo or any defined action. If the filter captures some key that isn't 
+defined in the QLDT options, or if console is opened, it forwards the key to QL. Keyboard filter can
+be disabled in the options.</p>
+
+<table style="margin-top:1em" border="1" cellpadding="3">
+<tr><td colspan="2" style="text-align:center">Default actions and key bindings</td></tr>
+<tr><td>Pause</td><td>Space</td></tr>
+<tr><td>Slow timescale *</td><td>Delete</td></tr>
+<tr><td>Fast timescale *</td><td>End</td></tr>
+<tr><td>Very fast timescale *</td><td>Page Down</td></tr>
+<tr><td>Next demo</td><td>Right</td></tr>
+<tr><td>Previous demo</td><td>Left</td></tr>
+<tr><td>Increase sound volume</td><td>Equal</td></tr>
+<tr><td>Decrease sound volume</td><td>Minus</td></tr>
+<tr><td>Sound volume 10-100%</td><td>1-0</td></tr>
+<tr><td>Mute sound</td><td>Backspace</td></tr>
+<tr><td>Show scores *</td><td>Tab</td></tr>
+<tr><td>Show accuracy *</td><td>A</td></tr>
+<tr><td>Show chat window</td><td>T</td></tr>
+<tr><td>Make screenshot</td><td>F11</td></tr>
+<tr><td>Repeat current demo</td><td>Enter</td></tr>
+</table>
+
+<p><b>*</b> <i>Action ends when the key is released.</i></p>
+
+<p>You can also assign your own actions by using the <b>Custom</b> tab, there you can specify an actions that will occur when a keys are pressed and released.</p>
+
+<h4><a name="the-connection-menu"></a>The Connection Menu</h4>
+<p>This menu allows to disconnect from quakelive.com and close the plugin.</p>
+
+<h4><a name="quake-live-config-files"></a>Quake Live Config Files</h4>
+<p>The games can cache its settings changes after the demo playback. To always play with the same settings after demo watching, create autoexec.cfg file with your settings in baseq3 directory. But autoexec.cfg is not needed by default for viewing Quake Live demos and further playing with the same settings. Since Quake Live is executed in the QLDT environment, there has been made a prohibition of the QLDT-affected game settings saving. The following cvars: r_fullscreen, r_mode, com_cameramode, r_inBrowserMode, cl_quitOnDemoCompleted, timescale, in_nograb, s_volume, cg_draw2D and com_allowConsole, after the demo playback in QLDT, will remain with the same values. This prohibition can be disabled in the options, and then, if there is no autoexec.cfg in baseq3 directory, the program will offer to create one before viewing the demos, otherwise the values of the above cvars may affect the further playing through a browser.</p>
+
+<p>com_cameramode and Freeze tag:</p>
+
+<p>Add <b>seta com_cameramode 0</b> to your demo config in order to see the character frozen body. Remember
+that the com_cameramode 0 will stop a demo playback after pressing any key that isn't defined
+in the QLDT options.</p>
+
+<h4><a name="playing-without-delay"></a>Playing Without Delay</h4>
+<p>This setting removes the delay with the static screen and the words "Waiting on Advertisement". It is disabled by default, and, in this mode, the unsubscribed users can't watch a short demos. When <a href="#demo-editor">editing</a>, the delay is removed automatically, regardless of program settings. This option only changes a temporary copies of the demos which is selected for playback, so the original demos is left unchanged.</p>
+
+<h4><a name="quake-3-arena"></a>Quake 3 Arena</h4>
+<p>To play Quake 3 demos, QLDT starts its process, specifying by the command line what mod to run, and passing other settings same way. If, while Quake 3 process is running, another demo of the same game is started, the process will be stopped and restarted with the other demo in the command line.</p>
+
+<h4><a name="other-programs-support"></a>Other Programs Support</h4>
+<p>Other programs run by the same principle as <a href="#quake-3-arena">Quake 3</a>, but without a mod. In the options, a program can be added to the context menu of certain demo formats, to the double-click action, or to the edited demo preview action.</p>
+<p>An additional program setup on the WolfcamQL (can be found on the <a href="http://www.esreality.com/index.php?a=post&forum=17">ESR forum</a>) example:</p>
+<p>After the WolfcamQL unpacking and setting up, there is necessary to create a link to the Quake Live <b>baseq3</b> <b>demos</b> directory in the <b>wolfcam-ql</b> subdirectory, to QL, and the other program, in this case WolfcamQL, could work together.</p>
+<p>Before creating the link, you have to delete or move the <b>demos</b> directory from the <b>wolfcam-ql</b> subdirectory.</p>
+<p>On the Windows the link can be created with the <a href="http://technet.microsoft.com/en-us/sysinternals/bb896768.aspx">Junction</a> application. For example, if QL home directory is <b>C:\Documents and Settings\User\Application Data\id Software\quakelive\home</b>, and WolfcamQL is located in <b>C:\wolfcamql</b>, a command for creating the link will be look like:</p>
+<p>junction C:\wolfcamql\wolfcam-ql\demos "C:\Documents and Settings\User\Application Data\id Software\quakelive\home\baseq3\demos" </p>
+<p>In the GNU/Linux the link can be created by the next command, in the case if WolfcamQL is located in <b>~/wolfcamql</b>:</p>
+<p>ln -s ~/.quakelive/quakelive/home/baseq3/demos ~/wolfcamql/wolfcam-ql/demos</p>
+<p>After that, for a full working, it is enough to specify the path to the WolfcamQL executable in the QLDT options, and select the actions for which it will be used.</p>
+<br />
+
+<h3><a name="demo-editor"></a>Demo Editor</h3>
+<hr />
+
+<h4><a name="demo-editor-tables"></a>Tables</h4>
+<p>Any table record can be edited by double click. The table at the right of the commands table used for easier player information or cvar editing. You need to enter a command code when you edit a name of a command in the commands table, so this operation is not recommended for users who are not familiar with the game protocol.</p>
+
+<h4><a name="timeline"></a>Timeline</h4>
+<p>The timeline is used to select parts of the demos, which may be later included in the result of editing, or, conversely, cutted out of it. If nothing is selected, it is assumed that all selected. Gray areas indicate the warmup and pauses. The boundaries of the selected segments can be selected and moved: with a mouse, by dragging them, or programmatically by changing the appropriate value of the time spinbox under the bar. You can deselect all by the button at the right of the timeline.</p>
+<p>By default, the timeline shows in red a long lags that could lead to showing the <b>Connection Interrupted</b> message.</p>
+
+<h4><a name="removing-pauses-and-warmup"></a>Removing of Warmup And Pauses</h4>
+<p>These options are set QLDT to not include all the warmup or pause related frames to the editing result.</p>
+
+<h4><a name="removing-lags"></a>Removing Lags</h4>
+<p>This feature is intended to eliminate some effects of the lags. It can make the game more smoothly,
+but no more than that, because effects caused by lags often are part of the game, and elimination
+of them in such case can only be done by cutting out a part of frames.</p>
+
+<h4><a name="saving"></a>Saving</h4>
+<p>Besides the ability to save the result as a demo file, you can also save it in <b>XML</b> and <b>TXT</b> formats. When saving as <b>XML</b>, the whole structure of the demo is saved, and it is possible to <a href="#xml-tools">import</a> the file back later. When saving as <b>TXT</b>, only the original chat log (without text coloring symbols) is written to the file.</p>
+<br />
+
+<h3><a name="other-tools"></a>Other Tools</h3>
+<hr />
+
+<h4><a name="find-demos"></a>Find Demos</h4>
+<p>This function searches for a demos in the database on the specified criteria and displays results in the separate table. Special wildcard characters can be used in the text boxes input. Wildcards can be escaped with the <b>\</b> (backslash) symbol.</p>
+
+<table style="margin-top:1em" border="1" cellpadding="3">
+<tr><td colspan="2" style="text-align:center">Wildcard characters</td></tr>
+<tr><td><b>?</b></td><td>Matches any single character.</td></tr>
+<tr><td><b>*</b></td><td>Matches zero or more of any characters.</td></tr>
+<tr><td><b>[...]</b></td><td>Sets of characters can be represented in square brackets, similar to full regexps.</td></tr>
+</table>
+<br />
+
+<h4><a name="find-frags"></a>Find Frags</h4>
+<p>This function scans a demos in the specified directory in the search of a frag sequence, made by a player that recorded the demo, in accordance with certain conditions. Warmup frags will be ignored. The results are displayed in a separate table at which you can work almost as well as with the main.</p>
+<p>Player names can be separated by commas in the <b>Have players</b> field.</p>
+<p>The following weapons: Rocket Launcher, Grenade Launcher, Plasma Gun and BFG 10K can do a frags by a splash damage, i.e. without a player being hit directly by a projectile. You can filter out such frags by turning on <b>Direct hits only</b> option.</p>
+
+<h4><a name="find-chat"></a>Find Chat</h4>
+<p>This function searches, depending on the protocol, commands chat, tchat and mm2, with the text that is identical to entered. Results, like when searching for frags, are displayed in a separate table. By default, the search ignores a colors of the text, that is, for example, when searching string <b>gg</b>, a strings <b>^7g^5g</b> and <b>^5g^7g</b> will hit to results, and the color symbols will be removed. To search for a string without ignoring the colors, you need to turn off the appropriate option. You can use wildcard characters, as when searching for demos.<p>
+
+<h4><a name="xml-tools"></a>XML Tools</h4>
+<p>Demos can be exported to <b>XML</b>, since this kind of content can be read by a human or processed by a program. Also, there is an import function that converts a demo from the <b>XML</b> format to the game format.</p>
+
+<p>For the convenience of external programs, there are console keys in QLDT for XML importing and exporting:</p>
+
+<table style="margin-top:1em" border="1" cellpadding="3">
+<tr><td>-i</td><td>Import specified demo from XML</td></tr>
+<tr><td>-e</td><td>Export specified demo to XML</td></tr>
+<tr><td>-o</td><td>Export output file name or path for import (optional)</td></tr>
+</table>
+
+<p>When using them, the program will run in the console, and will be closed after the operation.</p>
+
+<h4><a name="demo-converters"></a>Demo Converters</h4>
+<a name="old-beta-fix"></a><p>Old QL Beta Demos Fix: viewing the old demos recorded on some maps can cause <b>CM_InlineModel: bad number</b> error. This feature automatically updates the demos, making them suitable for viewing.</p>
+<br />
+
+<h3><a name="config-editor"></a>Config Editor</h3>
+<hr />
+<p>A simple text editor with tabs, syntax highlighting for Quake scripts (cfg, menu, h), autocompletion, sorting and a config files comparsion. Exists as a separate program and used in QLDT for config files editing. In addition to the actions listed in the <b>Edit</b>, the Shift+Delete combination can be used for the current line deletion.</p>
+<p>It is possible to configure the editor to use custom files that contain lists of actions, cvars, commands and keys. When you activate the use of custom highlighter files, they will be automatically created in the specified directory for a further changes. Editor uses the information from these files for syntax highlighting, for autocompletion, and for a config files comparsion.</p>
+<p>The config comparison tool compares the cvars of a two config files and shows the differences. The table will show a dash instead of value, if one of the configs insn't defines a cvar, that defined in another one.</p>
+
+<br />
+<br />
+<br />
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+1.1.11 (18-08-2013)
+    the Race gametype support (by Lam)
+    fix the map selector in the "find frags" panel (by Lam)
+
+1.1.10 (03-05-2013)
+    fix Quake Live login issue (by Lam)
+
+1.1.9 (03-05-2012)
+    fix ql login bug on linux (by woky)
+    Fedora 16 build fix (by woky)
+    the new gametypes (DOM, AD, RR, HARVESTER, 1FCTF) crash fix (by Lam)
+    find text: date column (by Lam)
+    
+1.1.8 (09-05-2011)
+    find frags: telefrags, kamikaze and ignore teamkills option
+    some minor bugfixes
+
+1.1.5 (01-05-2011)
+    update table option in the tools menu
+    sv_skillRating now shown in the first table row
+    demo boundaries extension can be customized separately (begin/end)
+    text search: wildcards, case sensitivity and ignore colors options
+    7zip bugfixes
+    fix insufficient disk space issue on i386 linux
+    fix autorename bug
+    fix file moving issues
+
+1.1.4 (13-04-2011)
+    7zip (lzma) demo packing/unpacking support
+    fix autorename bugs
+    fix cfg editor search cursor bug
+
+1.1.3 (27-03-2011)
+    fix main menu bug
+    fix demo deletion bug
+    fix delay removing bug
+    fix find frags gui bug
+    some new command names in the cmd editor
+    fix translation bug
+    fix issue when other app closed if ql disconnected
+    find frags: "min. frags" now set to 1 by default
+
+1.1.2 (24-03-2011)
+    demo edit pauses fix
+    find frags: option to show frags caused by direct hits only
+    fix weapon name typo
+    shortcut: Ctrl+W - close tab
+    cfg editor: fix welcome page bug
+    fix find frags bug
+    demo editor can open a demo from any table
+
+1.1.1 (21-03-2011)
+    added missing KP_HOME to the highlighter index
+    fix database obsolete records removing bug
+    find frags: resolved issue with the "min. frags" = 1
+    fix authorization email encoding bug
+    cfg editor: configs compare now also uses simple numeric comparsion (i.e. 1 = 1.0 now)
+    fix path edit file dialog bug
+    help additions and fixes
+
+1.1.0 (09-03-2011)
+    slightly increased program start speed
+    demos database (no more header indexing on every app start)
+    removed option for disabling demo headers indexing
+    demo find tool
+    convert dialog: save button
+    disabled menu items which can't be used
+    main table: key F4 - edit demo
+    all demo tables: key Insert - add next row to selection
+    all demo tables: keys Home, End - select top or bottom row
+    broken demos now shown with the broken icon
+    players in the player table now sorted by teams
+    option for showing clan tags in the header info table (disabled by default)
+    edit: option to show lags on the timeline (enabled by default)
+    edit: continue to select demo part if cursor leaves timeline
+    cfg editor: welcome page
+    cfg editor: recent opened files fixes
+    cfg editor: close button now closes only current tab
+    cfg editor: syntax highlighter index update
+    cfg editor: syntax highlighter and autocompleter index can be customized
+    cfg editor: clipboard text automatically pasted to newly opened find bar
+    cfg editor: toolbar position is saved now
+    cfg editor: find and replace panel
+    cfg editor: assotiated with *.menu files
+    cfg editor: cvar compare tool
+    cfg editor: selection indentation by Tab and Shift+Tab
+    cfg editor: comment/uncomment selection (by Ctrl+/)
+    demo player: changed control panel behaviour (the panel is hidden now by default)
+    demo player: default keys: "=" - sound up, "-" - sound down, Backspace - mute sound
+    help update
+    fix bug when QL window opened while other program started
+    fix windows installer bug
+    fix cfg editor sorting bug
+    fix cfg editor find text bug
+    fix cfg editor autocomplete bug
+    fix cfg editor syntax highlighter bug
+    fix find frags/chat initial time bug
+    fix edit demo save bug
+    fix main table selection bug
+    fix time format saving bug in options
+
+1.0.3 (12-02-2011)
+    demo edit regression fixes
+    cfg edit: updated syntax highlighter index
+
+1.0.2 (26-01-2011)
+    demo unlag fix
+    fix pause remove bug
+    help fixes
+    edit table fixes
+    fix item timers bug in edit
+    fix warmup bug in edit
+
+1.0.1 (16-01-2011)
+    minor help fixes and changes
+
+1.0.0 (14-01-2011)
+    options layout change
+    config editor is a standalone program now
+    disconnect option ("Connection" menu)
+    find chat tool
+    old beta demos converter
+    external program support
+    help contents
+    F5 key: update main demo table
+    F9 key: rename file in the main demo table
+    edit: time spinboxes
+    edit: increased parts selector darkness
+    edit: save as txt (for saving chat log)
+    options: QL auto disconnect if login info changed
+    slightly increased program start speed
+    cmd editor: "Ready" player info string
+    toggle fullscreen state now saved in the options
+    delay remove: demos loaded as is if they are recorded by a subscribed user
+    disabled QL settings caching to qzconfig.cfg and repconfig.cfg
+    (QLDT can be used without autoexec.cfg now)
+    QL autoexec.cfg now can be created automatically
+    cfg editor: Shift + Del - remove line
+    config file names sorting in options
+    player control panel black style
+    "Protocol" column now hidden by default
+    windows uninstaller removes all registry settings
+    application category: games in debian
+    fix issue if fullscreen toggled before QL started
+    fix keybord filter issue after console opening and issue after focus out
+    fix issue when "quit" console command started next demo
+    (keyboard filter should be enabled for the "quit" work)
+    fix edit command bug
+    fix cpma find frags bug
+    fix issue with a demo file name "QuakeLive.dm_73"
+    fix issue when "demos" directory not exist
+    fix edit demo pauses issue
+    fix bug prevented to get a correct plugin path on i386 linux
+    fix windows installer bug
+    fix path edit bug
+    fix file dialog labels
+    fix variables table bug
+    fix CA/FT round start when cutting
+
+0.9.14 (10-12-2010)
+    fix next demo action bug
+    fix kb filter arrows bug on windows (windowed mode)
+    cfg edit: fix some autocompleter bugs
+    cmd editor: "Subscribed" player info string
+    cmd editor: fixed edit command bug
+
+0.9.13 (13-11-2010)
+    cfg editor: updated syntax highlighter index
+    cfg editor options: autocomplete, on by default
+    cfg editor: fixed edit->sort aliases issue
+    find frags: updated QL map list
+
+0.9.12 (04-11-2010)
+    edit: removed ad waiting delay when watching a demo parts
+    edit: fixed servertime label size
+    edit: fixed empty demos crash
+    demo player options: "Start demo without delay" - auto removes the ad delay from 
+        the demo before it starts, disabled by default (with this turned on, free 
+        users can watch the short demos since the last QL update) Note: this option
+        only changes a temporary copies of the demos which is selected for playback,
+        so the original demos is left unchanged.
+    fixed keyboard filter bug
+    file deletion dialog can't be shown if there is no demos selected
+    fixed find frags table crash
+    fixed auto next demo bug
+    fixed a mouse cursor issue on windows (windowed mode)
+    cfg editor: fixed cut/copy crash on windows
+    cfg editor: fixed default font loading issue
+    added some more warning messages
+    updated Qt and translations up to 4.7.0 on windows
+    fixed a small screen issue on windows
+    fixed some plugin path issues on windows
+    fixed toggle fullscreen bug
+    fixed edit demo bug
+    fixed file dialog freeze
+    fixed win32 build bug
+
+0.9.11 (03-09-2010)
+    cfg syntax highlighter update
+    fixed cfg editor bug
+    fixed bug when play demo caused a crash after demo deleting
+    fixed demo table bug
+    fixed cpma demos edit bug
+    dir tree: directory symbolic links support
+
+0.9.10 (31-08-2010)
+    fixed keyboard filter action alias issue on linux
+    removed "CBT mode" windows option (QL window doesn't grab a mouse cursor anymore)
+    added com_allowConsole 1 to QL starting command string
+    sub-archives unpacking support
+    draw 2d on slow is on by default
+    new QL demo action - pause, default key - space
+    options: mute sound during the pause, on by default
+    options: draw 2d on pause, off by default
+    fixed old beta instagib demos gametype bug
+    command editor: new command name - "Level design by"
+    fixed cfg editor find panel bug
+    updated cfg editor syntax highlight
+
+0.9.8 (10-08-2010)
+    fixed some dir tree bugs
+    slightly increased program starting speed
+    fixed some cfg editor bugs
+    fixed demo table bug
+    updated QL demo player autorization code
+    updated map names
+    freeze tag support
+
+0.9.6 (27-07-2010)
+    fixed Q3 demo edit bug
+    fixed rename bug
+    increased demo headers indexing speed
+    fixed demo deletion bug
+
+0.9.5 (19-07-2010)
+    fixed scores bug in the QL demo edit
+    fixed some directory tree bugs
+    fixed find frags panel bug
+    fixed custom key bindings bug
+    fixed demo editing bug
+    fixed slow button bug
+    fixed QL keyboard filter bug (linux)
+    fixed save options bug
+    fixed cfg editor bug
+    fixed sound mute bug
+    file download progress shown in the taskbar
+    custom key bindings: key release action
+    chat editor: add chat string (and some other changes)
+    options: any game resolution can be selected for the QL windowed mode
+    edit: save as xml
+    cfg editor: recent configs menu
+
+0.9.4 (12-07-2010)
+    fixed some translation bugs
+    fixed file download bug
+    fixed accuracy key action bug
+    temporary directories now cleared on start
+    fixed main tab name bug after a demo drop
+    fixed user agent bug in options
+    demo table key: Return - play demo
+    QL demo action: repeat current demo from the beginning - Return by default
+    fixed unrar bug
+    full keyboard grab replaced by keyboard filter (see readme)
+    fixed key bindings bug
+    fixed part selector time spinbox bug
+    fixed sound volume bug
+    fixed key capture bug on vista/win7
+
+0.9.3 (01-07-2010)
+    fixed some translation bugs
+    fixed windows style bug
+    fixed lineEdit style bug
+    lineEdit clear button auto hide
+    fixed gtk style bug
+    fixed file copying bug
+    added downloaded file size label
+    fixed demo tables bug
+    fixed xml parse bug
+    fixed player names bug
+    fixed some demo editing bugs
+    fixed cfg editor bug
+    added some missing cvars
+    fixed Q3 gametypes bug
+    hide player window when demo starts in fullscreen
+    options: language selection
+    added all official Qt translations (18 languages)
+    fixed user names bug on windows
+    fixed user agent bug
+    fixed cvars table order
+
+0.9.1 (15-06-2010)
+    fixed some translation bugs
+    fixed options edit icon bug
+    fixed options config selection bug
+    edit: clear parts button flat and center aligned
+    fixed tab closing bug
+    edit: added some player info labels to the cmd editor
+    fixed cursor label bug in the edit
+    fixed demo rename bug
+    fixed bug in parts selector widget
+    fixed QL demo arguments bug
+    fixed Q3 edit commands table bug
+    fixed some demo edit bugs
+    fixed Q3 vote time bugs in the edited demo
+    fixed sound mute bug
+    fixed directory tree bug
+
+0.9.0 (11-06-2010)
+    fixed some plugin library loading bugs
+    fixed file download bug
+    fixed some translation bugs
+    urls can be pasted from clipboard by Ctrl+V
+    fixed demoplayer keys bug
+    fixed demoplayer toggle fullscreen bug
+    urls for download can be sended from firefox via "send to -> qldt"
+    added QL login error messages
+    fixed bug that crashed plugin if program is closed while demo is played
+    "Commands table" renamed to "Variables table"
+    fixed some autorename bugs
+    fixed QL SP demo edit bug
+    fixed cfg editor syntax highlighter bug
+    fixed search results info bugs
+    fixed find frags bug
+    fixed table selection bug
+    fixed bug when Q3 edited demos can't be previewed
+    fixed Q3 demo command arguments bug
+    "+set com_cameramode 1" passed to Q3 on start
+    fixed several bugs in the demo cut
+    added CPMA remove pauses
+    fixed Q3/CPMA find frags bug in CTF and CA
+    fixed some Q3 demo edit bugs
+    Q3 gamestate shown in the edit
+    fixed bug with incorrect player names in CPMA demo header info
+    fixed bug when initial time can't be setted in the edited Q3 demo
+    fixed QL edited demo game timer bug
+    fixed QL logging in bugs
+    fixed powerup respawn timers bug in the edited QL demo
+    fixed bug in options when repeatPlaylist option doesn't saved
+    fixed demo changing bug
+    added close tab button style
+    directory tree button moved to the tab bar corner
+    fixed widget sizes bugs in the keybindings dialog
+    fixed bug with incorrect warmup duration in some demos
+    fixed edited demo initial time bug
+    fixed edited demo server time bugs
+    fixed warmup label bug in the edit
+    fixed map name bug in the edit
+    edit: clear selection button moved to the parts selector widget layout
+    fixed bug in parts selector widget
+    edit: added option to cut off selected parts
+    fixed bug in edit chat
+    fixed bug when header info table items can be edited
+    edit: added commands editor
+    edit: added a cancel changes button
+    options: option "show time in minutes" renamed to "show time in seconds",
+    disabled by default, and also applyed to the part length label
+    options: "control panel always visible" renamed to "auto hide control panel"
+    edit: added Q3 mod label
+    added clear url and clear password buttons
+    fixed bug in login dialog
+    added option to turn off a next demo auto play
+    fixed bug when demo shows incorrect info after its part previewing
+    main demo table now updates right after a new demo saved to it
+    fixed edited demo vote time bug
+    fixed bug in recent menus
+    fixed bug in the keybindings dialog
+    chosen directory name now shown in the program title
+    added a "no permission" warning message for the restricted directories
+    added a QL demo launch error message
+    main menu: "Edit" renamed to "Tools"
+    changed some icons
+    config editor: added line numbers, current line highlight
+    config editor: added some missing cvars to syntax highlighter index
+    fixed bug with a modified state in the config editor
+    fixed a linux firefox plugin path getting bug
+    fixed bug with file downloading
+    fixed directory tree bug
+
+0.8.6 (27-05-2010)
+    fixed some translation bugs
+    slight demo parsing code optimizations
+    fixed bug when import from XML didn't work
+    fixed bug when it can start to download a non-valid url
+    fixed download indicator bug when it cancelled
+
+0.8.5 (23-05-2010)
+    fixed bug when accuracy box in QL demo can't be closed
+    fixed some translation bugs
+    fixed bug with demo config priority
+    table style colors now calculated in runtime depending on the system theme colors
+    fixed selected row font color bug
+    added options for customizing some table style colors by changing its color factors
+    backslashes in the game paths now automatically replaced by slashes
+    correct APPDATA path now taken from windows enviroment
+    fixed bug with a Vista/Win7 default home paths
+    fixed some incorrect default window sizes
+    rearranged widgets in the options dialog player tab
+    options: added QL sound volume slider, and sound mute checkbox
+    fixed find frags bug when it picks a parts with incorrect frag numbers
+    fixed CA demos find frags bug when it showed incorrect results (CA respawn now equal to death)
+    options: config from any baseq3 subdirectory with the valid name can be loaded
+    options: edit tab server time may be shown in minutes excluding warmup time
+    find frags: corrected frag sequence start time (warmup time excluded)
+    added checks for preventing of non-ascii file/directory names input
+    fixed directory tree auto resize bug
+    QL toggle fullscreen button now works
+    options: QL keyboard grab now can be disabled
+    fixed bug when QL window can steal mouse cursor after clicking on it
+    options: QL demo player key bindings
+    fixed windows bug when it fails to load file from directory with localized name
+
+0.8.3 beta (17-05-2010)
+    QL fullscreen modes comboBox in options now shows all modes properly
+    changed free space getting code on Windows
+    +fs_game with right mod name now passed to the Q3 binary
+    fixed language translation bugs in options dialog
+    fixed bug in QL fullscreen resolutions list
+    fixed broken desktop file path in Debian/Ubuntu package
+    demo headers reading process now can be cancelled
+    removed "+set in_mouse -1" from demo starting command string, because its there isn't necessary anymore
+
+0.8.1 beta (15-05-2010)
+    language translations now will be installed properly
+    fixed directory tree font size bug
+    increased edited demo saving speed in some cases
+    fixed some file assotiation issues
+
+0.8.0 beta (14-05-2010)
+    first beta release

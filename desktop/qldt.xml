@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/quakelive-demo">
+    <comment>Quake Live Demo</comment>
+    <glob pattern="*.dm_73"/>
+    <icon name="quakelive_demo"/>
+  </mime-type>  
+  <mime-type type="application/quake3-demo">
+    <comment>Quake 3 Demo</comment>
+    <glob pattern="*.dm_68"/>
+    <icon name="quake3_demo"/>
+  </mime-type>    
+</mime-info>

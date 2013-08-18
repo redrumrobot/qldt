@@ -1,0 +1,145 @@
+QWidget#controlWidget {
+    border: none;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #646464, stop: 0.08 #6d6d6d,
+        stop: 0.39999 #2f2f2f, stop: 0.4 #202020,
+        stop: 0.9 #0a0a0a, stop: 1 #000000);
+}
+
+DtPlayerButton {
+    width: 42px;
+    height: 26px;
+    border: 0px;
+    icon-size: 26px, 26px;
+
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #818181, stop: 0.08 #5b5b5b,
+        stop: 0.49999 #4c4c4c, stop: 0.5 #3d3d3d,
+        stop: 0.9 #272727, stop: 1 #0d0d0d);
+}
+
+DtPlayerButton:pressed, DtPlayerButton:checked {
+    border: 1px solid #3a3a3a;
+    border-left: 2px solid #3a3a3a;
+    border-right: 2px solid #3a3a3a;
+    padding-top: 4px;
+
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #131313, stop: 0.08 #1c1c1c, stop: 0.6 #414141,
+        stop: 0.9 #5f5f5f, stop: 1 #767676);
+}
+
+DtPlayerButton#prevButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/prev.png);
+}
+
+DtPlayerButton#playButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/play.png);
+}
+
+DtPlayerButton#pauseButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/pause.png);
+}
+
+DtPlayerButton#stopButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/stop.png);
+}
+
+DtPlayerButton#fastButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/fast.png);
+}
+
+DtPlayerButton#veryFastButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/fastest.png);
+}
+
+DtPlayerButton#nextButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/next.png);
+}
+
+DtPlayerButton#screenshotButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/screenshot.png);
+}
+
+DtPlayerButton#fullscreenButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/fullscreen.png);
+}
+
+DtPlayerButton#muteButton {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content;
+    background-clip: padding;
+    background-image: url(:/res/player/black/mute_off.png);
+}
+
+DtPlayerButton#muteButton:pressed, DtPlayerButton#muteButton:checked {
+    background-image: url(:/res/player/black/mute_on.png);
+}
+
+QSlider#soundVolumeSlider::groove:horizontal {
+    border: 1px solid #656565;
+    height: 4px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop:1 #747474);
+    margin: 2px 0;
+}
+
+QSlider#soundVolumeSlider::handle:horizontal {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #767676, stop: 0.08 #4f4f4f,
+        stop: 0.49999 #414141, stop: 0.5 #323232,
+        stop: 0.9 #2c2c2c, stop: 1 #131313);
+
+    border: 1px solid #353535;
+    border-top: none;
+    border-bottom: none;
+    width: 8px;
+    height: 26px;
+    margin: -10px -1;
+}

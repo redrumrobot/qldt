@@ -1,0 +1,24 @@
+IDI_ICON1 ICON DISCARDABLE "res/qldt.ico"
+IDI_ICON2 ICON DISCARDABLE "res/quake3_demo.ico"
+IDI_ICON3 ICON DISCARDABLE "res/quakelive_demo.ico"
+1 VERSIONINFO
+FILEVERSION 1,1,11,0
+BEGIN
+	BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "FileDescription",  "Quake Live - Demo Tools"
+            VALUE "LegalCopyright",   "Copyright (c) 2010-2011 Ed Bow"
+            VALUE "ProductName",      "Quake Live - Demo Tools"
+            VALUE "ProductVersion",   "1.1.11"
+            VALUE "FileVersion",      "1.1.11"
+        END
+    END
+	
+	BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+

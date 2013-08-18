@@ -1,0 +1,104 @@
+DtDirTreeButton {
+    width: 28px;
+    height: 26px;
+    background-image: url(:/res/qadir.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border: none;
+    margin-left: 3px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding: 0px;
+}
+
+DtDirTreeButton[winStyle="true"] {
+    margin-bottom: -1px;
+}
+
+DtDirTreeButton[qzIcon="true"] {
+    background-image: url(:/res/qzdir.png);
+}
+
+DtDirTreeButton:hover {
+    background-image: url(:/res/qadir_hover.png);
+}
+
+DtDirTreeButton:hover[qzIcon="true"] {
+    background-image: url(:/res/qzdir_hover.png);
+}
+
+DtDirTreeButton:pressed {
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
+DtMainTabWidget::tab-bar {
+    left: 0px;
+}
+
+DtMainTabWidget::tab-bar[treeButtonVisible="true"] {
+    left: -3px;
+}
+
+QTabBar::tab {
+    min-width: 18ex;
+}
+
+QTabBar::close-button {
+    image: url(:/res/tab_close.png);
+    subcontrol-position: right;
+}
+
+QTabBar::close-button:hover {
+    image: url(:/res/tab_close_hover.png);
+}
+
+QTreeWidget::branch:has-siblings:!adjoins-item {
+    border-image: url(:/res/tree-vline.png) 0;
+}
+
+QTreeWidget::branch:has-siblings:adjoins-item {
+    border-image: url(:/res/branch-more.png) 0;
+}
+
+QTreeWidget::branch:!has-children:!has-siblings:adjoins-item {
+    border-image: url(:/res/branch-end.png) 0;
+}
+
+QTreeWidget::branch:has-children:!has-siblings:closed,
+QTreeWidget::branch:closed:has-children:has-siblings {
+    border-image: none;
+    image: url(:/res/branch-closed.png);
+}
+
+QTreeWidget::branch:open:has-children:!has-siblings,
+QTreeWidget::branch:open:has-children:has-siblings  {
+    border-image: none;
+    image: url(:/res/branch-open.png);
+}
+
+QLabel#progressFileInfo, QLabel#progressTotalInfo {
+    margin-left: 5px;
+}
+
+QSlider#soundVolumeSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 4px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #919191, stop:1 #a4a4a4);
+    margin: 2px 0;
+}
+
+QSlider#soundVolumeSlider::handle:horizontal {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+        stop: 0 #a6a6a6, stop: 0.08 #7f7f7f,
+        stop: 0.49999 #717171, stop: 0.5 #626262,
+        stop: 0.9 #4c4c4c, stop: 1 #333333);
+
+    border: 1px solid #4a4a4a;
+    border-top: none;
+    border-bottom: none;
+    width: 8px;
+    height: 26px;
+    margin: -10px -1;
+}

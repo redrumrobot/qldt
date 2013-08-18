@@ -1,0 +1,12 @@
+QTabBar::close-button {
+    image: url(:/res/tab_close.png);
+    subcontrol-position: right;
+}
+
+QTabBar::close-button:hover {
+    image: url(:/res/tab_close_hover.png);
+}
+
+QTabBar::tab {
+    min-width: 18ex;
+}

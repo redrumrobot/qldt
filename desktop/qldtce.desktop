@@ -1,0 +1,15 @@
+[Desktop Entry]
+Value=1.0
+Type=Application
+Encoding=UTF-8
+Exec=qldtce %F
+Name=Config Editor
+GenericName=Config Editor
+X-KDE-StartupNotify=false
+StartupNotify=false
+Icon=qldtce_icon
+Terminal=false
+Type=Application
+Categories=Game;
+MimeType=text/quake-script
+InitialPreference=9

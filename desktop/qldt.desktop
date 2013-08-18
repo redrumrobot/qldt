@@ -1,0 +1,15 @@
+[Desktop Entry]
+Value=1.0
+Type=Application
+Encoding=UTF-8
+Exec=qldt %F
+Name=QLDT
+GenericName=QLDT
+X-KDE-StartupNotify=false
+StartupNotify=false
+Icon=qldt_icon
+Terminal=false
+Type=Application
+Categories=Game;
+MimeType=application/quakelive-demo;application/quake3-demo
+InitialPreference=9
