@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 #include <dlfcn.h>
 #include <sys/mman.h>
+#include <unistd.h>
 
 static void protectPage( void* ptr, int prot ) {
     void* page = reinterpret_cast< void* >( reinterpret_cast< quint64 >( ptr ) &
