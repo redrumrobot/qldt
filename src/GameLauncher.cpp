@@ -176,6 +176,7 @@ bool DtGameLauncher::initializeOtherAppProcess() {
 }
 
 bool DtGameLauncher::initializeQzPlugin() {
+    return false;
     qzLoader = new DtQzPluginLoader( screen, this );
     connect( qzLoader, SIGNAL( httpEvent( const QString& ) ),
              parent(), SLOT( qzConnectEvent( const QString& ) ) );
@@ -419,6 +420,7 @@ bool DtGameLauncher::setDemo( QString demoName ) {
             }
         }
     }
+/*
     else if ( ext == "dm_73" ) {
         if ( !qzPluginInitialized ) {
             if ( initializeQzPlugin() ) {
@@ -445,7 +447,7 @@ bool DtGameLauncher::setDemo( QString demoName ) {
         qDebug( "Unknown format" );
         return false;
     }
-
+*/
     return true;
 }
 
