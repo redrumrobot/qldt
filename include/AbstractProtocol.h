@@ -284,8 +284,15 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
         d->error( DtDemo::FATAL, "Bad delta entity number: %i", number );
     }
 
+#ifdef MSG_LOG
+    Com_Printf( "%3i: entity %d ", msg->readcount, number );
+#endif
+
     if ( readBits( msg, 1 ) == 1 ) {
         /* remove */
+#ifdef MSG_LOG
+        Com_Printf( "ent remove\n" );
+#endif
         memset( to, 0, sizeof( *to ) );
         to->number = MAX_GENTITIES - 1;
         return;
@@ -293,6 +300,9 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
 
     if ( readBits( msg, 1 ) == 0 ) {
         /* no delta */
+#ifdef MSG_LOG
+        Com_Printf( "no delta\n" );
+#endif
         *to = *from;
         to->number = number;
         return;
@@ -301,7 +311,7 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
     int lastFieldNum = readByte( msg );
 
     if ( lastFieldNum > U::entityStateFieldsNum ) {
-        d->error( DtDemo::FATAL, "Incorrect field count %d", lastFieldNum );
+        d->error( DtDemo::FATAL, "Incorrect field count %d > %d", lastFieldNum, U::entityStateFieldsNum );
     }
 
     to->number = number;
@@ -320,8 +330,14 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
                         readBits( msg, 32 );
                     }
                 }
+#ifdef MSG_LOG
+                Com_Printf( "%s:float ", fld->name );
+#endif
             } else {
                 int val = ( readBits( msg, 1 ) == 0 ) ? 0 : readBits( msg, fld->bits );
+#ifdef MSG_LOG
+                Com_Printf( "%s:%i ", fld->name, val );
+#endif
 
                 if ( d->currentParseType != DtDemo::FindFrags ) {
                     continue;
@@ -331,6 +347,10 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
             }
         }
     }
+
+#ifdef MSG_LOG
+                Com_Printf( "\n" );
+#endif
 
     if ( d->currentParseType == DtDemo::FindFrags && oEvent.save ) {
         if ( d->eventTimes[ number ] > d->lastSnapTime - EVENT_VALID_MSEC  ) {

@@ -45,7 +45,7 @@ netField_t playerStateFields[] =
 { PSF(events[0]), 8 },
 { PSF(legsAnim), 8 },
 { PSF(events[1]), 8 },
-{ PSF(pm_flags), 16 },
+{ PSF(pm_flags), 24 },
 { PSF(groundEntityNum), GENTITYNUM_BITS },
 { PSF(weaponstate), 4 },
 { PSF(eFlags), 16 },
@@ -73,7 +73,9 @@ netField_t playerStateFields[] =
 { PSF(grapplePoint[1]), 0 },
 { PSF(grapplePoint[2]), 0 },
 { PSF(jumppad_ent), 10 },
-{ PSF(loopSound), 16 }
+{ PSF(loopSound), 16 },
+{ PSF(jumpTime), 32 },
+{ PSF(doubleJumped), 1 }
 };
 
 int playerStateFieldsNum = sizeof( playerStateFields ) / sizeof( playerStateFields[ 0 ] );
