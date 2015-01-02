@@ -1467,6 +1467,7 @@ void DtMainWindow::initializeStrings() {
     weaponName( MOD_RAILGUN,        "Railgun",          "RG" );
     weaponName( MOD_PLASMA,         "Plasma Gun",       "PG" );
     weaponName( MOD_LIGHTNING,      "Lightning Gun",    "LG" );
+    weaponName( MOD_HMG,            "Heavy Machinegun", "HMG" );
     weaponName( MOD_BFG,            "BFG 10K",          "BFG" );
     weaponName( MOD_CHAINGUN,       "Chaingun",         "CG" );
     weaponName( MOD_NAIL,           "Nailgun",          "NG" );

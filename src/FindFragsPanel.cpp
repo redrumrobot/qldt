@@ -613,6 +613,7 @@ void DtFragsTab::initNames() {
     WEA( MOD_RAILGUN );
     WEA( MOD_PLASMA );
     WEA( MOD_LIGHTNING );
+    WEA( MOD_HMG );
     WEA( MOD_BFG );
     WEA( MOD_CHAINGUN );
     WEA( MOD_NAIL );
