@@ -396,6 +396,9 @@ bool DtGameLauncher::playDemo() {
         }
 #endif
     }
+    else if ( demoExt == "dm_90" ) {
+        return execOtherApp();
+    }
 
     return false;
 }

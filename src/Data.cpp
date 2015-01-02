@@ -164,6 +164,7 @@ bool dtdata::initializeData() {
 
     demoProtos.insert( "dm_68", Q3_68 );
     demoProtos.insert( "dm_73", QZ_73 );
+    demoProtos.insert( "dm_90", QZ_73 );
 
     QHashIterator< QString, DtDemoProto > it( demoProtos );
 
