@@ -194,11 +194,11 @@ void DtConfig::loadDefaults() {
     VAR( String,        otherAppTitle,                QObject::tr( "Other" ) )
     VAR( Bool,          otherAppDm68,                 false )
     VAR( Bool,          otherAppDm73,                 true )
-    VAR( Bool,          otherAppDoubleClick,          false )
-    VAR( Bool,          otherAppMenu,                 false )
-    VAR( Bool,          otherAppPreview,              false )
+    VAR( Bool,          otherAppDoubleClick,          true )
+    VAR( Bool,          otherAppMenu,                 true )
+    VAR( Bool,          otherAppPreview,              true )
     VAR( String,        otherAppPath,                 "" )
-    VAR( String,        otherAppCmdLine,              "+demo %demoName" )
+    VAR( String,        otherAppCmdLine,              "+demo %demoName +set nextdemo quit" )
     VAR( Bool,          otherAppFromDemos,            true )
 
     if ( !qzCustomUserAgent ) {
