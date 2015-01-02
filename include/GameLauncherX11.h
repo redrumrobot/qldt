@@ -55,7 +55,13 @@ void DtGameLauncher::wrapIo() {
 
     if ( !dlHandle ) {
         qDebug() << "Error: couldn't open" << libName;
-        return;
+        // Fedora's lib64 as fallback
+        const char* libName = "/usr/lib64/libc.so";
+        dlHandle = openLibrary( libName );
+        if ( !dlHandle ) {
+            qDebug() << "Error: couldn't open" << libName;
+            return;
+        }
     }
 
     if ( !allocateTrampMemory( dlHandle ) ) {
