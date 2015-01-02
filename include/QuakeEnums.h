@@ -157,7 +157,11 @@ enum {
     MOD_PROXIMITY_MINE,
     MOD_KAMIKAZE,
     MOD_JUICED,
-    MOD_GRAPPLE
+    MOD_GRAPPLE,
+    MOD_SWITCH_TEAMS,
+    MOD_THAW,
+    // MOD_?
+    MOD_HMG = 32
 };
 
 // entityState_t->event values
@@ -323,6 +327,7 @@ typedef enum {
     WP_NAILGUN,
     WP_PROX_LAUNCHER,
     WP_CHAINGUN,
+    WP_HEAVY_MACHINEGUN,
 
     WP_NUM_WEAPONS
 } weapon_t;
