@@ -384,7 +384,7 @@ void DtMainWindow::disconnectQl() {
 }
 
 void DtMainWindow::onShowConnectMenu() {
-    actDisconnect->setEnabled( !( demoPlayer && !demoPlayer->isQzLoggedIn() ) );
+//    actDisconnect->setEnabled( !( demoPlayer && !demoPlayer->isQzLoggedIn() ) );
 }
 
 void DtMainWindow::toggleMainTableNameColumn() {
@@ -1145,37 +1145,11 @@ void DtMainWindow::playDemo( tableDemoPos sDemo ) {
         else {
             DtDemo* demo = selected.demo;
 
-            if ( !demo->isGamesateParsed() ) {
-                demo->parseGamestateMsg();
-            }
+//            if ( !demo->isGamesateParsed() ) {
+//                demo->parseGamestateMsg();
+//            }
 
-            if ( !demo->isRecordedBySubscriber()    &&
-                 config.qzRemoveAdvertDelay         &&
-                 demo->getAdvertDelay() > 0 )
-            {
-                DtWriteOptions* opt = new DtWriteOptions( selected.demo );
-                opt->setGamestateString = true;
-                opt->gamestateString.first = CS_AD_WAIT;
-                opt->gamestateString.second = "0";
-                opt->newFileName = QString( "%1/%2/%3" ).arg( dtdata::config.getQzDemoPath(),
-                                                              dtdata::defaultTmpDirName,
-                                                              QString::number( qrand(), 16 ) );
-                tempFile = QString( "%1.dm_%2" ).arg( opt->newFileName )
-                                                .arg( demo->getProto() );
-
-                if ( demoPlayer->isQzRunning() ) {
-                    connect( demo, SIGNAL( gamestateWritten() ), this, SLOT( runDemo() ) );
-                }
-
-                QtConcurrent::run( demo, &DtDemo::writeSegment, opt );
-
-                if ( !demoPlayer->isQzRunning() ) {
-                    demoPlayer->playDemo( tempFile, demo->fileInfo().baseName );
-                }
-            }
-            else {
-                demoPlayer->playDemo( demo->fileInfo().fileName() );
-            }
+            demoPlayer->playDemo( demo->fileInfo().fileName() );
         }
     }
     else {

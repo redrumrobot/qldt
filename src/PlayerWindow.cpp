@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "Data.h"
 #include "DemoTable.h"
 #include "GameLauncher.h"
-#include "QzPluginLoader.h"
 #include "ClearLineEdit.h"
 
 #include <QEvent>
@@ -251,17 +250,6 @@ void DtPlayerWindow::cmdMute() {
     config.qzSoundMute = muted;
 }
 
-bool DtPlayerWindow::isQzRunning() {
-    return ( gameLauncher->qzPluginInitialized && gameLauncher->qzLoader->isGameRunning() );
-}
-
-bool DtPlayerWindow::isQzLoggedIn() {
-    return ( gameLauncher->qzPluginInitialized && gameLauncher->qzLoader->isLoggedIn() );
-}
-
-void DtPlayerWindow::setShowQzWarining( bool s ) {
-    showQzWarning = s;
-}
 
 void DtPlayerWindow::playDemo( const QString& demoFileName, const QString& windowTitle ) {
     QString demoName = demoFileName;
@@ -281,93 +269,10 @@ void DtPlayerWindow::playDemo( const QString& demoFileName, const QString& windo
         return;
     }
 
-    if ( QFileInfo( demoName ).suffix() == "dm_68" || openInOtherApplication() ) {
+//    if ( QFileInfo( demoName ).suffix() == "dm_68" || openInOtherApplication() ) {
         gameLauncher->playDemo();
         return;
-    }
-
-    fullscreen = config.qzFullscreen;
-    modeNum = config.qzWindowedMode;
-    gameLauncher->setMode( modeNum, fullscreen );
-
-    QString title = windowTitle.isEmpty() ? QFileInfo( demoName ).completeBaseName() : windowTitle;
-
-    if ( title == "QuakeLive" ) {
-        title += " ";
-    }
-
-    setWindowTitle( title );
-
-    if ( !isVisible() ) {
-        if ( !config.qzFullscreen ||
-             ( config.qzFullscreen && !gameLauncher->qzLoader->isLoggedIn() ) )
-        {
-            show();
-        }
-    }
-
-    setCursor( Qt::BusyCursor );
-    autoClosed = true;
-    chatVisible = false;
-    timescaleSoundMuted = false;
-    accVisible = false;
-    scoresVisible = false;
-    showQzWarning = true;
-    consoleOpened = false;
-    goingToDisconnect = false;
-    consoleCmdString.clear();
-
-    if ( gameLauncher->playDemo() ) {
-        if ( currentPlayDemoTable ) {
-            currentPlayDemoTable->markDemoPlaying();
-        }
-    }
-    else {
-        if ( hideOnLogin ) {
-            hide();
-        }
-
-        if ( showQzWarning ) {
-            QMessageBox::warning( 0, tr( "Error" ),
-                                  tr( "Couldn't launch the game\n\n"
-                                      "Notice: any other Quake Live plugin instances "
-                                      "must be closed for watching demos" ) );
-        }
-    }
-
-    setCursor( Qt::ArrowCursor );
-}
-
-void DtPlayerWindow::showQzLoginDialog( bool empty ) {
-    showQzWarning = false;
-    hideOnLogin = true;
-
-    QString email = config.getQzEmail();
-    QString pass = config.getQzPass();
-    QString msg = empty ? tr( "Enter email and password" ) : tr( "Invalid email or password" );
-
-    DtQzLoginDialog* loginDialog = new DtQzLoginDialog( this );
-
-    int btn = loginDialog->exec( msg, email, pass );
-
-    if ( btn == BTN_OK ) {
-        if ( config.qzSavePassword ) {
-            config.setQzLoginData( email, pass );
-        }
-        else {
-            config.setQzLoginData( email, "" );
-        }
-
-        hideOnLogin = false;
-        config.save();
-        gameLauncher->setQzLoginData( email, pass );
-        QTimer::singleShot( 100, this, SLOT( cmdTogglePlay() ) );
-    }
-    else {
-        close();
-    }
-
-    delete loginDialog;
+//    }
 }
 
 void DtPlayerWindow::cmdPrevDemo() {
@@ -383,12 +288,6 @@ void DtPlayerWindow::cmdTogglePlay() {
 }
 
 void DtPlayerWindow::cmdStopPlay() {
-    if ( gameLauncher->qzLoader->isGameRunning() ) {
-        autoClosed = false;
-        gCmd( "quit;" );
-        update();
-    }
-
     cmdNormalSpeed();
     pauseButton->setChecked( false );
     slowPressed = false;
@@ -487,7 +386,7 @@ void DtPlayerWindow::gCmd( const char* cmd ) {
         return;
     }
 
-    gameLauncher->qzLoader->sendGameCommand( cmd );
+//    gameLauncher->qzLoader->sendGameCommand( cmd );
 }
 
 void DtPlayerWindow::cmdScreenshot() {
@@ -495,51 +394,6 @@ void DtPlayerWindow::cmdScreenshot() {
 }
 
 void DtPlayerWindow::cmdToggleFullscreen() {
-    if ( !gameLauncher->qzPluginInitialized ) {
-        return;
-    }
-
-    if ( !gameLauncher->qzLoader->isGameRunning() ) {
-        if ( !fullscreen ) {
-            fullscreen = true;
-            config.qzFullscreen = true;
-            gameLauncher->setMode( modeNum, true );
-        }
-
-        return;
-    }
-
-    fullscreen = !fullscreen;
-    config.qzFullscreen = fullscreen;
-
-#if 0 /* vid_restart causes segfault when demo is playing */
-    gameLauncher->setMode( modeNum, fullscreen );
-
-    if ( fullscreen ) {
-        gCmd( "in_nograb 0;r_fullscreen 1;vid_restart;" );
-    }
-    else {
-        gCmd( "in_nograb 1;r_fullscreen 0;vid_restart;" );
-    }
-#else /* workaround */
-
-    goingToDisconnect = true;
-
-    if ( fullscreen ) {
-        gCmd( "in_nograb 0;disconnect;r_fullscreen 1;vid_restart;" );
-    }
-    else {
-        QString cmd = QString( "in_nograb 1;disconnect;r_fullscreen 0;"
-                               "r_inBrowserMode %1;vid_restart;" ).arg( config.qzWindowedMode );
-
-        gCmd( cmd.toAscii().data() );
-        show();
-    }
-
-    gameLauncher->setMode( modeNum, fullscreen );
-    gameLauncher->setGameStarted( false );
-    gameLauncher->playDemo();
-#endif
 }
 
 void DtPlayerWindow::qzConnectEvent( const QString& msg ) {
@@ -561,7 +415,7 @@ void DtPlayerWindow::qzExitEvent() {
     }
 
     if ( autoClosed && config.autoPlayNext ) {
-        gameLauncher->checkPlugin();
+//        gameLauncher->checkPlugin();
 
         if ( config.repeatPlaylist ) {
             cmdNextDemo();
@@ -591,35 +445,14 @@ void DtPlayerWindow::qzServerInfoEvent() {
     if ( fullscreen && isVisible() ) {
         hide();
         gameLauncher->setGameStarted( false );
-        gameLauncher->checkPlugin();
+//        gameLauncher->checkPlugin();
     }
 }
 
 void DtPlayerWindow::exit() {
-    if ( gameLauncher->qzPluginInitialized ) {
-        if ( gameLauncher->qzLoader->isGameRunning() ) {
-            gameLauncher->qzLoader->unload();
-            gameLauncher->qzPluginInitialized = false;
-        }
-        else {
-            gameLauncher->qzLoader->cancelLogin();
-        }
-    }
 }
 
 void DtPlayerWindow::closeEvent( QCloseEvent* ) {
-    showQzWarning = false;
-
-    if ( gameLauncher->qzPluginInitialized ) {
-        if ( gameLauncher->qzLoader->isGameRunning() ) {
-            autoClosed = false;
-            gCmd( "quit;" );
-        }
-        else {
-            gameLauncher->qzLoader->cancelLogin();
-        }
-    }
-
     if ( currentPlayDemoTable ) {
         currentPlayDemoTable->clearMark();
         currentPlayDemoTable->stopDemoPlay();

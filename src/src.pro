@@ -66,14 +66,6 @@ HEADERS += MainWindow.h     \
     PlayerData.h            \
     PlayerWindow.h          \
     GameLauncher.h          \
-    QzPluginLoader.h        \
-    NpFunctions.h           \
-    GameLauncherCommon.h    \
-    GameLauncherX11.h       \
-    GameLauncherWin32.h     \
-    firefox.h               \
-    npupp.h                 \
-    jstypes.h               \
     Task.h                  \
     OptionsDialog.h         \
     MainOptionsDialog.h     \
@@ -95,7 +87,6 @@ HEADERS += MainWindow.h     \
     ClearLineEdit.h         \
     XmlReader.h             \
     XmlWriter.h             \
-    Detour.h                \
     FindText.h              \
     FindTextDialog.h        \
     FormatDialog.h          \
@@ -136,7 +127,6 @@ SOURCES += qldt.cpp           \
     PlayerData.cpp            \
     PlayerWindow.cpp          \
     GameLauncher.cpp          \
-    QzPluginLoader.cpp        \
     Task.cpp                  \
     OptionsDialog.cpp         \
     MainOptionsDialog.cpp     \

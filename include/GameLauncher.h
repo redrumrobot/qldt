@@ -27,7 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <windows.h>
 #endif
 
-class DtQzPluginLoader;
 class QTimer;
 class QFileInfo;
 class QProcess;
@@ -39,7 +38,6 @@ public:
     DtGameLauncher( WId win, int mode, bool fullscreen, QWidget* parent = 0 );
     ~DtGameLauncher();
 
-    DtQzPluginLoader* qzLoader;
     bool qzPluginInitialized;
     bool qaProcessInitialized;
     bool otherAppProcessInitialized;
@@ -48,14 +46,12 @@ public:
     bool setDemo( QString demoName );
     void setWindow( WId win );
     void setMode( int mode, bool fullscreen );
-    void setQzLoginData( const QString& email, const QString& pass );
     bool playDemo();
     const QString& getCurrentDemo() const;
     void setGameStarted( bool started );
 
 public slots:
     void toggleAutoexecWarning( bool checked );
-    void checkPlugin();
 
 #ifdef Q_OS_WIN
 public:
@@ -81,13 +77,11 @@ private:
     bool mainWindowKeyboardGrab;
     static bool ioWrapped;
 
-    bool initializeQzPlugin();
     bool initializeQaProcess();
     bool initializeOtherAppProcess();
     bool execOtherApp();
     void releaseInput();
     void wrapIo();
-    void onDestroy();
 
 private slots:
     void runQaDemo();

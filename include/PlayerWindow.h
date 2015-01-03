@@ -60,7 +60,6 @@ public slots:
     void qzExitEvent();
     void qzDisconnectEvent();
     void qzServerInfoEvent();
-    void showQzLoginDialog( bool );
     void cmdStopPlay();
     void exit();
     void updateStyle();
@@ -105,7 +104,6 @@ private:
     bool accVisible;
     bool scoresVisible;
     bool goingToDisconnect;
-    bool showQzWarning;
     bool hideOnLogin;
     bool consoleOpened;
 
