@@ -13,7 +13,6 @@ INCLUDEPATH += ../include                           \
     zlib/contrib/minizip                            \
     unrar                                           \
     hde                                             \
-    detours                                         \
     p7zip/src                                       \
     p7zip/include
 
@@ -197,7 +196,7 @@ unix {
 }
 
 win32 {
-    LIBS += -lOleaut32 ./p7zip/p7zip.lib -luser32 -L../ -lzlibwapi -lunrar
+    LIBS += -loleaut32 ./p7zip/p7zip.lib -luser32 -L../ -lzlibwapi -lunrar
     RC_FILE = qldt.rc
     QMAKE_CXXFLAGS_RELEASE -= -O2
     QMAKE_CXXFLAGS_RELEASE += -MP2 -Ox
