@@ -197,7 +197,7 @@ unix {
 }
 
 win32 {
-    LIBS += ./detours/detours.lib -lOleaut32 ./p7zip/p7zip.lib -luser32 -L../ -lzlibwapi -lunrar
+    LIBS += -lOleaut32 ./p7zip/p7zip.lib -luser32 -L../ -lzlibwapi -lunrar
     RC_FILE = qldt.rc
     QMAKE_CXXFLAGS_RELEASE -= -O2
     QMAKE_CXXFLAGS_RELEASE += -MP2 -Ox

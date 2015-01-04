@@ -555,7 +555,7 @@ void DtPlayerWindow::keyPressEvent( QKeyEvent* e ) {
         }
 
 #ifdef Q_OS_WIN
-        gameLauncher->sendKey = false;
+//        gameLauncher->sendKey = false;
 #endif
         return;
     }
@@ -633,14 +633,14 @@ void DtPlayerWindow::keyPressEvent( QKeyEvent* e ) {
                 sendKey = true;
             }
 
-            gameLauncher->sendKey = sendKey;
+//            gameLauncher->sendKey = sendKey;
             return;
 #endif
             break;
     }
 
 #ifdef Q_OS_WIN
-    gameLauncher->sendKey = false;
+//    gameLauncher->sendKey = false;
 #endif
 }
 

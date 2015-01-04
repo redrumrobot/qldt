@@ -58,14 +58,8 @@ public:
     static HWND playerWindow;
     static bool sendKey;
 
-public slots:
-    void setInputHooks();
-
 private:
     HHOOK qzKeyboardHook;
-
-private slots:
-    void removeInputHooks();
 #endif
 
 private:
