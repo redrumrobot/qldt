@@ -109,6 +109,8 @@ void DtMainWidget::showFindFragsWidget() {
 
         if ( mainLayout ) {
             mainLayout->addWidget( fragsTab );
+            mainLayout->setStretch( 0, 1 );
+            mainLayout->setStretch( 1, 0 );
         }
     }
 }

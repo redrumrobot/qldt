@@ -104,12 +104,12 @@ class DtSourceFilesSelector : public QWidget {
     Q_OBJECT
 public:
     DtSourceFilesSelector( QWidget* parent = 0 );
+    QGroupBox* sourceFilesGBox;
 
     int selectedIndex();
     QVector< QLineEdit* > textFields;
 
 protected:
-    QGroupBox* sourceFilesGBox;
     QButtonGroup* sourceFilesGroup;
     QGridLayout* gBox;
     QList< int > textFieldNums;

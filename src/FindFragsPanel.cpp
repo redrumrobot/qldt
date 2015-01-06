@@ -49,8 +49,8 @@ DtFragsTab::DtFragsTab( QWidget* parent ) : QWidget( parent ) {
 
     QHBoxLayout* hBox = new QHBoxLayout;
 
-    hBox->addWidget( sSelector, 1 );
-    hBox->setSpacing( 10 );
+    hBox->addWidget( sSelector->sourceFilesGBox );
+    hBox->addSpacing( 10 );
 
     cbWeapon = new QComboBox( this );
     QLabel* lblWeapon = new QLabel( tr( "Weapon" ), this );
@@ -112,17 +112,18 @@ DtFragsTab::DtFragsTab( QWidget* parent ) : QWidget( parent ) {
     grid->addWidget( leMinFrags, 2, 4 );
     grid->addWidget( lblcountTeamKills, 3, 3 );
     grid->addWidget( countTeamKillsCb, 3, 4 );
-    grid->addWidget( startScanButton, 4, 3 );
-    grid->addWidget( closeButton, 4, 4 );
+    grid->addWidget( startScanButton, 4, 1 );
+    grid->addWidget( closeButton, 4, 3 );
 
-    hBox->addLayout( grid, 1 );
+    hBox->addLayout( grid );
     hBox->addSpacing( 10 );
 
-    QGroupBox* mainGroup = new QGroupBox;
+    QGroupBox* mainGroup = new QGroupBox( tr("Find frags"), this );
     mainGroup->setLayout( hBox );
 
     QHBoxLayout* mainLayout = new QHBoxLayout;
     mainLayout->addWidget( mainGroup );
+    mainLayout->addStretch( 1 );
 
     setLayout( mainLayout );
 
@@ -546,9 +547,11 @@ DtSourceFilesSelector::DtSourceFilesSelector( QWidget* parent ) : QWidget( paren
              this, SLOT( selectionChanged( int ) ) );
 
     sourceFilesGBox = new QGroupBox( tr( "Files" ), this );
-    sourceFilesGBox->setMinimumWidth( 300 );
+//    sourceFilesGBox->setMinimumWidth( 300 );
+    sourceFilesGBox->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
 
     gBox = new QGridLayout;
+    gBox->setSpacing( 0 );
 
     for ( int i = 0; i < sourceNames.size(); ++i ) {
         QRadioButton* sButton = new QRadioButton( sourceNames.at( i ) );
@@ -566,7 +569,7 @@ DtSourceFilesSelector::DtSourceFilesSelector( QWidget* parent ) : QWidget( paren
                 QLineEdit* tF = new QLineEdit( this );
 
                 tF->setVisible( false );
-                tF->setMinimumHeight( 25 );
+//                tF->setMinimumHeight( 25 );
                 gBox->addWidget( tF, i, 1 );
                 textFields.append( tF );
             }
