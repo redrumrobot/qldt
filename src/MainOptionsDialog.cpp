@@ -695,10 +695,12 @@ void DtMainOptionsDialog::updateConfigCb( DtOptionsComboBox* comboBox, const QSt
     QStringList configs;
     comboBox->clear();
 
-    configsFromDir( dir, configs );
+    if ( dir != "" )
+        configsFromDir( dir, configs );
 
     configs.removeAt( configs.indexOf( "qzconfig.cfg" ) );
     configs.removeAt( configs.indexOf( "repconfig.cfg" ) );
+    configs.insert( 0, tr( "None" ) );
     comboBox->addItems( configs );
 
     int selectedIndex = comboBox->findText( selectedCfg );
@@ -987,7 +989,6 @@ void DtMainOptionsDialog::configsFromDir( QString path, QStringList& list ) {
     }
 
     qSort( list );
-    list.insert( 0, tr( "None" ) );
 }
 
 void DtMainOptionsDialog::setOptionsChanged() {
