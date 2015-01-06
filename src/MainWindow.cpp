@@ -237,10 +237,6 @@ void DtMainWindow::createMenus() {
     actUpdateTable = toolsMenu->addAction( tr( "&Update table" ), this,
                                           SLOT( updateMainTable() ), QKeySequence( "F5" ) );
 
-    connectMenu = menuBar()->addMenu( tr( "&Connection" ) );
-    connect( connectMenu, SIGNAL( aboutToShow() ), this, SLOT( onShowConnectMenu() ) );
-    actDisconnect = connectMenu->addAction( tr( "&Disconnect" ), this, SLOT( disconnectQl() ) );
-
     optionsMenu = menuBar()->addMenu( tr( "&Options" ) );
     viewMenu = optionsMenu->addMenu( tr( "View" ) );
 
