@@ -177,6 +177,7 @@ private:
     infoMap cgsRedPlayers;
     infoMap cgsBluePlayers;
     infoMap cgsSpecs;
+    int realProto;
     int infoPlayerCount;
     int clientNum;
     bool parsing;

@@ -45,7 +45,7 @@ netField_t playerStateFields[] =
 { PSF(events[0]), 8 },
 { PSF(legsAnim), 8 },
 { PSF(events[1]), 8 },
-{ PSF(pm_flags), 24 },
+{ PSF(pm_flags), 666 },
 { PSF(groundEntityNum), GENTITYNUM_BITS },
 { PSF(weaponstate), 4 },
 { PSF(eFlags), 16 },
@@ -470,7 +470,7 @@ void DtAbstractProtocol::writeDeltaPlayerstate( msg_t* msg, struct playerState_s
             }
         } else {
             /* integer */
-            writeBits( msg, *toF, field->bits );
+            writeBits( msg, *toF, field->bits == 666 ? ( d->realProto == 90 ? 24 : 16 ) : field->bits );
         }
     }
     c = msg->cursize - c;
@@ -614,7 +614,7 @@ void DtAbstractProtocol::readDeltaPlayerstate( msg_t* msg, struct playerState_s*
                 }
             } else {
                 /* integer */
-                *toF = readBits( msg, field->bits );
+                *toF = readBits( msg, field->bits == 666 ? ( d->realProto == 90 ? 24 : 16 ) : field->bits );
 #ifdef MSG_LOG
                 Com_Printf( "%s:%i ", field->name, *toF );
 #endif
@@ -702,7 +702,7 @@ void DtAbstractProtocol::skipPlayerState( msg_t* msg ) {
                 }
             }
             else {
-                readBits( msg, fld->bits );
+                readBits( msg, fld->bits == 666 ? ( d->realProto == 90 ? 24 : 16 ) : fld->bits );
             }
         }
     }

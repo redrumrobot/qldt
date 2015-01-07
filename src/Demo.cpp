@@ -680,6 +680,7 @@ bool DtDemo::open() {
     }
 
     demoProto = dtdata::demoProtos.value( fInfo.fileExt, Q_UNKNOWN );
+    realProto = demoProto;
 
     if ( demoProto == Q_UNKNOWN ) {
         error( WARN, "Unknown extension %s", fInfo.fileExt.toUtf8().data() );

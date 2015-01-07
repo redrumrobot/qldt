@@ -150,6 +150,9 @@ void DtDm73::parseConfigVars( char* str, int len, int csIndex ) {
             else if ( !strcmp( key, "g_instaGib" ) || !strcmp( key, "g_instagib" ) ) {
                 d->instaGib = atoi( val );
             }
+            else if ( !strcmp( key, "protocol" ) ) {
+                d->realProto = atoi( val );
+            }
 
             d->info.append( QPair< QString, QString >( key, val ) );
         }
@@ -427,12 +430,16 @@ void DtDm73::parseConfigString( msg_t* msg, int& dataCount, msg_t* outMsg ) {
     else if ( d->currentParseType == DtDemo::ReadEditInfo ) {
         d->commands.append( DtDemoCommand( -1, csIndex, str ) );
     }
+/*
     else if ( d->currentParseType == DtDemo::ParseGamestate ||
             ( d->currentParseType == DtDemo::FindFrags &&
               !( d->state & DtDemo::INFO_PARSED ) ) )
     {
         parseConfigVars( str, len, csIndex );
     }
+    apparently I need to do this always to get protocol:
+    */
+    parseConfigVars( str, len, csIndex );
 }
 
 void DtDm73::parseCommandString( msg_t* msg, msg_t* outMsg ) {
