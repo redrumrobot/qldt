@@ -81,7 +81,6 @@ HEADERS += MainWindow.h     \
     unrar.h                 \
     7z.h                    \
     About.h                 \
-    KeyBindingsDialog.h     \
     CommandsWidget.h        \
     ClearLineEdit.h         \
     XmlReader.h             \
@@ -139,7 +138,6 @@ SOURCES += qldt.cpp           \
     zip.c                     \
     7z.cpp                    \
     About.cpp                 \
-    KeyBindingsDialog.cpp     \
     CommandsWidget.cpp        \
     ClearLineEdit.cpp         \
     XmlReader.cpp             \

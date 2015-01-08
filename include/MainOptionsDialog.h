@@ -58,16 +58,8 @@ protected:
     DtOptionsLineEdit* tableAlternateColorFactorEdit;
     DtOptionsLineEdit* tableSelectionColorFactorEdit;
 
-    DtOptionsCheckBox* repeatPlaylistCb;
-    DtOptionsCheckBox* autoPlayCb;
     DtOptionsCheckBox* qzFullscreenCb;
     DtOptionsCheckBox* qaFullscreenCb;
-    DtOptionsCheckBox* draw2dSlowCb;
-    DtOptionsCheckBox* draw2dPauseCb;
-    DtOptionsCheckBox* forwardMuteSoundCb;
-    DtOptionsCheckBox* pauseMuteSoundCb;
-    DtOptionsCheckBox* panelVisibleCb;
-    DtOptionsCheckBox* customUserAgentCb;
     DtOptionsComboBox* qzWindowedModeCombo;
     DtOptionsComboBox* qzFullscreenModeCombo;
     DtOptionsComboBox* qaWindowedModeCombo;
@@ -75,25 +67,10 @@ protected:
     DtOptionsComboBox* qzConfigCombo;
     DtOptionsComboBox* qaConfigCombo;
     DtOptionsComboBox* languageCombo;
-    DtOptionsSlider* qzSoundVolumeSlider;
-    DtOptionsCheckBox* qzSoundMuteCb;
-    DtOptionsButton* qzBtnKeyBindings;
-    DtOptionsCheckBox* qzKeybordFilterCb;
-    DtOptionsCheckBox* qzRemoveAdvertDelayCb;
-    DtOptionsLineEdit* qzEmailEdit;
-    DtOptionsCheckBox* qzSettingsCachingCb;
-    DtOptionsClearLineEdit* qzPassEdit;
-    DtOptionsLineEdit* qzUaEdit;
-    DtOptionsLineEdit* slowEdit;
-    DtOptionsLineEdit* fastEdit;
-    DtOptionsLineEdit* fastestEdit;
     DtOptionsButton* qzBtnEditConfig;
     DtOptionsButton* qzBtnNewConfig;
     DtOptionsButton* qaBtnEditConfig;
     DtOptionsButton* qaBtnNewConfig;
-    DtOptionsButtonGroup* panelStyleBtnGroup;
-    QRadioButton* carbonStyleBtn;
-    QRadioButton* blackStyleBtn;
     DtOptionsLineEdit* otherAppTitle;
     DtOptionsCheckBox* otherAppDm68Cb;
     DtOptionsCheckBox* otherAppDm73Cb;
@@ -144,10 +121,8 @@ private slots:
     void qzNewConfig();
     void qaEditConfig();
     void qaNewConfig();
-    void qzEditUa();
     void noCompressChecked( int state );
     void updateConfigComboBoxes();
-    void qzBindKeys();
 
 signals:
     void configChanged();

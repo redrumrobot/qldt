@@ -138,7 +138,7 @@ DtMainWindow::DtMainWindow() {
 
     if ( config.getQzPath().isEmpty() ) {
         QMessageBox::warning( this, tr( "Error" ),
-                              tr( "Quake Live Firefox plugin path not found. Set it manually in the options." ) );
+                              tr( "Quake Live installation not found.\nYou can set QL directory manually in the options." ) );
     }
 
     deleteTmpDirs();

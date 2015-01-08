@@ -138,38 +138,15 @@ public:
     bool findTextIgnoreColors;
     bool findTextMatchCase;
 
-    bool draw2dOnSlow;
-    bool draw2dOnPause;
-
-    float slowTimescale;
-    float fastTimescale;
-    float fastestTimescale;
-
-    bool repeatPlaylist;
-    bool autoPlayNext;
     bool qzFullscreen;
     bool qaFullscreen;
-    bool qzRemoveAdvertDelay;
     int qzWindowedMode;
     int qaWindowedMode;
     int qzFullscreenMode;
     int qaFullscreenMode;
 
-    bool qzSoundMute;
-    int qzSoundVolume;
-    bool qzForwardMuteSound;
-    bool qzPauseMuteSound;
-    bool qzKeyboardFilter;
-
     QString qzGameConfig;
     QString qaGameConfig;
-
-    bool qzCustomUserAgent;
-    QString qzUserAgent;
-
-    bool qzSavePassword;
-    bool controlPanelAlwaysVisible;
-    QString controlPanelStyle;
 
     QString otherAppTitle;
     bool otherAppDm68;
@@ -181,43 +158,6 @@ public:
     QString otherAppCmdLine;
     bool otherAppFromDemos;
     bool qzPreventSettingsCaching;
-
-    /* < key code, action code > */
-    QMap< int, int > playerKeys;
-    QMap< int, int > playerAlternateKeys;
-
-    /* < action code, action string > */
-    QMap< int, QString > customKeyPressActions;
-    QMap< int, QString > customKeyReleaseActions;
-
-    enum standardKeyActions {
-        AC_PAUSE,
-        AC_SLOW,
-        AC_FAST,
-        AC_VERYFAST,
-        AC_NEXT,
-        AC_PREV,
-        AC_SOUNDUP,
-        AC_SOUNDDOWN,
-        AC_SOUND10,
-        AC_SOUND20,
-        AC_SOUND30,
-        AC_SOUND40,
-        AC_SOUND50,
-        AC_SOUND60,
-        AC_SOUND70,
-        AC_SOUND80,
-        AC_SOUND90,
-        AC_SOUND100,
-        AC_MUTE,
-        AC_SCORES,
-        AC_ACC,
-        AC_CHAT,
-        AC_SCREENSHOT,
-        AC_REPEATDEMO
-    };
-
-    int qzSoundVolumeStep;
 
     QString lastPackPath;
     QString lastExportPath;
@@ -242,8 +182,6 @@ public:
     void loadDefaults();
     void loadLanguage();
     void textEditorDefaults();
-    void playerBindingsDefaults();
-    void saveKeyBindingsSettings( bool saveDefaults = false );
 
     void setSelectedGame( int game );
     int getSelectedGame() const;
@@ -287,14 +225,7 @@ private:
     QString getQzDefaultHomePath();
     QString getDefaultLanguage();
 
-    QString qzEmail;
-    QString qzPassword;
-    QByteArray qzEncodedPassword;
-
-    DtCrypt* crypt;
-
     QHash< QString, QVariant > defaultVars;
-    QMap< int, int > defaultPlayerKeys;
 
     void updatePaths();
 

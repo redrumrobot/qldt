@@ -69,7 +69,7 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
     QSize rMode = qzModes.at( modeNum );
     QWidget* cWidget = this;
 
-    if ( !config.controlPanelAlwaysVisible ) {
+/* OLD    if ( !config.controlPanelAlwaysVisible ) {
         cWidget = new QWidget( this );
         cWidget->setFixedSize( rMode.width(), rMode.height() );
         cWidget->setAttribute( Qt::WA_TransparentForMouseEvents );
@@ -82,7 +82,7 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
         panelVisibleTimer = new QTimer( this );
         connect( panelVisibleTimer, SIGNAL( timeout() ), this, SLOT( closePanel() ) );
         panelVisibleTimer->setInterval( 4000 );
-    }
+    } */
 
     screenArea = new DtPlayerScreenWidget( rMode, cWidget );
     gameLauncher = 0;
@@ -96,7 +96,7 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
     controlWidget = new QWidget( cWidget );
     controlWidget->setObjectName( "controlWidget" );
     controlWidget->setFixedSize( rMode.width(), 34 );
-    controlWidget->setVisible( config.controlPanelAlwaysVisible );
+// OLD    controlWidget->setVisible( config.controlPanelAlwaysVisible );
 
     QHBoxLayout* cLayout = new QHBoxLayout;
     cLayout->setMargin( 3 );
@@ -147,14 +147,14 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
     soundVolumeSlider->setFocusPolicy( Qt::NoFocus );
     connect( soundVolumeSlider, SIGNAL( valueChanged( int ) ),
              this, SLOT( cmdVolumeChanged( int ) ) );
-    soundVolume = config.qzSoundVolume;
+    soundVolume = 0; // OLD config.qzSoundVolume;
     soundVolumeSlider->setValue( soundVolume );
     soundVolumeSlider->setMinimum( 0 );
     soundVolumeSlider->setMaximum( 100 );
     cLayout->addWidget( soundVolumeSlider );
 
     pButton( muteButton, cmdMute, tr( "Mute Sound" ) );
-    muted = config.qzSoundMute;
+    muted = false; // OLD config.qzSoundMute;
     muteButton->setCheckable( true );
     muteButton->setChecked( muted );
 
@@ -172,9 +172,9 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
     int nWidth = rMode.width() + layoutMargin * 2;
     int nHeight = rMode.height() + layoutMargin * 2;
 
-    if ( config.controlPanelAlwaysVisible ) {
+/* OLD    if ( config.controlPanelAlwaysVisible ) {
         nHeight += controlWidget->height();
-    }
+    } */
 
     setFixedSize( nWidth, nHeight );
 
@@ -193,7 +193,7 @@ DtPlayerWindow::~DtPlayerWindow() {
 }
 
 void DtPlayerWindow::updateStyle() {
-    setStyleSheet( getStyle( config.controlPanelStyle + "_player" ) );
+// OLD    setStyleSheet( getStyle( config.controlPanelStyle + "_player" ) );
 }
 
 void DtPlayerWindow::closePanel() {
@@ -234,7 +234,7 @@ void DtPlayerWindow::mouseMove() {
 
 void DtPlayerWindow::cmdVolumeChanged( int volume ) {
     soundVolume = volume;
-    config.qzSoundVolume = volume;
+// OLD    config.qzSoundVolume = volume;
     gCmd( QString( "s_volume %1;" ).arg( soundVolume / 50.f ).toAscii().data() );
 }
 
@@ -247,7 +247,7 @@ void DtPlayerWindow::cmdMute() {
     }
 
     muted = !muted;
-    config.qzSoundMute = muted;
+// OLD    config.qzSoundMute = muted;
 }
 
 
@@ -300,7 +300,7 @@ void DtPlayerWindow::cmdSpeed( float timeScale ) {
 }
 
 void DtPlayerWindow::cmdSlow() {
-    if ( !slowPressed ) {
+/* OLD    if ( !slowPressed ) {
         if ( !config.draw2dOnSlow ) {
             gCmd( "cg_draw2d 0;" );
         }
@@ -313,13 +313,13 @@ void DtPlayerWindow::cmdSlow() {
         }
 
         cmdNormalSpeed();
-    }
+    } */
 
     slowPressed = !slowPressed;
 }
 
 void DtPlayerWindow::cmdPause() {
-    if ( !pausePressed ) {
+/* OLD    if ( !pausePressed ) {
         if ( !config.draw2dOnPause ) {
             gCmd( "cg_draw2d 0;" );
         }
@@ -339,33 +339,33 @@ void DtPlayerWindow::cmdPause() {
 
         cmdNormalSpeed();
         pauseButton->setChecked( false );
-    }
+    } */
 
     pausePressed = !pausePressed;
 }
 
 void DtPlayerWindow::cmdFast() {
-    if ( !config.qzSoundMute && config.qzForwardMuteSound && !muted ) {
+/* OLD    if ( !config.qzSoundMute && config.qzForwardMuteSound && !muted ) {
         timescaleSoundMuted = true;
         gCmd( "s_volume 0;" );
-    }
+    } */
 
     slowPressed = false;
     pauseButton->setChecked( false );
     pausePressed = false;
-    cmdSpeed( config.fastTimescale );
+// OLD    cmdSpeed( config.fastTimescale );
 }
 
 void DtPlayerWindow::cmdVeryFast() {
-    if ( !config.qzSoundMute && config.qzForwardMuteSound && !muted ) {
+/* OLD    if ( !config.qzSoundMute && config.qzForwardMuteSound && !muted ) {
         timescaleSoundMuted = true;
         gCmd( "s_volume 0;" );
-    }
+    } */
 
     slowPressed = false;
     pauseButton->setChecked( false );
     pausePressed = false;
-    cmdSpeed( config.fastestTimescale );
+// OLD    cmdSpeed( config.fastestTimescale );
 }
 
 void DtPlayerWindow::cmdNormalSpeed() {
@@ -414,7 +414,7 @@ void DtPlayerWindow::qzExitEvent() {
         return;
     }
 
-    if ( autoClosed && config.autoPlayNext ) {
+/* OLD    if ( autoClosed && config.autoPlayNext ) {
 //        gameLauncher->checkPlugin();
 
         if ( config.repeatPlaylist ) {
@@ -428,7 +428,7 @@ void DtPlayerWindow::qzExitEvent() {
         currentPlayDemoTable->clearMark();
         currentPlayDemoTable->stopDemoPlay();
         close();
-    }
+    } */
 }
 
 void DtPlayerWindow::qzDisconnectEvent() {
@@ -605,7 +605,7 @@ void DtPlayerWindow::keyPressEvent( QKeyEvent* e ) {
                     consoleCmdString += e->text().toLower();
                 }
             }
-            else {
+/* OLD            else {
                 if ( config.playerKeys.contains( e->key() ) ) {
                     if ( !e->isAutoRepeat() ) {
                         keyAction( config.playerKeys.value( e->key(), -1 ) );
@@ -619,11 +619,11 @@ void DtPlayerWindow::keyPressEvent( QKeyEvent* e ) {
                 else {
                     sendKey = true;
                 }
-            }
+            } */
 #ifdef Q_OS_LINUX
-            if ( sendKey && config.qzKeyboardFilter ) {
+/* OLD            if ( sendKey && config.qzKeyboardFilter ) {
                 sendKeyEvent( e );
-            }
+            } */
 #elif defined Q_OS_WIN
             if ( e->modifiers()
                 && ( e->key() == Qt::Key_Shift  ||
@@ -645,7 +645,7 @@ void DtPlayerWindow::keyPressEvent( QKeyEvent* e ) {
 }
 
 void DtPlayerWindow::keyReleaseEvent( QKeyEvent* e ) {
-    if ( config.playerKeys.contains( e->key() ) ) {
+/* OLD    if ( config.playerKeys.contains( e->key() ) ) {
         if ( !e->isAutoRepeat() ) {
             stopAction( config.playerKeys.value( e->key(), -1 ) );
         }
@@ -663,14 +663,14 @@ void DtPlayerWindow::keyReleaseEvent( QKeyEvent* e ) {
             }
         }
 #endif
-    }
+    } */
 }
 
 void DtPlayerWindow::keyAction( int action ) {
     if ( action < 0 ) {
         return;
     }
-
+/* OLD
     if ( action <= 100 ) {
         switch ( action ) {
             case DtConfig::AC_PAUSE :     cmdPause();     break;
@@ -763,7 +763,7 @@ void DtPlayerWindow::keyAction( int action ) {
             QByteArray cmdBuf = cmd.toAscii();
             gCmd( cmdBuf.data() );
         }
-    }
+    } */
 }
 
 void DtPlayerWindow::stopAction( int action ) {
@@ -771,7 +771,7 @@ void DtPlayerWindow::stopAction( int action ) {
         return;
     }
 
-    if ( action <= 100 ) {
+/* OLD    if ( action <= 100 ) {
         switch ( action ) {
             case DtConfig::AC_SLOW :      cmdSlow();          break;
             case DtConfig::AC_FAST :
@@ -800,7 +800,7 @@ void DtPlayerWindow::stopAction( int action ) {
             QByteArray cmdBuf = cmd.toAscii();
             gCmd( cmdBuf.data() );
         }
-    }
+    } */
 }
 
 DtPlayerScreenWidget::DtPlayerScreenWidget( QSize mode, QWidget* ) {
@@ -921,7 +921,7 @@ void DtQzLoginDialog::registerPressed() {
 }
 
 void DtQzLoginDialog::onSavePasswordCb() {
-    config.qzSavePassword = savePasswordCb->isChecked();
+// OLD    config.qzSavePassword = savePasswordCb->isChecked();
 }
 
 void DtQzLoginDialog::closeEvent( QCloseEvent* e ) {

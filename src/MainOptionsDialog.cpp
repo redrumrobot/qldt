@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "Data.h"
 #include "PlayerData.h"
 #include "TabWidget.h"
-#include "KeyBindingsDialog.h"
 #include "EditorOptionsDialog.h"
 #include "MainWindow.h"
 
@@ -149,9 +148,9 @@ void DtMainOptionsDialog::createFilesPage() {
     QVBoxLayout* pathsLayout = new QVBoxLayout;
     QGroupBox* pathsGroup = new QGroupBox( tr( "Paths and directories" ) );
 
-    qzPluginPathEdit = new DtPathEdit( "Quake Live plugin", "", true, this, 140 );
+    qzPluginPathEdit = new DtPathEdit( "Quake Live exe", "", true, this, 140 );
     qzHomePathEdit = new DtPathEdit( "Quake Live home", "", false, this, 140 );
-    qaPathEdit = new DtPathEdit( "Quake Arena", "", true, this, 140 );
+    qaPathEdit = new DtPathEdit( "Quake Arena exe", "", true, this, 140 );
     qaHomePathEdit = new DtPathEdit( "Quake Arena home", "", false, this, 140 );
 
     QGridLayout* cbLayout = new QGridLayout;
@@ -401,74 +400,6 @@ void DtMainOptionsDialog::createPlayerTabQz() {
     QGridLayout* qzPlayerLayout = new QGridLayout;
     int row = 0;
 
-    QLabel* draw2dPauseLbl = new QLabel( tr( "Draw 2D on pause" ) );
-    draw2dPauseCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( draw2dPauseLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( draw2dPauseCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* draw2dSlowLbl = new QLabel( tr( "Draw 2D on slow timescale" ) );
-    draw2dSlowCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( draw2dSlowLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( draw2dSlowCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* autoPlayLbl = new QLabel( tr( "Auto play a next demo" ) );
-    autoPlayCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( autoPlayLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( autoPlayCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* pauseMuteSoundLbl = new QLabel( tr( "Mute sound during the pause" ) );
-    pauseMuteSoundCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( pauseMuteSoundLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( pauseMuteSoundCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* forwardMuteSoundLbl = new QLabel( tr( "Mute sound during the forwarding" ) );
-    forwardMuteSoundCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( forwardMuteSoundLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( forwardMuteSoundCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* panelVisibleLbl = new QLabel( tr( "Auto hide control panel" ) );
-    panelVisibleCb = new DtOptionsCheckBox( this );
-    panelVisibleCb->setObjectName( "qzPanelAutoHide" );
-    qzPlayerLayout->addWidget( panelVisibleLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( panelVisibleCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* panelStyleLbl = new QLabel( tr( "Control panel style" ) );
-    panelStyleBtnGroup = new DtOptionsButtonGroup( this );
-    panelStyleBtnGroup->setObjectName( "qzPanelStyle" );
-    QHBoxLayout* panelStyleLayout = new QHBoxLayout;
-    carbonStyleBtn = new QRadioButton( tr( "carbon" ), this );
-    blackStyleBtn = new QRadioButton( tr( "black" ), this );
-    panelStyleLayout->addWidget( carbonStyleBtn );
-    panelStyleLayout->addWidget( blackStyleBtn );
-    panelStyleBtnGroup->addButton( carbonStyleBtn, 0 );
-    panelStyleBtnGroup->addButton( blackStyleBtn, 1 );
-    qzPlayerLayout->addWidget( panelStyleLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addLayout( panelStyleLayout, row++, 1, Qt::AlignLeft );
-
-    QLabel* slowLbl = new QLabel( tr( "Slow timescale" ) );
-    slowEdit = new DtOptionsLineEdit( "", this );
-    slowEdit->setValidator( new QDoubleValidator( this ) );
-    slowEdit->setMaxLength( 8 );
-    slowEdit->setFixedWidth( 100 );
-    qzPlayerLayout->addWidget( slowLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( slowEdit, row++, 1, Qt::AlignLeft );
-
-    QLabel* fastLbl = new QLabel( tr( "Fast timescale" ) );
-    fastEdit = new DtOptionsLineEdit( "", this );
-    fastEdit->setValidator( new QDoubleValidator( this ) );
-    fastEdit->setMaxLength( 8 );
-    fastEdit->setFixedWidth( 100 );
-    qzPlayerLayout->addWidget( fastLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( fastEdit, row++, 1, Qt::AlignLeft );
-
-    QLabel* fastestLbl = new QLabel( tr( "Very fast timescale" ) );
-    fastestEdit = new DtOptionsLineEdit( "", this );
-    fastestEdit->setValidator( new QDoubleValidator( this ) );
-    fastestEdit->setMaxLength( 8 );
-    fastestEdit->setFixedWidth( 100 );
-    qzPlayerLayout->addWidget( fastestLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( fastestEdit, row++, 1, Qt::AlignLeft );
-
     QLabel* qzWindowedModeLbl = new QLabel( tr( "Windowed Resolution" ) );
     qzWindowedModeCombo = new DtOptionsComboBox( this );
     qzWindowedModeCombo->setFixedWidth( 120 );
@@ -504,94 +435,6 @@ void DtMainOptionsDialog::createPlayerTabQz() {
     qzPlayerLayout->addWidget( qzBtnEditConfig, row, 2, Qt::AlignLeft );
     qzPlayerLayout->addWidget( qzBtnNewConfig, row++, 3, Qt::AlignLeft );
 
-    QLabel* qzEmailLbl = new QLabel( tr( "Email" ) );
-    qzEmailEdit = new DtOptionsLineEdit( "", this );
-    qzEmailEdit->setObjectName( "qzEmailEdit" );
-    qzEmailEdit->setFixedWidth( 245 );
-
-    QLabel* qzPassLbl = new QLabel( tr( "Password" ) );
-    qzPassEdit = new DtOptionsClearLineEdit( "", this );
-    qzPassEdit->setObjectName( "qzPassEdit" );
-    qzPassEdit->setFixedWidth( 245 );
-    qzPassEdit->setEchoMode( QLineEdit::Password );
-
-    QLabel* qzCustomUaLbl = new QLabel( tr( "Custom user agent" ) );
-    customUserAgentCb = new DtOptionsCheckBox( this );
-    connect( customUserAgentCb, SIGNAL( stateChanged( int ) ), this, SLOT( qzEditUa() ) );
-    qzUaEdit = new DtOptionsLineEdit( "", this );
-    qzUaEdit->setFixedWidth( 340 );
-
-    qzPlayerLayout->addWidget( qzEmailLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzEmailEdit, row++, 1, 1, 2, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzPassLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzPassEdit, row++, 1, 1, 2, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzCustomUaLbl, row, 0, Qt::AlignLeft );
-
-    QHBoxLayout* uaLayout = new QHBoxLayout;
-
-    uaLayout->addWidget( customUserAgentCb, Qt::AlignLeft );
-    uaLayout->addWidget( qzUaEdit, Qt::AlignLeft );
-    uaLayout->addStretch( 2 );
-    uaLayout->setMargin( 0 );
-    uaLayout->setSpacing( 0 );
-
-    qzPlayerLayout->addLayout( uaLayout, row++, 1, 1, 3, Qt::AlignLeft );
-
-    QLabel* repeatPlaylistLbl = new QLabel( tr( "Auto repeat playlist" ) );
-    repeatPlaylistCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( repeatPlaylistLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( repeatPlaylistCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* qzRemoveAdvertDelayLbl = new QLabel( tr( "Start demo without delay" ) );
-    qzRemoveAdvertDelayCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( qzRemoveAdvertDelayLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzRemoveAdvertDelayCb, row++, 1, Qt::AlignLeft );
-
-    QLabel* qzSettingsCachingLbl = new QLabel( tr( "Disable settings caching" ) );
-    qzSettingsCachingCb = new DtOptionsCheckBox( this );
-    qzPlayerLayout->addWidget( qzSettingsCachingLbl, row, 0, Qt::AlignLeft );
-    qzPlayerLayout->addWidget( qzSettingsCachingCb, row++, 1, Qt::AlignLeft );
-
-    QHBoxLayout* soundVolumeLayout = new QHBoxLayout;
-
-    QLabel* qzSoundVolumeLbl = new QLabel( tr( "Sound Volume" ) );
-    qzSoundVolumeSlider = new DtOptionsSlider( Qt::Horizontal, this );
-    qzSoundVolumeSlider->setMinimum( 1 );
-    qzSoundVolumeSlider->setMaximum( 10 );
-    qzSoundVolumeSlider->setMinimumWidth( 150 );
-    qzSoundVolumeSlider->setTickPosition( QSlider::TicksAbove );
-    qzSoundVolumeSlider->setTickInterval( 1 );
-
-    QLabel* qzSoundMuteLbl = new QLabel( tr( "Mute" ) );
-    qzSoundMuteCb = new DtOptionsCheckBox( this );
-
-    qzPlayerLayout->addWidget( qzSoundVolumeLbl, row, 0, Qt::AlignLeft );
-    soundVolumeLayout->addWidget( qzSoundVolumeSlider );
-    soundVolumeLayout->addSpacing( 10 );
-    soundVolumeLayout->addWidget( qzSoundMuteCb );
-    soundVolumeLayout->addWidget( qzSoundMuteLbl );
-    soundVolumeLayout->addStretch( 1 );
-
-    qzPlayerLayout->addLayout( soundVolumeLayout, row++, 1, 1, 3, Qt::AlignLeft );
-
-    QLabel* qzKeyBindingsLbl = new QLabel( tr( "Key bindings" ) );
-    qzBtnKeyBindings = new DtOptionsButton( tr( "Set" ), this, QIcon( ":res/key_bindings.png" ) );
-    qzBtnKeyBindings->setIconSize( QSize( 20, 20 ) );
-    qzBtnKeyBindings->setMinimumWidth( 150 );
-    connect( qzBtnKeyBindings, SIGNAL( clicked() ), this, SLOT( qzBindKeys()  ) );
-    QLabel* qzKeybordFilterLbl = new QLabel( tr( "Keyboard filter" ) );
-    qzKeybordFilterCb = new DtOptionsCheckBox( this );
-
-    QHBoxLayout* bindingsLayout = new QHBoxLayout;
-
-    qzPlayerLayout->addWidget( qzKeyBindingsLbl, row, 0, Qt::AlignLeft );
-    bindingsLayout->addWidget( qzBtnKeyBindings );
-    bindingsLayout->addSpacing( 10 );
-    bindingsLayout->addWidget( qzKeybordFilterCb );
-    bindingsLayout->addWidget( qzKeybordFilterLbl );
-
-    qzPlayerLayout->addLayout( bindingsLayout, row++, 1, 1, 3, Qt::AlignLeft );
-
     qzPlayerLayout->setColumnStretch( qzPlayerLayout->columnCount() + 1, 1 );
     qzPlayerLayout->setRowStretch( qzPlayerLayout->rowCount() + 1, 1 );
 
@@ -612,12 +455,12 @@ void DtMainOptionsDialog::createPlayerTabOther() {
     otherAppLayout->addWidget( otherAppTitle, row++, 1, Qt::AlignLeft );
 
     int minWidth = 90;
-    QLabel* extensionsLbl = new QLabel( tr( "Extensions" ) );
+    QLabel* extensionsLbl = new QLabel( tr( "Can play" ) );
     QHBoxLayout* extensionsLayout = new QHBoxLayout;
-    QLabel* otherAppDm68Lbl = new QLabel( "dm_68" );
+    QLabel* otherAppDm68Lbl = new QLabel( "Q3A demos" );
     otherAppDm68Lbl->setMinimumWidth( minWidth );
     otherAppDm68Cb = new DtOptionsCheckBox( this );
-    QLabel* otherAppDm73Lbl = new QLabel( "dm_73" );
+    QLabel* otherAppDm73Lbl = new QLabel( "QL demos" );
     otherAppDm73Lbl->setMinimumWidth( minWidth );
     otherAppDm73Cb = new DtOptionsCheckBox( this );
     extensionsLayout->addWidget( otherAppDm68Cb );
@@ -681,11 +524,6 @@ void DtMainOptionsDialog::createPlayerTabOther() {
     otherAppTab->setContentsMargins( 8, 8, 2, 2 );
     otherAppTab->setLayout( otherAppLayout );
     playerTabs->addTab( otherAppTab, icons->getIcon( I_OTHER_SMALL ), config.otherAppTitle );
-}
-
-void DtMainOptionsDialog::qzBindKeys() {
-    DtKeyBindingsDialog optionsDialog( this );
-    optionsDialog.exec();
 }
 
 void DtMainOptionsDialog::updateConfigCb( DtOptionsComboBox* comboBox, const QString& dir ) {
@@ -786,33 +624,12 @@ void DtMainOptionsDialog::readConfig() {
     dirTreeOpenedCb->setChecked( config.dirTreeAlwaysOpened );
     dropDemosToNewDirCb->setChecked( config.dropDemosToNewDir );
 
-    draw2dPauseCb->setChecked( config.draw2dOnPause );
-    draw2dSlowCb->setChecked( config.draw2dOnSlow );
-    pauseMuteSoundCb->setChecked( config.qzPauseMuteSound );
-    forwardMuteSoundCb->setChecked( config.qzForwardMuteSound );
-    slowEdit->setText( QString::number( config.slowTimescale ) );
-    fastEdit->setText( QString::number( config.fastTimescale ) );
-    fastestEdit->setText( QString::number( config.fastestTimescale ) );
-    panelVisibleCb->setChecked( !config.controlPanelAlwaysVisible );
-
-    if ( config.controlPanelStyle == "black" ) {
-        blackStyleBtn->setChecked( true );
-    }
-    else {
-        carbonStyleBtn->setChecked( true );
-    }
-
-    repeatPlaylistCb->setChecked( config.repeatPlaylist );
-    autoPlayCb->setChecked( config.autoPlayNext );
     qzFullscreenCb->setChecked( config.qzFullscreen );
     qaFullscreenCb->setChecked( config.qaFullscreen );
     qzWindowedModeCombo->setCurrentIndex( qzWindowedModeCombo->findData( config.qzWindowedMode ) );
     qzFullscreenModeCombo->setCurrentIndex( config.qzFullscreenMode );
     qaWindowedModeCombo->setCurrentIndex( qaWindowedModeCombo->findData( config.qaWindowedMode ) );
     qaFullscreenModeCombo->setCurrentIndex( config.qaFullscreenMode );
-    qzKeybordFilterCb->setChecked( config.qzKeyboardFilter );
-    qzRemoveAdvertDelayCb->setChecked( config.qzRemoveAdvertDelay );
-    qzSettingsCachingCb->setChecked( config.qzPreventSettingsCaching );
 
     int cfgIndex = qzConfigCombo->findText( config.qzGameConfig );
 
@@ -825,16 +642,6 @@ void DtMainOptionsDialog::readConfig() {
     if ( cfgIndex != -1 ) {
         qaConfigCombo->setCurrentIndex( cfgIndex );
     }
-
-    qzEmailEdit->setText( config.getQzEmail() );
-    qzPassEdit->setText( config.getQzPass() );
-
-    customUserAgentCb->setChecked( config.qzCustomUserAgent );
-    qzUaEdit->setText( config.qzUserAgent );
-    qzUaEdit->setEnabled( config.qzCustomUserAgent );
-
-    qzSoundVolumeSlider->setValue( static_cast< int >( config.qzSoundVolume / 10.f ) );
-    qzSoundMuteCb->setChecked( config.qzSoundMute );
 
     otherAppTitle->setText( config.otherAppTitle );
     otherAppDm68Cb->setChecked( config.otherAppDm68 );
@@ -890,27 +697,12 @@ void DtMainOptionsDialog::writeConfig() {
     config.dirTreeAlwaysOpened = dirTreeOpenedCb->isChecked();
     config.dropDemosToNewDir = dropDemosToNewDirCb->isChecked();
 
-    config.draw2dOnPause = draw2dPauseCb->isChecked();
-    config.draw2dOnSlow = draw2dSlowCb->isChecked();
-    config.qzPauseMuteSound = pauseMuteSoundCb->isChecked();
-    config.qzForwardMuteSound = forwardMuteSoundCb->isChecked();
-    config.slowTimescale = slowEdit->text().toFloat();
-    config.fastTimescale = fastEdit->text().toFloat();
-    config.fastestTimescale = fastestEdit->text().toFloat();
-    config.controlPanelAlwaysVisible = !panelVisibleCb->isChecked();
-    config.controlPanelStyle = ( panelStyleBtnGroup->checkedId() ) ? "black" : "carbon";
-
-    config.repeatPlaylist = repeatPlaylistCb->isChecked();
-    config.autoPlayNext = autoPlayCb->isChecked();
     config.qzFullscreen = qzFullscreenCb->isChecked();
     config.qaFullscreen = qaFullscreenCb->isChecked();
     config.qzWindowedMode = qzWindowedModeCombo->itemData( qzWindowedModeCombo->currentIndex() ).toInt();
     config.qzFullscreenMode = qzFullscreenModeCombo->currentIndex();
     config.qaWindowedMode = qaWindowedModeCombo->itemData( qaWindowedModeCombo->currentIndex() ).toInt();
     config.qaFullscreenMode = qaFullscreenModeCombo->currentIndex();
-    config.qzKeyboardFilter = qzKeybordFilterCb->isChecked();
-    config.qzRemoveAdvertDelay = qzRemoveAdvertDelayCb->isChecked();
-    config.qzPreventSettingsCaching = qzSettingsCachingCb->isChecked();
 
     config.qzGameConfig = qzConfigCombo->currentText();
 
@@ -923,19 +715,6 @@ void DtMainOptionsDialog::writeConfig() {
     if ( qaConfigCombo->currentIndex() == 0 ) {
         config.qaGameConfig.clear();
     }
-
-    config.setQzLoginData( qzEmailEdit->text(), qzPassEdit->text() );
-
-    bool uiSavePassword = config.qzSavePassword;
-
-    if ( !qzPassEdit->text().isEmpty() ) {
-        config.qzSavePassword = true;
-    }
-
-    config.qzCustomUserAgent = customUserAgentCb->isChecked();
-    config.qzUserAgent = qzUaEdit->text();
-    config.qzSoundVolume = qzSoundVolumeSlider->value() * 10;
-    config.qzSoundMute = qzSoundMuteCb->isChecked();
 
     config.otherAppTitle = otherAppTitle->text();
     config.otherAppDm68 = otherAppDm68Cb->isChecked();
@@ -969,8 +748,6 @@ void DtMainOptionsDialog::writeConfig() {
     }
 
     editorOptionsPage->writeConfig();
-
-    config.qzSavePassword = uiSavePassword;
 }
 
 void DtMainOptionsDialog::configsFromDir( QString path, QStringList& list ) {
@@ -1021,14 +798,6 @@ void DtMainOptionsDialog::defaults() {
         readConfig();
         playerConfigChanged = true;
         playerLoginDataChanged = true;
-    }
-}
-
-void DtMainOptionsDialog::qzEditUa() {
-    qzUaEdit->setEnabled( customUserAgentCb->isChecked() );
-
-    if ( !customUserAgentCb->isChecked() ) {
-        qzUaEdit->setText( firefoxUserAgent );
     }
 }
 

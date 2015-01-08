@@ -666,7 +666,7 @@ void DtFileDialog::onHttpError( QNetworkReply::NetworkError code ) {
 QNetworkReply* DtFileDialog::getHttp( const QUrl& url ) {
     QNetworkRequest request;
     request.setUrl( url );
-    const QString& uAgent = config.qzCustomUserAgent ? config.qzUserAgent : firefoxUserAgent;
+    const QString& uAgent = firefoxUserAgent;
     request.setRawHeader( "User-Agent", uAgent.toUtf8().data() );
 
     waitHttpHeader = true;

@@ -32,8 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #endif
 
 DtConfig::DtConfig() :
-    settings( new QSettings( QSettings::NativeFormat, QSettings::UserScope, "QLDT", "settings" ) ),
-    crypt( new DtCrypt )
+    settings( new QSettings( QSettings::NativeFormat, QSettings::UserScope, "QLDT", "settings" ) )
 {
 }
 
@@ -161,35 +160,14 @@ void DtConfig::loadDefaults() {
     END
 
     GROUP( Player )
-    VAR( Bool,          repeatPlaylist,               false )
-    VAR( Bool,          autoPlayNext,                 true )
-    VAR( Bool,          controlPanelAlwaysVisible,    false )
-    VAR( String,        controlPanelStyle,            "carbon" )
-    VAR( Bool,          draw2dOnSlow,                 true )
-    VAR( Bool,          draw2dOnPause,                false )
-    VAR( Double,        slowTimescale,                0.0001f )
-    VAR( Double,        fastTimescale,                25.f )
-    VAR( Double,        fastestTimescale,             128.f )
-    VAR( Bool,          qzPauseMuteSound,             true )
-    VAR( Bool,          qzForwardMuteSound,           true )
     VAR( Bool,          qzFullscreen,                 false )
     VAR( Bool,          qaFullscreen,                 false )
     VAR( Int,           qzWindowedMode,               QZ_800x600 )
     VAR( Int,           qaWindowedMode,               QA_800x600 )
     VAR( Int,           qzFullscreenMode,             QZ_800x600 )
     VAR( Int,           qaFullscreenMode,             QA_800x600 )
-    VAR( Bool,          qzSoundMute,                  false )
-    VAR( Int,           qzSoundVolume,                50 )
-    VAR( Int,           qzSoundVolumeStep,            10 )
     VAR( String,        qzGameConfig,                 "" )
     VAR( String,        qaGameConfig,                 "" )
-    VAR( Bool,          qzCustomUserAgent,            false )
-    VAR( String,        qzUserAgent,                  firefoxUserAgent )
-    VAR( String,        qzEmail,                      "" )
-    VAR( Bool,          qzSavePassword,               false )
-    VAR( ByteArray,     qzEncodedPassword,            "" )
-    VAR( Bool,          qzKeyboardFilter,             true )
-    VAR( Bool,          qzRemoveAdvertDelay,          false )
     VAR( Bool,          qzPreventSettingsCaching,     true )
     VAR( String,        otherAppTitle,                QObject::tr( "Other" ) )
     VAR( Bool,          otherAppDm68,                 false )
@@ -200,92 +178,6 @@ void DtConfig::loadDefaults() {
     VAR( String,        otherAppPath,                 "" )
     VAR( String,        otherAppCmdLine,              "+demo %demoName +set nextdemo quit" )
     VAR( Bool,          otherAppFromDemos,            true )
-
-    if ( !qzCustomUserAgent ) {
-        qzUserAgent = defaultVars.value( "qzUserAgent", firefoxUserAgent ).toString();
-    }
-
-    qzPassword = qzEncodedPassword.size() ? crypt->decodePassword( qzEncodedPassword ) : "";
-
-    defaultPlayerKeys.insert( Qt::Key_Space,        AC_PAUSE );
-    defaultPlayerKeys.insert( Qt::Key_Delete,       AC_SLOW );
-    defaultPlayerKeys.insert( Qt::Key_End,          AC_FAST );
-    defaultPlayerKeys.insert( Qt::Key_PageDown,     AC_VERYFAST );
-    defaultPlayerKeys.insert( Qt::Key_Right,        AC_NEXT );
-    defaultPlayerKeys.insert( Qt::Key_Left,         AC_PREV );
-    defaultPlayerKeys.insert( Qt::Key_Equal,        AC_SOUNDUP );
-    defaultPlayerKeys.insert( Qt::Key_Minus,        AC_SOUNDDOWN );
-    defaultPlayerKeys.insert( Qt::Key_1,            AC_SOUND10 );
-    defaultPlayerKeys.insert( Qt::Key_2,            AC_SOUND20 );
-    defaultPlayerKeys.insert( Qt::Key_3,            AC_SOUND30 );
-    defaultPlayerKeys.insert( Qt::Key_4,            AC_SOUND40 );
-    defaultPlayerKeys.insert( Qt::Key_5,            AC_SOUND50 );
-    defaultPlayerKeys.insert( Qt::Key_6,            AC_SOUND60 );
-    defaultPlayerKeys.insert( Qt::Key_7,            AC_SOUND70 );
-    defaultPlayerKeys.insert( Qt::Key_8,            AC_SOUND80 );
-    defaultPlayerKeys.insert( Qt::Key_9,            AC_SOUND90 );
-    defaultPlayerKeys.insert( Qt::Key_0,            AC_SOUND100 );
-    defaultPlayerKeys.insert( Qt::Key_Backspace,    AC_MUTE );
-    defaultPlayerKeys.insert( Qt::Key_Tab,          AC_SCORES );
-    defaultPlayerKeys.insert( Qt::Key_A,            AC_ACC );
-    defaultPlayerKeys.insert( Qt::Key_T,            AC_CHAT );
-    defaultPlayerKeys.insert( Qt::Key_F11,          AC_SCREENSHOT );
-    defaultPlayerKeys.insert( Qt::Key_Return,       AC_REPEATDEMO );
-
-    QByteArray settingsKeyMap = settings->value( "playerKeyBindings" ).toByteArray();
-
-    if ( settingsKeyMap.isEmpty() ) {
-        playerKeys = defaultPlayerKeys;
-    }
-    else {
-        QBuffer buf( &settingsKeyMap );
-        buf.open( QBuffer::ReadOnly );
-        QDataStream in( &buf );
-
-        in >> playerKeys;
-
-        QMapIterator< int, int > it( defaultPlayerKeys );
-
-        while ( it.hasNext() ) {
-            it.next();
-
-            if ( !playerKeys.contains( it.key() ) ) {
-                playerKeys.insert( it.key(), it.value() );
-            }
-        }
-    }
-
-    QByteArray settingsAlternateKeyMap = settings->value( "playerAlternateKeyBindings" )
-                                         .toByteArray();
-
-    if ( !settingsAlternateKeyMap.isEmpty() ) {
-        QBuffer buf( &settingsAlternateKeyMap );
-        buf.open( QBuffer::ReadOnly );
-        QDataStream in( &buf );
-
-        in >> playerAlternateKeys;
-    }
-
-    QByteArray customKeyPressActionsMap = settings->value( "playerCustomActions" ).toByteArray();
-
-    if ( !customKeyPressActionsMap.isEmpty() ) {
-        QBuffer buf( &customKeyPressActionsMap );
-        buf.open( QBuffer::ReadOnly );
-        QDataStream in( &buf );
-
-        in >> customKeyPressActions;
-    }
-
-    QByteArray customKeyReleaseActionsMap = settings->value( "playerCustomKeyReleaseActions" )
-                                            .toByteArray();
-
-    if ( !customKeyReleaseActionsMap.isEmpty() ) {
-        QBuffer buf( &customKeyReleaseActionsMap );
-        buf.open( QBuffer::ReadOnly );
-        QDataStream in( &buf );
-
-        in >> customKeyReleaseActions;
-    }
 
     END
 
@@ -412,39 +304,15 @@ void DtConfig::save( bool saveDefaults ) {
     SET( Int,           textSegAddTimeEnd )
     END
 
-    if ( qzSavePassword ) {
-        qzEncodedPassword = crypt->encodePassword( qzPassword.toUtf8() );
-    }
-
     GROUP( Player )
-    SET( Bool,          repeatPlaylist )
-    SET( Bool,          autoPlayNext )
-    SET( Bool,          controlPanelAlwaysVisible )
-    SET( String,        controlPanelStyle )
-    SET( Bool,          draw2dOnSlow )
-    SET( Bool,          draw2dOnPause )
-    SET( Double,        slowTimescale )
-    SET( Double,        fastTimescale )
-    SET( Double,        fastestTimescale )
-    SET( Bool,          qzForwardMuteSound )
-    SET( Bool,          qzPauseMuteSound )
     SET( Bool,          qzFullscreen )
     SET( Bool,          qaFullscreen )
     SET( Int,           qzWindowedMode )
     SET( Int,           qaWindowedMode )
     SET( Int,           qzFullscreenMode )
     SET( Int,           qaFullscreenMode )
-    SET( Bool,          qzSoundMute )
-    SET( Int,           qzSoundVolume )
     SET( String,        qzGameConfig )
     SET( String,        qaGameConfig )
-    SET( Bool,          qzCustomUserAgent )
-    SET( String,        qzUserAgent )
-    SET( String,        qzEmail )
-    SET( ByteArray,     qzEncodedPassword )
-    SET( Bool,          qzSavePassword )
-    SET( Bool,          qzKeyboardFilter )
-    SET( Bool,          qzRemoveAdvertDelay )
     SET( Bool,          qzPreventSettingsCaching )
     SET( String,        otherAppTitle )
     SET( Bool,          otherAppDm68 )
@@ -458,7 +326,6 @@ void DtConfig::save( bool saveDefaults ) {
     END
 
     saveTextEditorSettings( saveDefaults );
-    saveKeyBindingsSettings( saveDefaults );
     updatePaths();
 }
 
@@ -500,51 +367,6 @@ void DtConfig::saveTextEditorSettings( bool saveDefaults ) {
     SET( Bool,      textEditor.searchMatchCase )
     SET( Bool,      textEditor.useCustomFiles )
     SET( String,    textEditor.customFilesPath )
-    END
-}
-
-void DtConfig::saveKeyBindingsSettings( bool saveDefaults ) {
-    if ( saveDefaults ) {
-        playerKeys = defaultPlayerKeys;
-        playerAlternateKeys.clear();
-        customKeyPressActions.clear();
-    }
-
-    GROUP( Player )
-
-    QByteArray settingsKeyMap;
-    QBuffer buf( &settingsKeyMap );
-    buf.open( QBuffer::WriteOnly );
-    QDataStream out( &buf );
-
-    out << playerKeys;
-    settings->setValue( "playerKeyBindings", settingsKeyMap );
-
-    QByteArray settingsAlternateKeyMap;
-    buf.close();
-    buf.setBuffer( &settingsAlternateKeyMap );
-    buf.open( QBuffer::WriteOnly );
-
-    out << playerAlternateKeys;
-    settings->setValue( "playerAlternateKeyBindings", settingsAlternateKeyMap );
-
-    QByteArray customKeyPressActionsMap;
-    buf.close();
-    buf.setBuffer( &customKeyPressActionsMap );
-    buf.open( QBuffer::WriteOnly );
-
-    out << customKeyPressActions;
-    settings->setValue( "playerCustomActions",  customKeyPressActionsMap );
-
-    QByteArray customKeyReleaseActionsMap;
-    buf.close();
-    buf.setBuffer( &customKeyReleaseActionsMap );
-    buf.open( QBuffer::WriteOnly );
-
-    out << customKeyReleaseActions;
-    settings->setValue( "playerCustomKeyReleaseActions",  customKeyReleaseActionsMap );
-
-    SET( Int, qzSoundVolumeStep )
     END
 }
 
@@ -621,10 +443,6 @@ void DtConfig::textEditorDefaults() {
     saveTextEditorSettings( true );
 }
 
-void DtConfig::playerBindingsDefaults() {
-    saveKeyBindingsSettings( true );
-}
-
 void DtConfig::updatePaths() {
     qzBasePath.clear();
     qaBasePath.clear();
@@ -698,32 +516,6 @@ const QString& DtConfig::getQzDemoPath() const {
 
 const QString& DtConfig::getQaDemoPath() const {
     return qaDemoPath;
-}
-
-void DtConfig::setQzUserAgent( const QString& ua ) {
-    qzUserAgent = ua;
-}
-
-QString DtConfig::getQzUserAgent() const {
-    if ( !qzCustomUserAgent ) {
-        return firefoxUserAgent;
-    }
-    else {
-        return qzUserAgent;
-    }
-}
-
-void DtConfig::setQzLoginData( const QString& email, const QString& pass ) {
-    qzEmail = email;
-    qzPassword = pass;
-}
-
-const QString& DtConfig::getQzEmail() const {
-    return qzEmail;
-}
-
-const QString& DtConfig::getQzPass() const {
-    return qzPassword;
 }
 
 QString DtConfig::getQzPluginPath() {
