@@ -889,7 +889,8 @@ bool DtDemo::parse( parseType type ) {
         info.clear();
     }
 
-    skipGamestate = ( type == FindFrags && state & INFO_PARSED );
+//    skipGamestate = ( type == FindFrags && state & INFO_PARSED );
+    skipGamestate = false;
     msgSeq = 0;
 
     if ( type == CustomWrite ) {

@@ -311,6 +311,7 @@ void DtAbstractProtocol::readEntity( msg_t* msg, T* from, T* to, int number ) {
     int lastFieldNum = readByte( msg );
 
     if ( lastFieldNum > U::entityStateFieldsNum ) {
+        printf( "Protocol %d\n", d->realProto );
         d->error( DtDemo::FATAL, "Incorrect field count %d > %d", lastFieldNum, U::entityStateFieldsNum );
     }
 
