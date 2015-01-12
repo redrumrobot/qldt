@@ -148,8 +148,8 @@ void DtMainOptionsDialog::createFilesPage() {
     QVBoxLayout* pathsLayout = new QVBoxLayout;
     QGroupBox* pathsGroup = new QGroupBox( tr( "Paths and directories" ) );
 
-    qzPluginPathEdit = new DtPathEdit( "Quake Live exe", "", true, this, 140 );
-    qzHomePathEdit = new DtPathEdit( "Quake Live home", "", false, this, 140 );
+    qzExePathEdit = new DtPathEdit( "Quake Live exe", "", true, this, 140 );
+    qzFSBasePathEdit = new DtPathEdit( "Quake Live basepath", "", false, this, 140 );
     qaPathEdit = new DtPathEdit( "Quake Arena exe", "", true, this, 140 );
     qaHomePathEdit = new DtPathEdit( "Quake Arena home", "", false, this, 140 );
 
@@ -167,8 +167,8 @@ void DtMainOptionsDialog::createFilesPage() {
     cbLayout->setColumnStretch( cbLayout->columnCount() + 1, 1 );
     cbLayout->setRowStretch( cbLayout->rowCount() + 1, 1 );
 
-    pathsLayout->addWidget( qzPluginPathEdit );
-    pathsLayout->addWidget( qzHomePathEdit );
+    pathsLayout->addWidget( qzExePathEdit );
+    pathsLayout->addWidget( qzFSBasePathEdit );
     pathsLayout->addWidget( qaPathEdit );
     pathsLayout->addWidget( qaHomePathEdit );
     pathsLayout->addSpacing( 10 );
@@ -617,8 +617,8 @@ void DtMainOptionsDialog::readConfig() {
     compressSlider->setEnabled( config.zlibCompressionLevel );
     archRemovePathsCb->setChecked( !config.archiveRemovePaths );
 
-    qzPluginPathEdit->setPath( config.getQzPath() );
-    qzHomePathEdit->setPath( config.getQzHomePath() );
+    qzExePathEdit->setPath( config.getQzPath() );
+    qzFSBasePathEdit->setPath( config.getQzFSBasePath() );
     qaPathEdit->setPath( config.getQaPath() );
     qaHomePathEdit->setPath( config.getQaHomePath() );
     dirTreeOpenedCb->setChecked( config.dirTreeAlwaysOpened );
@@ -690,8 +690,8 @@ void DtMainOptionsDialog::writeConfig() {
     }
 
     config.archiveRemovePaths = !archRemovePathsCb->isChecked();
-    config.setQzPath( qzPluginPathEdit->getPath() );
-    config.setQzHomePath( qzHomePathEdit->getPath()  );
+    config.setQzPath( qzExePathEdit->getPath() );
+    config.setQzFSBasePath( qzFSBasePathEdit->getPath()  );
     config.setQaPath( qaPathEdit->getPath() );
     config.setQaHomePath( qaHomePathEdit->getPath() );
     config.dirTreeAlwaysOpened = dirTreeOpenedCb->isChecked();

@@ -157,7 +157,6 @@ public:
     QString otherAppPath;
     QString otherAppCmdLine;
     bool otherAppFromDemos;
-    bool qzPreventSettingsCaching;
 
     QString lastPackPath;
     QString lastExportPath;
@@ -191,17 +190,12 @@ public:
     const QString& getQaPath() const;
     void setQaHomePath( const QString& path );
     const QString& getQaHomePath() const;
-    void setQzHomePath( const QString& path );
-    const QString& getQzHomePath() const;
+    void setQzFSBasePath( const QString& path );
+    const QString& getQzFSBasePath() const;
     const QString& getQzBasePath() const;
     const QString& getQaBasePath() const;
     const QString& getQzDemoPath() const;
     const QString& getQaDemoPath() const;
-    void setQzUserAgent( const QString& ua );
-    QString getQzUserAgent() const;
-    void setQzLoginData( const QString& email, const QString& pass );
-    const QString& getQzEmail() const;
-    const QString& getQzPass() const;
 
     QByteArray formatToByteArray( unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0,
                                   bool bold = false, bool italic = false, bool underline = false );
@@ -214,6 +208,7 @@ private:
     int selectedGame;
     QString qzPath;
     QString qaPath;
+    QString qzFSBasePath;
     QString qzHomePath;
     QString qaHomePath;
     QString qzBasePath;
@@ -221,8 +216,8 @@ private:
     QString qzDemoPath;
     QString qaDemoPath;
 
-    QString getQzPluginPath();
-    QString getQzDefaultHomePath();
+    QString getQzDefaultFSBasePath();
+    QString getQzDefaultExePath();
     QString getDefaultLanguage();
 
     QHash< QString, QVariant > defaultVars;

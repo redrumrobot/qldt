@@ -108,7 +108,7 @@ QString DtMainTabWidget::getDirTabName( const QString& path ) {
 }
 
 void DtMainTabWidget::updateTabName( const QString& path ) {
-    bool pathStartsQz = path.startsWith( config.getQzHomePath() );
+    bool pathStartsQz = path.startsWith( config.getQzFSBasePath() );
 
     config.setSelectedGame( pathStartsQz ? Q_LIVE : Q_ARENA );
     treeButton->updateIcon();
@@ -118,7 +118,7 @@ void DtMainTabWidget::updateTabName( const QString& path ) {
     bool showTitleDirName = false;
 
     if ( pathStartsQz ) {
-        int qzPathSize = config.getQzHomePath().size();
+        int qzPathSize = config.getQzFSBasePath().size();
 
         if ( path.size() == qzPathSize + subDirSz ) {
             tabName = "Live";

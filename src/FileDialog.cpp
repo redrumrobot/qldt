@@ -1029,7 +1029,7 @@ bool DtFileDialog::getArchiveName( QString& name, const QString& defName, bool& 
     QList< QUrl > gameDirs;
     gameDirs << QUrl::fromLocalFile( QDir::homePath() );
 
-    if ( !config.getQzHomePath().isEmpty() ) {
+    if ( !config.getQzFSBasePath().isEmpty() ) {
         gameDirs << QUrl::fromLocalFile( config.getQzDemoPath() );
     }
 

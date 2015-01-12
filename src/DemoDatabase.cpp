@@ -162,7 +162,7 @@ void DtDemoDatabase::setDir( const QString& dir ) {
         }
     }
     else {
-        int game = dir.startsWith( config.getQzHomePath() ) ? Q_LIVE : Q_ARENA;
+        int game = dir.startsWith( config.getQzFSBasePath() ) ? Q_LIVE : Q_ARENA;
 
         QSqlQuery query;
         query.exec( "INSERT INTO directories ( game, path )"

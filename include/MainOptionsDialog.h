@@ -83,8 +83,8 @@ protected:
     QRadioButton* otherAppFromDemosPathBtn;
     QRadioButton* otherAppAbsolutePathBtn;
 
-    DtPathEdit* qzPluginPathEdit;
-    DtPathEdit* qzHomePathEdit;
+    DtPathEdit* qzExePathEdit;
+    DtPathEdit* qzFSBasePathEdit;
     DtPathEdit* qaPathEdit;
     DtPathEdit* qaHomePathEdit;
 

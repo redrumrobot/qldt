@@ -60,8 +60,8 @@ void DtConfig::loadLanguage() {
 }
 
 void DtConfig::loadDefaults() {
-    QString qzPluginPath = getQzPluginPath();
-    QString qzDefaultHomePath = getQzDefaultHomePath();
+    QString qzExePath = getQzDefaultExePath();
+    QString qzDefaultFSBasePath = getQzDefaultFSBasePath();
 
     QBitArray mainColumnsDefault( 7, true );
     mainColumnsDefault.setBit( 6, false );
@@ -108,12 +108,13 @@ void DtConfig::loadDefaults() {
     VAR( String,        lastPackPath,                 QDir::homePath() )
     VAR( String,        lastExportPath,               QDir::homePath() )
     VAR( String,        lastImportPath,               QDir::homePath() )
-    VAR( String,        qzHomePath,                   qzDefaultHomePath )
+    VAR( String,        qzFSBasePath,                 qzDefaultFSBasePath )
+    VAR( String,        qzHomePath,                   qzDefaultFSBasePath + "/home" )
     VAR( String,        qaHomePath,                   "" )
-    VAR( String,        qzPath,                       qzPluginPath )
+    VAR( String,        qzPath,                       qzExePath )
 
     VAR( String,        qaPath,                       "" )
-    VAR( Bool,          dirTreeAlwaysOpened,          false )
+    VAR( Bool,          dirTreeAlwaysOpened,          true )
     VAR( Int,           mainTableSortColumn,          0 )
     VAR( Int,           mainTableSortOrder,           Qt::AscendingOrder )
     VAR( Int,           findFragsTableSortColumn,     0 )
@@ -168,13 +169,12 @@ void DtConfig::loadDefaults() {
     VAR( Int,           qaFullscreenMode,             QA_800x600 )
     VAR( String,        qzGameConfig,                 "" )
     VAR( String,        qaGameConfig,                 "" )
-    VAR( Bool,          qzPreventSettingsCaching,     true )
     VAR( String,        otherAppTitle,                QObject::tr( "Other" ) )
     VAR( Bool,          otherAppDm68,                 false )
     VAR( Bool,          otherAppDm73,                 true )
-    VAR( Bool,          otherAppDoubleClick,          true )
-    VAR( Bool,          otherAppMenu,                 true )
-    VAR( Bool,          otherAppPreview,              true )
+    VAR( Bool,          otherAppDoubleClick,          false )
+    VAR( Bool,          otherAppMenu,                 false )
+    VAR( Bool,          otherAppPreview,              false )
     VAR( String,        otherAppPath,                 "" )
     VAR( String,        otherAppCmdLine,              "+demo %demoName +set nextdemo quit" )
     VAR( Bool,          otherAppFromDemos,            true )
@@ -242,14 +242,8 @@ void DtConfig::save( bool saveDefaults ) {
     SET( Int,           selectedGame )
     SET( String,        qzHomePath )
     SET( String,        qaHomePath )
-
-    if ( !qzPath.isEmpty() ) {
-        SET( String, qzPath )
-    }
-
-    if ( !qaPath.isEmpty() ) {
-        SET( String, qaPath )
-    }
+    SET( String,	qzPath )
+    SET( String,	qaPath )
 
     SET( Bool,          confirmOnDelete )
     SET( Int,           zlibCompressionLevel )
@@ -313,7 +307,6 @@ void DtConfig::save( bool saveDefaults ) {
     SET( Int,           qaFullscreenMode )
     SET( String,        qzGameConfig )
     SET( String,        qaGameConfig )
-    SET( Bool,          qzPreventSettingsCaching )
     SET( String,        otherAppTitle )
     SET( Bool,          otherAppDm68 )
     SET( Bool,          otherAppDm73 )
@@ -444,12 +437,14 @@ void DtConfig::textEditorDefaults() {
 }
 
 void DtConfig::updatePaths() {
+    qzHomePath.clear();
     qzBasePath.clear();
     qaBasePath.clear();
     qzDemoPath.clear();
     qaDemoPath.clear();
 
-    if( !qzHomePath.isEmpty() ) {
+    if( !qzFSBasePath.isEmpty() ) {
+        qzHomePath = qzFSBasePath + "/home";
         qzBasePath = qzHomePath + "/" + baseSubDir;
         qzDemoPath = qzBasePath + "/" + demoSubDir;
     }
@@ -484,13 +479,13 @@ const QString& DtConfig::getQaPath() const {
     return qaPath;
 }
 
-void DtConfig::setQzHomePath( const QString& path ) {
-    qzHomePath = path;
+void DtConfig::setQzFSBasePath( const QString& path ) {
+    qzFSBasePath = path;
     updatePaths();
 }
 
-const QString& DtConfig::getQzHomePath() const {
-    return qzHomePath;
+const QString& DtConfig::getQzFSBasePath() const {
+    return qzFSBasePath;
 }
 
 void DtConfig::setQaHomePath( const QString& path ) {
@@ -518,78 +513,6 @@ const QString& DtConfig::getQaDemoPath() const {
     return qaDemoPath;
 }
 
-QString DtConfig::getQzPluginPath() {
-    QString pluginPath = "";
-
-#ifdef Q_OS_LINUX
-    /* try to get the plugin path from the firefox extension settings */
-
-    QString profilesPath = QDir::homePath() + firefox3ProfilesPath;
-    QSettings profiles( profilesPath + "/profiles1.ini", QSettings::IniFormat );
-    QStringList profileGroups = profiles.childGroups();
-
-    bool defUserNum = false;
-    int i = 0;
-
-    for ( ; i < profileGroups.size(); ++i ) {
-        QString groupName = profileGroups.at( i );
-
-        if ( groupName == QString( "Profile%1" ).arg( i ) ) {
-            if ( profiles.value( groupName + "/Default", false ).toBool() ) {
-                defUserNum = true;
-                break;
-            }
-        }
-    }
-
-    if ( !defUserNum ) {
-        i = 0;
-    }
-
-    QString userPath = profiles.value( QString( "Profile%1/Path" ).arg( i ), "" ).toString();
-
-    if ( userPath.isEmpty() ) {
-        return "";
-    }
-
-    QSettings extensions( QString( "%1/%2/extensions.ini" ).arg( profilesPath, userPath ),
-                          QSettings::IniFormat );
-    extensions.beginGroup( "ExtensionDirs" );
-
-    QStringList extensionDirs = extensions.childKeys();
-    const QString qlPluginExtName = "quakeliveplugin@idsoftware.com";
-
-    for ( i = 0; i < extensionDirs.size(); ++i ) {
-        QString extDir = extensions.value( extensionDirs.at( i ), "" ).toString();
-
-        if ( extDir.contains( qlPluginExtName ) ) {
-            pluginPath = extDir + "/plugins/" + pluginFileName;
-        }
-    }
-
-    extensions.endGroup();
-
-#elif defined Q_OS_WIN
-    QSettings mozillaPlugins( QSettings::SystemScope, "MozillaPlugins", "@idsoftware.com/QuakeLive" );
-
-    pluginPath = mozillaPlugins.value( "Path", "" ).toString();
-
-    if ( pluginPath.isEmpty() || !QFile::exists( pluginPath ) ) {
-        pluginPath = QDir::rootPath() + "Documents and Settings/All Users.WINDOWS/"
-                                        "Application Data/id Software/QuakeLive/npquakezero.dll";
-
-        if ( !QFile::exists( pluginPath ) ) {
-            pluginPath.clear();
-        }
-    }
-    else {
-        pluginPath.replace( "\\", "/" );
-    }
-#endif
-
-    return pluginPath;
-}
-
 QString DtConfig::getAppDataPath() {
 #ifdef Q_OS_LINUX
     return QDir::homePath();
@@ -604,21 +527,29 @@ QString DtConfig::getAppDataPath() {
 #endif
 }
 
-QString DtConfig::getQzDefaultHomePath() {
+QString DtConfig::getQzDefaultFSBasePath() {
 #ifdef Q_OS_LINUX
-    return QDir::homePath() + "/.quakelive/quakelive/home";
+    // Hackish way but should work on default installs without actually running WINE
+    // Windows 7 emulation
+    QString basePath = QDir::homePath() + "/.wine/drive_c/users/" + qgetenv( "USER" ) + "/Local Settings/LocalLow/id Software/quakelive";
+    if ( !QDir( basePath ).exists() ) {
+        // Windows XP emulation
+        basePath = QDir::homePath() + "/.wine/drive_c/users/" + qgetenv( "USER" ) + "/Application Data/id Software/quakelive";
+        if ( !QDir( basePath ).exists() ) {
+            return "";
+        }
+    }
+    return basePath;
 #elif defined Q_OS_WIN
     QString homePath = getAppDataPath();
 
     homePath.replace( "/Roaming", "" );
 
-    if ( QSysInfo::windowsVersion() == QSysInfo::WV_VISTA ||
-         QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS7 )
-    {
+    if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
         homePath.append( "/LocalLow" );
     }
 
-    homePath.append( "/id Software/quakelive/home" );
+    homePath.append( "/id Software/quakelive" );
 
     if ( !QDir( homePath ).exists() ) {
         QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
@@ -635,5 +566,31 @@ QString DtConfig::getQzDefaultHomePath() {
     }
 
     return homePath;
+#endif
+}
+
+QString DtConfig::getQzDefaultExePath() {
+#ifdef Q_OS_LINUX
+    QString exePath = QDir::homePath() + "/.wine/drive_c/users/" + qgetenv( "USER" ) + "/Local Settings/Application Data/id Software/quakelive/quakelive.exe";
+    if ( !QFile( exePath ).exists() ) {
+        exePath = QDir::homePath() + "/.wine/drive_c/users/" + qgetenv( "USER" ) + "/Application Data/id Software/quakelive/quakelive.exe";
+        if ( !QFile( exePath ).exists() ) {
+            return "";
+        }
+    }
+    return exePath;
+#elif defined Q_OS_WIN
+    // FIXME: Steam
+    // "C:/Steam/SteamApps/common/Quake Live/quakelive_steam.exe"
+    // %ProgramFiles(x86)%\Steam\
+    // qgetenv( "PROGRAMFILES(X86)" )
+
+    if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
+        return qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive";
+    } else {
+        return qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
+    }
+
+    return "FIXME";
 #endif
 }
