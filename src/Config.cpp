@@ -445,6 +445,14 @@ void DtConfig::updatePaths() {
 
     if( !qzFSBasePath.isEmpty() ) {
         qzHomePath = qzFSBasePath + "/home";
+        if ( qzFSBasePath.contains( "Steam/SteamApps" ) ) {
+            QDir steamdir = QDir( qzFSBasePath );
+            foreach( QString homePath, steamdir.entryList() ) {
+                if ( QDir( homePath + "/baseq3" ).exists() ) {
+                    qzHomePath = homePath;
+                }
+            }
+        }
         qzBasePath = qzHomePath + "/" + baseSubDir;
         qzDemoPath = qzBasePath + "/" + demoSubDir;
     }
@@ -548,6 +556,16 @@ QString DtConfig::getQzDefaultFSBasePath() {
     QStringList knownlocs, steamlocs;
     QString homePath;
 
+    steamlocs << qgetenv( "PROGRAMFILES(X86)" ).replace( "\\", "/" ) + "/Steam/SteamApps/common/Quake Live"
+              << "C:/Steam/SteamApps/common/Quake Live";
+    foreach ( homePath, steamlocs ) {
+        QDir onedir = QDir( homePath );
+        if ( QDir( homePath ).exists() ) {
+                return homePath;
+            }
+        }
+    }
+
     knownlocs << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive"
               << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Local Settings/LocalLow/id Software/quakelive"
               << qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
@@ -571,19 +589,6 @@ QString DtConfig::getQzDefaultFSBasePath() {
 
         if ( QFile( homePath ).exists() ) {
             return homePath;
-        }
-    }
-
-    steamlocs << qgetenv( "PROGRAMFILES(X86)" ).replace( "\\", "/" ) + "/Steam/SteamApps/common/Quake Live"
-              << "C:/Steam/SteamApps/common/Quake Live";
-    foreach ( homePath, steamlocs ) {
-        QDir onedir = QDir( homePath );
-        if ( onedir.exists() ) {
-            foreach( homePath, onedir.entryList() ) {
-                if ( QDir( homePath + "/baseq3" ).exists() ) {
-                    return homePath;
-                }
-            }
         }
     }
 
