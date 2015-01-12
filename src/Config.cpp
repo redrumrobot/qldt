@@ -561,8 +561,7 @@ QString DtConfig::getQzDefaultFSBasePath() {
     foreach ( homePath, steamlocs ) {
         QDir onedir = QDir( homePath );
         if ( QDir( homePath ).exists() ) {
-                return homePath;
-            }
+            return homePath;
         }
     }
 
