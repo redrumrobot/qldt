@@ -541,31 +541,49 @@ QString DtConfig::getQzDefaultFSBasePath() {
     }
     return basePath;
 #elif defined Q_OS_WIN
-    QString homePath = "";
+    QStringList knownlocs, steamlocs;
+    QString homePath;
 
-    if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
-        homePath = qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive";
-    } else {
-        homePath = qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
-    }
+    knownlocs << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive"
+              << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Local Settings/LocalLow/id Software/quakelive"
+              << qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
 
-    homePath.replace( "/Roaming", "" );
+    foreach ( homePath, knownlocs ) {
+        homePath.replace( "/Roaming", "" );
 
-    if ( !QDir( homePath ).exists() ) {
-        QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
-        QTextCodec* pathCodec = QTextCodec::codecForName( defaultCharset.toAscii() );
-        QTextDecoder* pathDecoder = pathCodec->makeDecoder();
+        if ( !QDir( homePath ).exists() ) {
+            QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
+            QTextCodec* pathCodec = QTextCodec::codecForName( defaultCharset.toAscii() );
+            QTextDecoder* pathDecoder = pathCodec->makeDecoder();
 
-        QString reencodedPath = pathDecoder->toUnicode( homePath.toAscii() );
+            QString reencodedPath = pathDecoder->toUnicode( homePath.toAscii() );
 
-        delete pathDecoder;
+            delete pathDecoder;
 
-        if ( QDir( reencodedPath ).exists() ) {
-            homePath = reencodedPath;
+            if ( QDir( reencodedPath ).exists() ) {
+                homePath = reencodedPath;
+            }
+        }
+
+        if ( QFile( homePath ).exists() ) {
+            return homePath;
         }
     }
 
-    return homePath;
+    steamlocs << qgetenv( "PROGRAMFILES(X86)" ).replace( "\\", "/" ) + "/Steam/SteamApps/common/Quake Live"
+              << "C:/Steam/SteamApps/common/Quake Live";
+    foreach ( homePath, steamlocs ) {
+        QDir onedir = QDir( homePath );
+        if ( onedir.exists() ) {
+            foreach( homePath, onedir.entryList() ) {
+                if ( QDir( homePath + "/baseq3" ).exists() ) {
+                    return homePath;
+                }
+            }
+        }
+    }
+
+    return "";
 #endif
 }
 
@@ -580,35 +598,38 @@ QString DtConfig::getQzDefaultExePath() {
     }
     return exePath;
 #elif defined Q_OS_WIN
-    QString exePath = "";
+    QStringList knownlocs;
+    QString exePath;
 
-    // FIXME: Steam
-    // "C:/Steam/SteamApps/common/Quake Live/quakelive_steam.exe"
-    // %ProgramFiles(x86)%\Steam\
-    // qgetenv( "PROGRAMFILES(X86)" )
+    knownlocs << qgetenv( "PROGRAMFILES(X86)" ).replace( "\\", "/" ) + "/Steam/SteamApps/common/Quake Live/quakelive_steam.exe"
+              << "C:/Steam/SteamApps/common/Quake Live/quakelive_steam.exe"
+              << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/Local/id Software/quakelive/quakelive.exe"
+              << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Local Settings/Application Data/id Software/quakelive/quakelive.exe"
+              << qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Application Data/id Software/quakelive/quakelive.exe"
+              << qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/Application Data/id Software/quakelive/quakelive.exe";
 
-    if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
-        exePath = qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Local Settings/Application Data/id Software/quakelive/quakelive.exe"
-    } else {
-        exePath = qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/Application Data/id Software/quakelive/quakelive.exe";
-    }
+    foreach ( exePath, knownlocs ) {
+        exePath.replace( "/Roaming", "" );
 
-    exePath.replace( "/Roaming", "" );
+        if ( !QFile( exePath ).exists() ) {
+            QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
+            QTextCodec* pathCodec = QTextCodec::codecForName( defaultCharset.toAscii() );
+            QTextDecoder* pathDecoder = pathCodec->makeDecoder();
 
-    if ( !QDir( exePath ).exists() ) {
-        QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
-        QTextCodec* pathCodec = QTextCodec::codecForName( defaultCharset.toAscii() );
-        QTextDecoder* pathDecoder = pathCodec->makeDecoder();
+            QString reencodedPath = pathDecoder->toUnicode( exePath.toAscii() );
 
-        QString reencodedPath = pathDecoder->toUnicode( exePath.toAscii() );
+            delete pathDecoder;
 
-        delete pathDecoder;
+            if ( QFile( reencodedPath ).exists() ) {
+                exePath = reencodedPath;
+            }
+        }
 
-        if ( QDir( reencodedPath ).exists() ) {
-            exePath = reencodedPath;
+        if ( QFile( exePath ).exists() ) {
+            return exePath;
         }
     }
 
-    return exePath;
+    return "";
 #endif
 }
