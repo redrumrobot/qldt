@@ -541,15 +541,15 @@ QString DtConfig::getQzDefaultFSBasePath() {
     }
     return basePath;
 #elif defined Q_OS_WIN
-    QString homePath = getAppDataPath();
-
-    homePath.replace( "/Roaming", "" );
+    QString homePath = "";
 
     if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
-        homePath.append( "/LocalLow" );
+        homePath = qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive";
+    } else {
+        homePath = qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
     }
 
-    homePath.append( "/id Software/quakelive" );
+    homePath.replace( "/Roaming", "" );
 
     if ( !QDir( homePath ).exists() ) {
         QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
@@ -580,17 +580,35 @@ QString DtConfig::getQzDefaultExePath() {
     }
     return exePath;
 #elif defined Q_OS_WIN
+    QString exePath = "";
+
     // FIXME: Steam
     // "C:/Steam/SteamApps/common/Quake Live/quakelive_steam.exe"
     // %ProgramFiles(x86)%\Steam\
     // qgetenv( "PROGRAMFILES(X86)" )
 
     if ( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA ) {
-        return qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/AppData/LocalLow/id Software/quakelive";
+        exePath = qgetenv( "USERPROFILE" ).replace( "\\", "/" ) + "/Local Settings/Application Data/id Software/quakelive/quakelive.exe"
     } else {
-        return qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/id Software/quakelive";
+        exePath = qgetenv( "APPDATA" ).replace( "\\", "/" ) + "/Application Data/id Software/quakelive/quakelive.exe";
     }
 
-    return "FIXME";
+    exePath.replace( "/Roaming", "" );
+
+    if ( !QDir( exePath ).exists() ) {
+        QString defaultCharset = QString( "CP-%1" ).arg( GetACP() );
+        QTextCodec* pathCodec = QTextCodec::codecForName( defaultCharset.toAscii() );
+        QTextDecoder* pathDecoder = pathCodec->makeDecoder();
+
+        QString reencodedPath = pathDecoder->toUnicode( exePath.toAscii() );
+
+        delete pathDecoder;
+
+        if ( QDir( reencodedPath ).exists() ) {
+            exePath = reencodedPath;
+        }
+    }
+
+    return exePath;
 #endif
 }
