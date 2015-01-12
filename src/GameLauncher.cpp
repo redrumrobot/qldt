@@ -187,7 +187,9 @@ void DtGameLauncher::runQzDemo() {
     }
     args << "+demo" << currentDemo;
 
-    printf( "args: %s\n", qPrintable( args.join( " " ) ) );
+#ifdef MSG_LOG
+    printf( "Running QL with args: %s\n", qPrintable( args.join( " " ) ) );
+#endif
 
     dtMainWindow->quakeLiveStandalone->start( config.getQzPath(), args );
 }
