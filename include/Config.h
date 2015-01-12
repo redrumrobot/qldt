@@ -193,6 +193,7 @@ public:
     void setQzFSBasePath( const QString& path );
     const QString& getQzFSBasePath() const;
     const QString& getQzBasePath() const;
+    const QString& getQzHomePath() const;
     const QString& getQaBasePath() const;
     const QString& getQzDemoPath() const;
     const QString& getQaDemoPath() const;

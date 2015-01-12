@@ -38,10 +38,9 @@ public:
     DtGameLauncher( WId win, int mode, bool fullscreen, QWidget* parent = 0 );
     ~DtGameLauncher();
 
-    bool qzPluginInitialized;
+    bool qzProcessInitialized;
     bool qaProcessInitialized;
     bool otherAppProcessInitialized;
-    QTimer* pluginLoadTimer;
 
     bool setDemo( QString demoName );
     void setWindow( WId win );
@@ -72,6 +71,7 @@ private:
     static bool ioWrapped;
 
     bool initializeQaProcess();
+    bool initializeQzProcess();
     bool initializeOtherAppProcess();
     bool execOtherApp();
     void releaseInput();
@@ -79,6 +79,7 @@ private:
 
 private slots:
     void runQaDemo();
+    void runQzDemo();
     void runOtherAppDemo();
 
 signals:

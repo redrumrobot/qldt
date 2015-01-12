@@ -501,6 +501,10 @@ const QString& DtConfig::getQzBasePath() const {
     return qzBasePath;
 }
 
+const QString& DtConfig::getQzHomePath() const {
+    return qzHomePath;
+}
+
 const QString& DtConfig::getQaBasePath() const {
     return qaBasePath;
 }

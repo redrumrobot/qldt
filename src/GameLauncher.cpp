@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <QCheckBox>
 #include <QLabel>
 #include <QSettings>
+#include <QDir>
 
 using namespace dtdata;
 
@@ -42,6 +43,7 @@ bool DtGameLauncher::ioWrapped = false;
 DtGameLauncher::DtGameLauncher( WId win, int mode, bool fullscreen, QWidget* parent ) :
 //    qzPluginInitialized( false ),
     qaProcessInitialized( false ),
+    qzProcessInitialized( false ),
     otherAppProcessInitialized( false ),
     gameStarted( false ),
     mainWindowKeyboardGrab( false )
@@ -73,6 +75,23 @@ bool DtGameLauncher::initializeQaProcess() {
     if ( qaPath.exists() && qaPath.isFile() ) {
         dtMainWindow->quakeArena = new QProcess( dtMainWindow );
         dtMainWindow->quakeArena->setWorkingDirectory( qaPath.absolutePath() );
+
+        return true;
+    }
+
+    return false;
+}
+
+bool DtGameLauncher::initializeQzProcess() {
+    QFileInfo qzPath( config.getQzPath() );
+
+    if ( dtMainWindow->quakeLiveStandalone ) {
+        return true;
+    }
+
+    if ( qzPath.exists() && qzPath.isFile() ) {
+        dtMainWindow->quakeLiveStandalone = new QProcess( dtMainWindow );
+        dtMainWindow->quakeLiveStandalone->setWorkingDirectory( qzPath.absolutePath() );
 
         return true;
     }
@@ -131,6 +150,46 @@ void DtGameLauncher::runQaDemo() {
                     .split( ' ', QString::SkipEmptyParts );
 
     dtMainWindow->quakeArena->start( config.getQaPath(), args );
+}
+
+void DtGameLauncher::runQzDemo() {
+    DtDemo demo( QFileInfo( config.getQzDemoPath() + "/" + currentDemo ) );
+
+    if ( !demo.parseGamestateMsg() ) {
+        return;
+    }
+
+    QString qzMode = config.qzFullscreen ? QString::number( config.qzFullscreenMode ) :
+                                           QString::number( config.qzWindowedMode );
+    QStringList args;
+
+    QString tmpBasePath = config.getQzFSBasePath();
+    QString tmpHomePath = config.getQzHomePath();
+#ifdef Q_OS_LINUX
+    tmpBasePath.replace( QDir::homePath() + "/.wine/drive_c", "C:" );
+    tmpHomePath.replace( QDir::homePath() + "/.wine/drive_c", "C:" );
+#endif
+
+    args << "+set" << "r_fullscreen" << QString::number( config.qzFullscreen );
+    args << "+set" << "r_mode" << qzMode;
+    args << "+set" << "in_nograb" << QString::number( !config.qzFullscreen );
+    args << "+set" << "timescale" << "1";
+    args << "+set" << "com_cameramode" << "1";
+    args << "+set" << "fs_basepath" << tmpBasePath;
+    args << "+set" << "fs_homepath" << tmpHomePath;
+    args << "+set" << "gt_user" << "aaa";
+    args << "+set" << "gt_pass" << "aaa";
+    args << "+set" << "gt_realm" << "quakelive";
+    args << "+set" << "web_sess" << "aaa";
+    args << "+set" << "nextdemo" << "quit";
+    if ( !config.qaGameConfig.isEmpty() ) {
+        args << "+exec" << config.qaGameConfig;
+    }
+    args << "+demo" << currentDemo;
+
+    printf( "args: %s\n", qPrintable( args.join( " " ) ) );
+
+    dtMainWindow->quakeLiveStandalone->start( config.getQzPath(), args );
 }
 
 void DtGameLauncher::runOtherAppDemo() {
@@ -222,7 +281,28 @@ bool DtGameLauncher::playDemo() {
 //        }
     }
     else if ( demoExt == "dm_90" ) {
-        return execOtherApp();
+        if ( openInOtherApp && config.otherAppDm73 ) {
+            return execOtherApp();
+        }
+
+        if ( !qzProcessInitialized ) {
+            QMessageBox::critical( dtMainWindow, tr( "Error" ),
+                                   tr( "Process not initialized, unable to play demo" ) );
+            return false;
+        }
+
+        if ( dtMainWindow->quakeLiveStandalone->state() == QProcess::NotRunning ) {
+            runQzDemo();
+        }
+        else {
+            dtMainWindow->quakeLiveStandalone->terminate();
+
+            if ( dtMainWindow->quakeLiveStandalone->waitForFinished( 1000 ) ) {
+                QTimer::singleShot( 0, this, SLOT( runQzDemo() ) );
+            }
+        }
+
+        return true;
     }
 
     return false;
@@ -244,26 +324,15 @@ bool DtGameLauncher::setDemo( QString demoName ) {
             }
         }
     }
-/*
-    else if ( ext == "dm_73" ) {
-        if ( !qzPluginInitialized ) {
-            if ( initializeQzPlugin() ) {
-                qzPluginInitialized = true;
+    else if ( ext == "dm_73" || ext == "dm_90" ) {
+        if ( !qzProcessInitialized ) {
+            if ( initializeQzProcess() ) {
+                qzProcessInitialized = true;
             }
             else {
                 QMessageBox::critical( dtMainWindow, tr( "Error" ),
-                                       tr( "Unable to load Quake Live plugin" ) );
+                                       tr( "Unable to initialize Quake Live process" ) );
                 return false;
-            }
-        }
-
-        if ( !qzLoader->isLoggedIn() && !qzLoader->haveLoginData() ) {
-            if ( config.getQzEmail().isEmpty() || config.getQzPass().isEmpty() ) {
-                emit noLoginData( true );
-                return false;
-            }
-            else {
-                setQzLoginData( config.getQzEmail(), config.getQzPass() );
             }
         }
     }
@@ -271,7 +340,7 @@ bool DtGameLauncher::setDemo( QString demoName ) {
         qDebug( "Unknown format" );
         return false;
     }
-*/
+
     return true;
 }
 

@@ -382,11 +382,11 @@ void DtPlayerWindow::gCmd( const char* cmd ) {
         return;
     }
 
-    if ( !gameLauncher->qzPluginInitialized ) {
+/*    if ( !gameLauncher->qzPluginInitialized ) {
         return;
     }
 
-//    gameLauncher->qzLoader->sendGameCommand( cmd );
+    gameLauncher->qzLoader->sendGameCommand( cmd ); */
 }
 
 void DtPlayerWindow::cmdScreenshot() {

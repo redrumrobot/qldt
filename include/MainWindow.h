@@ -54,6 +54,7 @@ public:
     static void addEntryToRecentList( const QString& entry, QStringList& list );
 
     QProcess* quakeArena;
+    QProcess* quakeLiveStandalone;
     QProcess* otherApp;
 
 public slots:

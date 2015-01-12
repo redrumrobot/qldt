@@ -133,6 +133,7 @@ DtMainWindow::DtMainWindow() {
 #endif
 
     quakeArena = 0;
+    quakeLiveStandalone = 0;
     otherApp = 0;
     demoPlayer = new DtPlayerWindow( this );
 
