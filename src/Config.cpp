@@ -240,6 +240,7 @@ void DtConfig::save( bool saveDefaults ) {
     SET( StringList,    recentOpenedUrls )
     SET( StringList,    recentOpenedConfigs )
     SET( Int,           selectedGame )
+    SET( String,        qzFSBasePath )
     SET( String,        qzHomePath )
     SET( String,        qaHomePath )
     SET( String,	qzPath )
