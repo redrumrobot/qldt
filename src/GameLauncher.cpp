@@ -207,12 +207,7 @@ void DtGameLauncher::runOtherAppDemo() {
         demoFileName = path + "/" + currentDemo;
     }
 
-    if ( cmdLine.startsWith( "%demoName" ) ) {
-        cmdLine.replace( "%demoName", demoFileName );
-    }
-    else {
-        cmdLine.replace( " %demoName", " " + demoFileName );
-    }
+    cmdLine.replace( "%demoName", demoFileName );
 
     args = cmdLine.split( ' ', QString::SkipEmptyParts );
     dtMainWindow->otherApp->start( config.otherAppPath, args );

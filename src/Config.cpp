@@ -176,7 +176,7 @@ void DtConfig::loadDefaults() {
     VAR( Bool,          otherAppMenu,                 false )
     VAR( Bool,          otherAppPreview,              false )
     VAR( String,        otherAppPath,                 "" )
-    VAR( String,        otherAppCmdLine,              "+demo %demoName +set nextdemo quit" )
+    VAR( String,        otherAppCmdLine,              "+demo \"%demoName\" +set nextdemo quit" )
     VAR( Bool,          otherAppFromDemos,            true )
 
     END
