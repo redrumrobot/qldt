@@ -448,8 +448,10 @@ void DtConfig::updatePaths() {
         if ( qzFSBasePath.contains( "Steam/SteamApps" ) ) {
             QDir steamdir = QDir( qzFSBasePath );
             foreach( QString homePath, steamdir.entryList() ) {
-                if ( QDir( homePath + "/baseq3" ).exists() ) {
+                homePath = qzFSBasePath + "/" + homePath;
+                if ( QDir( homePath + "/baseq3/demos" ).exists() ) {
                     qzHomePath = homePath;
+                    break;
                 }
             }
         }
