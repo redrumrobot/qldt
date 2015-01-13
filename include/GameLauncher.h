@@ -38,8 +38,8 @@ public:
     DtGameLauncher( WId win, int mode, bool fullscreen, QWidget* parent = 0 );
     ~DtGameLauncher();
 
-    bool qzProcessInitialized;
     bool qaProcessInitialized;
+    bool qzProcessInitialized;
     bool otherAppProcessInitialized;
 
     bool setDemo( QString demoName );
