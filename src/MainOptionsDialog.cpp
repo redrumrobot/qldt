@@ -42,7 +42,7 @@ DtMainOptionsDialog::DtMainOptionsDialog( QWidget* parent ) : DtOptionsDialog( p
     setWindowTitle( tr( "Preferences" ) );
     setWindowModality( Qt::WindowModal );
 
-    QSize defaultSize( 1024, 768 );
+    QSize defaultSize( 1000, 600 );
     setMinimumSize( defaultSize );
     resize( config.settings->value( "OptionsDialog/size", defaultSize ).toSize() );
 
