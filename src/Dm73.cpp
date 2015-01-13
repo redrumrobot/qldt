@@ -174,31 +174,25 @@ void DtDm73::parseConfigVars( char* str, int len, int csIndex ) {
                  strEnd[ 3 ] == '1' )
             {
                 subscribedPlayers.insert( playerNum );
-
-                if ( !dtdata::config.showClanTags ) {
-                    break;
-                }
             }
 
-            if ( dtdata::config.showClanTags ) {
-                if ( strEnd[ 0 ] == confDelimeter  &&
-                     strEnd[ 1 ] == 'c'            &&
-                     strEnd[ 2 ] == 'n'            &&
-                     strEnd[ 3 ] == confDelimeter )
-                {
-                    char* playerStr = strEnd + 3;
-                    readPlayerName( playerStr, pName );
-                    int nameLength = strnlen( pName, 100 );
+            if ( strEnd[ 0 ] == confDelimeter  &&
+                 strEnd[ 1 ] == 'c'            &&
+                 strEnd[ 2 ] == 'n'            &&
+                 strEnd[ 3 ] == confDelimeter )
+            {
+                char* playerStr = strEnd + 3;
+                readPlayerName( playerStr, pName );
+                int nameLength = strnlen( pName, 100 );
 
-                    if ( nameLength ) {
-                        pNamePtr += nameLength;
-                        pNamePtr[ 0 ] = ' ';
-                        ++pNamePtr;
-                        haveClantag = true;
-                    }
-
-                    break;
+                if ( nameLength ) {
+                    pNamePtr += nameLength;
+                    pNamePtr[ 0 ] = ' ';
+                    ++pNamePtr;
+                    haveClantag = true;
                 }
+
+                break;
             }
 
             --strEnd;

@@ -96,10 +96,19 @@ void DtTablesWidget::showDemoInfo( DtDemo* demo ) {
 
     const infoMap& info = demo->getInfo();
     int infoCount = info.count();
+    int proto = demo->getProto();
 
     for ( int i = 0; i < infoCount; ++i ) {
         if ( info.at( i ).first.startsWith( "playerName" ) ) {
-            playersTable->addPlayer( info.at( i ).second );
+            QString name = info.at( i ).second;
+            int spaceidx = name.indexOf( " " );
+            if ( !dtdata::config.showClanTags
+              && spaceidx >= 0
+              && proto == QZ_73 ) {
+                playersTable->addPlayer( name.remove( 0, spaceidx + 1 ) );
+            } else {
+                playersTable->addPlayer( info.at( i ).second );
+            }
         } else {
             bool begin = ( info.at( i ).first == "sv_skillRating" );
             variablesTable->addVariable( info.at( i ).first, info.at( i ).second, begin );
