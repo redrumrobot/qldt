@@ -7,23 +7,14 @@ TRANSLATIONS            =   res/lang/ru.ts
 include(qtsingleapp/src/qtsingleapplication.pri)
 
 INCLUDEPATH += ../include                           \
-    ../include/firefox                              \
-    ../include/firefox/modules/plugin/base/public   \
-    ../include/firefox/js/src                       \
     zlib/contrib/minizip                            \
     unrar                                           \
-    hde                                             \
     p7zip/src                                       \
     p7zip/include
 
 DEPENDPATH += ../include                            \
-    ../include/firefox                              \
-    ../include/firefox/modules/plugin/base/public   \
-    ../include/firefox/js/src                       \
     zlib/contrib/minizip                            \
     unrar                                           \
-    hde                                             \
-    detours                                         \
     p7zip/src                                       \
     p7zip/include
 
@@ -155,16 +146,6 @@ SOURCES += qldt.cpp           \
     FindDemo.cpp              \
     FindDemoTable.cpp
 
-linux-g++-64 {
-    HEADERS += hde64.h
-    SOURCES += hde64.c
-}
-
-linux-g++-32 {
-    HEADERS += hde32.h
-    SOURCES += hde32.c
-}
-
 unix {
     INCLUDEPATH += ./p7zip/src/linux/Common
     DEPENDPATH += ./p7zip/src/linux/Common
@@ -200,3 +181,5 @@ win32 {
     QMAKE_CXXFLAGS_RELEASE += -MP2 -Ox
     DEFINES += _CRT_SECURE_NO_WARNINGS _UNICODE
 }
+
+QMAKE_CLEAN += ./unrar/libunrar.a ./p7zip/libp7zip.a ./p7zip/p7zip.lib ./unrar/unrar.lib
