@@ -1,7 +1,7 @@
 IDI_ICON1 ICON DISCARDABLE "res/text-editor.ico"
 IDI_ICON2 ICON DISCARDABLE "res/cfg.ico"
 1 VERSIONINFO
-FILEVERSION 1,1,11,0
+FILEVERSION 1,2,1,0
 BEGIN
 	BLOCK "StringFileInfo"
     BEGIN
@@ -10,8 +10,8 @@ BEGIN
             VALUE "FileDescription",  "Quake Live - Config Editor"
             VALUE "LegalCopyright",   "Copyright (c) 2010-2013 Ed Bow"
             VALUE "ProductName",      "Quake Live - Config Editor"
-            VALUE "ProductVersion",   "1.1.11"
-            VALUE "FileVersion",      "1.1.11"
+            VALUE "ProductVersion",   "1.2.1"
+            VALUE "FileVersion",      "1.2.1"
         END
     END
 	

@@ -20,6 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #ifndef DTVERSION_H
 #define DTVERSION_H
 
-const char* const VERSION = "1.1.11";
+const char* const VERSION = "1.2.1";
 
 #endif // DTVERSION_H
