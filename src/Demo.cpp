@@ -1230,7 +1230,8 @@ QString DtDemo::writeSegment( DtWriteOptions* options ) {
     else {
         QString fName = QString( "tmp%1.dm_%2" )
                         .arg( QString::number( qrand(), 16 ) )
-                        .arg( demoProto );
+//                        .arg( demoProto );
+                        .arg( realProto );
         outFileName = path + "/" + fName;
     }
 
