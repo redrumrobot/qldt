@@ -1,21 +1,31 @@
-1.1.11 (18-08-2013)
+1.2.1 (2015-01-16)
+    support for dm_90 demos
+    support for standalone QL (including Steam version) for watching demos
+    easier integration with WolfcamQL
+    ability to search for HMG frags
+    better renaming of duel demos
+    fix for "show clantags" option needing a restart to work
+    fix "lag" when opening options if Q3 home path wasn't set
+    minor UI tweaks (find frags panel, options dialog, menu...)
+
+1.1.11 (2013-08-18)
     the Race gametype support (by Lam)
     fix the map selector in the "find frags" panel (by Lam)
 
-1.1.10 (03-05-2013)
+1.1.10 (2013-05-03)
     fix Quake Live login issue (by Lam)
 
-1.1.9 (03-05-2012)
+1.1.9 (2012-05-03)
     fix ql login bug on linux (by woky)
     Fedora 16 build fix (by woky)
     the new gametypes (DOM, AD, RR, HARVESTER, 1FCTF) crash fix (by Lam)
     find text: date column (by Lam)
     
-1.1.8 (09-05-2011)
+1.1.8 (2011-05-09)
     find frags: telefrags, kamikaze and ignore teamkills option
     some minor bugfixes
 
-1.1.5 (01-05-2011)
+1.1.5 (2011-05-01)
     update table option in the tools menu
     sv_skillRating now shown in the first table row
     demo boundaries extension can be customized separately (begin/end)
@@ -25,12 +35,12 @@
     fix autorename bug
     fix file moving issues
 
-1.1.4 (13-04-2011)
+1.1.4 (2011-04-13)
     7zip (lzma) demo packing/unpacking support
     fix autorename bugs
     fix cfg editor search cursor bug
 
-1.1.3 (27-03-2011)
+1.1.3 (2011-03-27)
     fix main menu bug
     fix demo deletion bug
     fix delay removing bug
@@ -40,7 +50,7 @@
     fix issue when other app closed if ql disconnected
     find frags: "min. frags" now set to 1 by default
 
-1.1.2 (24-03-2011)
+1.1.2 (2011-03-24)
     demo edit pauses fix
     find frags: option to show frags caused by direct hits only
     fix weapon name typo
@@ -49,7 +59,7 @@
     fix find frags bug
     demo editor can open a demo from any table
 
-1.1.1 (21-03-2011)
+1.1.1 (2011-03-21)
     added missing KP_HOME to the highlighter index
     fix database obsolete records removing bug
     find frags: resolved issue with the "min. frags" = 1
@@ -58,7 +68,7 @@
     fix path edit file dialog bug
     help additions and fixes
 
-1.1.0 (09-03-2011)
+1.1.0 (2011-03-09)
     slightly increased program start speed
     demos database (no more header indexing on every app start)
     removed option for disabling demo headers indexing
@@ -99,11 +109,11 @@
     fix main table selection bug
     fix time format saving bug in options
 
-1.0.3 (12-02-2011)
+1.0.3 (2011-02-12)
     demo edit regression fixes
     cfg edit: updated syntax highlighter index
 
-1.0.2 (26-01-2011)
+1.0.2 (2011-01-26)
     demo unlag fix
     fix pause remove bug
     help fixes
@@ -111,10 +121,10 @@
     fix item timers bug in edit
     fix warmup bug in edit
 
-1.0.1 (16-01-2011)
+1.0.1 (2011-01-16)
     minor help fixes and changes
 
-1.0.0 (14-01-2011)
+1.0.0 (2011-01-14)
     options layout change
     config editor is a standalone program now
     disconnect option ("Connection" menu)
@@ -157,20 +167,20 @@
     fix variables table bug
     fix CA/FT round start when cutting
 
-0.9.14 (10-12-2010)
+0.9.14 (2010-12-10)
     fix next demo action bug
     fix kb filter arrows bug on windows (windowed mode)
     cfg edit: fix some autocompleter bugs
     cmd editor: "Subscribed" player info string
     cmd editor: fixed edit command bug
 
-0.9.13 (13-11-2010)
+0.9.13 (2010-11-13)
     cfg editor: updated syntax highlighter index
     cfg editor options: autocomplete, on by default
     cfg editor: fixed edit->sort aliases issue
     find frags: updated QL map list
 
-0.9.12 (04-11-2010)
+0.9.12 (2010-11-04)
     edit: removed ad waiting delay when watching a demo parts
     edit: fixed servertime label size
     edit: fixed empty demos crash
@@ -195,7 +205,7 @@
     fixed file dialog freeze
     fixed win32 build bug
 
-0.9.11 (03-09-2010)
+0.9.11 (2010-09-03)
     cfg syntax highlighter update
     fixed cfg editor bug
     fixed bug when play demo caused a crash after demo deleting
@@ -203,7 +213,7 @@
     fixed cpma demos edit bug
     dir tree: directory symbolic links support
 
-0.9.10 (31-08-2010)
+0.9.10 (2010-08-31)
     fixed keyboard filter action alias issue on linux
     removed "CBT mode" windows option (QL window doesn't grab a mouse cursor anymore)
     added com_allowConsole 1 to QL starting command string
@@ -217,7 +227,7 @@
     fixed cfg editor find panel bug
     updated cfg editor syntax highlight
 
-0.9.8 (10-08-2010)
+0.9.8 (2010-08-10)
     fixed some dir tree bugs
     slightly increased program starting speed
     fixed some cfg editor bugs
@@ -226,13 +236,13 @@
     updated map names
     freeze tag support
 
-0.9.6 (27-07-2010)
+0.9.6 (2010-07-27)
     fixed Q3 demo edit bug
     fixed rename bug
     increased demo headers indexing speed
     fixed demo deletion bug
 
-0.9.5 (19-07-2010)
+0.9.5 (2010-07-19)
     fixed scores bug in the QL demo edit
     fixed some directory tree bugs
     fixed find frags panel bug
@@ -250,7 +260,7 @@
     edit: save as xml
     cfg editor: recent configs menu
 
-0.9.4 (12-07-2010)
+0.9.4 (2010-07-12)
     fixed some translation bugs
     fixed file download bug
     fixed accuracy key action bug
@@ -266,7 +276,7 @@
     fixed sound volume bug
     fixed key capture bug on vista/win7
 
-0.9.3 (01-07-2010)
+0.9.3 (2010-07-01)
     fixed some translation bugs
     fixed windows style bug
     fixed lineEdit style bug
@@ -288,7 +298,7 @@
     fixed user agent bug
     fixed cvars table order
 
-0.9.1 (15-06-2010)
+0.9.1 (2010-06-15)
     fixed some translation bugs
     fixed options edit icon bug
     fixed options config selection bug
@@ -305,7 +315,7 @@
     fixed sound mute bug
     fixed directory tree bug
 
-0.9.0 (11-06-2010)
+0.9.0 (2010-06-11)
     fixed some plugin library loading bugs
     fixed file download bug
     fixed some translation bugs
@@ -376,14 +386,14 @@
     fixed bug with file downloading
     fixed directory tree bug
 
-0.8.6 (27-05-2010)
+0.8.6 (2010-05-27)
     fixed some translation bugs
     slight demo parsing code optimizations
     fixed bug when import from XML didn't work
     fixed bug when it can start to download a non-valid url
     fixed download indicator bug when it cancelled
 
-0.8.5 (23-05-2010)
+0.8.5 (2010-05-23)
     fixed bug when accuracy box in QL demo can't be closed
     fixed some translation bugs
     fixed bug with demo config priority
@@ -409,7 +419,7 @@
     options: QL demo player key bindings
     fixed windows bug when it fails to load file from directory with localized name
 
-0.8.3 beta (17-05-2010)
+0.8.3 beta (2010-05-17)
     QL fullscreen modes comboBox in options now shows all modes properly
     changed free space getting code on Windows
     +fs_game with right mod name now passed to the Q3 binary
@@ -419,11 +429,11 @@
     demo headers reading process now can be cancelled
     removed "+set in_mouse -1" from demo starting command string, because its there isn't necessary anymore
 
-0.8.1 beta (15-05-2010)
+0.8.1 beta (2010-05-15)
     language translations now will be installed properly
     fixed directory tree font size bug
     increased edited demo saving speed in some cases
     fixed some file assotiation issues
 
-0.8.0 beta (14-05-2010)
+0.8.0 beta (2010-05-14)
     first beta release
