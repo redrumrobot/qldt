@@ -28,18 +28,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <QPointer>
 #include <QEventLoop>
 
-DtFormatDialog::DtFormatDialog( QString title, QString& defFormat, QString help, QWidget* parent )
-    : QDialog( parent ), defaultFormat( defFormat )
+DtFormatDialog::DtFormatDialog( QString title, QString& defFormat, QString help,
+                    QString& defFormat2, QString help2, QWidget* parent )
+    : QDialog( parent ), defaultFormat( defFormat ), defaultFormat2( defFormat2 )
 {
     setWindowTitle( title );
-    setFixedSize( 400, 250 );
+    setMinimumWidth( 400 );
     setWindowModality( Qt::ApplicationModal );
 
     QVBoxLayout* dialogLayout = new QVBoxLayout;
 
     if ( !help.isEmpty() ) {
         QLabel* formatHelp = new QLabel( help );
-        dialogLayout->addWidget( formatHelp, 1, Qt::AlignCenter );
+        dialogLayout->addWidget( formatHelp, 1, Qt::AlignLeft );
     }
 
     QHBoxLayout* buttonsLayout = new QHBoxLayout;
@@ -52,11 +53,15 @@ DtFormatDialog::DtFormatDialog( QString title, QString& defFormat, QString help,
 
     formatEdit = new QLineEdit( defaultFormat );
 
-    if ( !help.isEmpty() ) {
-        dialogLayout->addSpacing( 10 );
-    }
-
     dialogLayout->addWidget( formatEdit );
+
+    if ( !help2.isEmpty() ) {
+        dialogLayout->addSpacing( 10 );
+        QLabel* formatHelp2 = new QLabel( help2 );
+        dialogLayout->addWidget( formatHelp2, 1, Qt::AlignLeft );
+        formatEdit2 = new QLineEdit( defaultFormat2 );
+        dialogLayout->addWidget( formatEdit2 );
+    }
 
     buttonsLayout->addStretch( 1 );
     buttonsLayout->addWidget( okButton, 1, Qt::AlignRight );

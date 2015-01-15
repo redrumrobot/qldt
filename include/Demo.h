@@ -127,6 +127,8 @@ public:
     QString getGamestate() const;
     bool isInProgress() const;
     const DtCmdVec& getCommands() const;
+    const QString& getFirstPlace() const;
+    const QString& getSecondPlace() const;
 
 private:
     enum parseType {
@@ -234,6 +236,8 @@ private:
     QString flagStatus;
     QString firstPlace;
     QString secondPlace;
+    QString firstPlaceGS;
+    QString secondPlaceGS;
     int caRoundNum;
 
     int mapRestartTime;

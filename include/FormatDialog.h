@@ -30,7 +30,8 @@ class QLineEdit;
 class DtFormatDialog : public QDialog {
     Q_OBJECT
 public:
-    DtFormatDialog( QString title, QString& defFormat, QString help, QWidget* parent = 0 );
+    DtFormatDialog( QString title, QString& defFormat, QString help,
+                    QString& defFormat2, QString help2, QWidget* parent = 0 );
 
     enum dialogButtons {
         BTN_CANCEL,
@@ -45,6 +46,8 @@ protected:
     QEventLoop* pEventLoop;
     QLineEdit* formatEdit;
     QString& defaultFormat;
+    QLineEdit* formatEdit2;
+    QString& defaultFormat2;
 
     dialogButtons ret;
 

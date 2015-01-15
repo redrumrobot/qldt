@@ -111,6 +111,14 @@ void DtDm73::parseConfigVars( char* str, int len, int csIndex ) {
             d->advertDelay = atoi( str );
             return;
 
+        case CS_FIRST_PLACE :
+            d->firstPlaceGS = str;
+            break;
+
+        case CS_SECOND_PLACE :
+            d->secondPlaceGS = str;
+        break;
+
         default : break;
     }
 

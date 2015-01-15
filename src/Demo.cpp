@@ -1402,6 +1402,14 @@ const DtCmdVec& DtDemo::getCommands() const {
     return commands;
 }
 
+const QString& DtDemo::getFirstPlace() const {
+    return firstPlaceGS;
+}
+
+const QString& DtDemo::getSecondPlace() const {
+    return secondPlaceGS;
+}
+
 bool DtDemo::openXml() {
     if ( demoFile->isOpen() ) {
         return true;

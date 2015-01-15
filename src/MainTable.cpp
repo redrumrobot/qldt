@@ -83,9 +83,18 @@ void DtMainTable::autoRenameItem() {
                        "&lt;T&gt; - Game type<br />"
                        "&lt;M&gt; - Map name<br />"
                        "&lt;D&gt; - Record date and time<br />"
-                       "&lt;N&gt; - Number" );
+                       "&lt;N&gt; - Number<br /><br />"
+                       "<b>Enter format for team modes and FFA here:</b>" );
+    QString duelhelp = tr( "For duel, additional fields are available:<br />"
+                       "&lt;FC&gt; - First player's clan<br />"
+                       "&lt;FP&gt; - First player's name<br />"
+                       "&lt;SC&gt; - Second player's clan<br />"
+                       "&lt;SP&gt; - Second player's name<br /><br />"
+                       "<b>Enter format for duel demos here:</b>" );
 
-    DtFormatDialog renameDialog( tr( "Rename format" ), config.lastRenameFormat, help, this );
+    DtFormatDialog renameDialog( tr( "Automatically rename demos" ),
+    config.lastRenameFormat, help,
+    config.lastDuelRenameFormat, duelhelp, this );
     DtFormatDialog::dialogButtons button = renameDialog.exec();
 
     if ( button == DtFormatDialog::BTN_OK ) {
@@ -103,6 +112,9 @@ void DtMainTable::autoRenameItem() {
         foreach ( int rowNum, selectedRows ) {
             DtDemo* demo = demoAt( rowNum );
             QString newFileName = config.lastRenameFormat;
+            if ( demo->getProto() == QZ_73 && demo->getGameType() == GT_DUEL ) {
+                newFileName = config.lastDuelRenameFormat;
+            }
             newFileName.replace( "<P>", demo->getClientName() );
             newFileName.replace( "<T>", getGameTypeName( demo->getProto(),
                                                          demo->getQ3Mod(),
@@ -116,7 +128,31 @@ void DtMainTable::autoRenameItem() {
             QString dateTime = demoTime.toString( "yyyy_MM_dd-HH_mm_ss" );
             newFileName.replace( "<D>", dateTime );
             newFileName.replace( "<N>", QString::number( rowNum ) );
+
+            if ( demo->getProto() == QZ_73 && demo->getGameType() == GT_DUEL )
+            {
+                if ( !demo->isGamesateParsed() ) demo->parseGamestateMsg();
+
+                QString pp, pc;
+                QString player = demo->getFirstPlace();
+                cleanStringColors( player );
+                pp = player.section( ' ', -1, -1 );
+                pc = player.section( ' ', -2, -2 );
+                newFileName.replace( "<FC>", pc );
+                newFileName.replace( "<FP>", pp );
+
+                player = demo->getSecondPlace();
+                cleanStringColors( player );
+                pp = player.section( ' ', -1, -1 );
+                pc = player.section( ' ', -2, -2 );
+                newFileName.replace( "<SC>", pc );
+                newFileName.replace( "<SP>", pp );
+            }
+
             newFileName.replace( ' ', '-' );
+            // People have all kinds of crazy shit in their clantags, sanitize this a bit:
+            newFileName.remove( QRegExp( "[?:*<>$\"/\\|]" ) );
+            // "[,^@={}[]~!?:*|#%<>$\"'();`/\\]"
 
             QString newName;
             QString newNamePath;
@@ -142,8 +178,9 @@ void DtMainTable::organizeDemos() {
                        "&lt;Y&gt; - Year<br />"
                        "&lt;T&gt; - Game type<br />"
                        "&lt;MN&gt; - Map name<br />" );
+    QString placeholder = "";
 
-    DtFormatDialog organizeDialog( tr( "Organize in subdirectories" ), config.lastOrganizeFormat, help, this );
+    DtFormatDialog organizeDialog( tr( "Organize in subdirectories" ), config.lastOrganizeFormat, help, placeholder, "", this );
     organizeDialog.setFixedHeight( 220 );
     DtFormatDialog::dialogButtons button = organizeDialog.exec();
 

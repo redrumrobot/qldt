@@ -56,7 +56,6 @@ QString dtdata::defaultTmpDirName;
 QString dtdata::defaultNewDirName;
 QString dtdata::defaultDateFormat;
 QString dtdata::defaultTimeFormat;
-QString dtdata::defaultRenameFormat;
 QString dtdata::defaultConfigFormat;
 QStringList dtdata::defaultConfigFilters;
 QStringList dtdata::defaultMainTableColumnNames;
@@ -177,7 +176,6 @@ bool dtdata::initializeData() {
     defaultNewDirName = "_demotools_new";
     defaultDateFormat = "dd.MM.yy hh:mm";
     defaultTimeFormat = "h:m:ss";
-    defaultRenameFormat = "<T>-<P>-<M>-<D>";
 
     defaultConfigFormat = "Quake Scripts (";
     defaultConfigFilters << ".cfg" << ".menu" << ".h";

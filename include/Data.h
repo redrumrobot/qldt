@@ -96,7 +96,6 @@ extern QString defaultTmpDirName;
 extern QString defaultNewDirName;
 extern QString defaultDateFormat;
 extern QString defaultTimeFormat;
-extern QString defaultRenameFormat;
 extern QString defaultConfigFormat;
 extern QStringList defaultConfigFilters;
 extern QStringList defaultMainTableColumnNames;

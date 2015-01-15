@@ -125,6 +125,7 @@ public:
     bool dropDemosToNewDir;
     bool archiveRemovePaths;
     QString lastRenameFormat;
+    QString lastDuelRenameFormat;
     QString lastOrganizeFormat;
 
     bool editorShowGameTime;
