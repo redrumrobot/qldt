@@ -226,7 +226,7 @@ void DtMainWindow::createMenus() {
     actFindText = toolsMenu->addAction( tr( "Find &chat" ), this, SLOT( openFindTextDialog() ) );
     actEditDemo = toolsMenu->addAction( tr( "&Edit demo" ), this, SLOT( openDemoEditor() ),
                                         QKeySequence( "F4" ) );
-    actConverter = toolsMenu->addAction( tr( "Co&nvert" ), this, SLOT( openConvertDialog() ) );
+//    actConverter = toolsMenu->addAction( tr( "Co&nvert" ), this, SLOT( openConvertDialog() ) );
 
     toolsMenu->addSeparator();
 
@@ -710,7 +710,7 @@ void DtMainWindow::onShowToolsMenu() {
     }
 
     actAutoRename->setEnabled( mainSelection );
-    actConverter->setEnabled( mainSelection );
+//    actConverter->setEnabled( mainSelection );
 }
 
 void DtMainWindow::onHideToolsMenu() {
