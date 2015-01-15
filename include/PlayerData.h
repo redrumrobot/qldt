@@ -25,8 +25,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <QString>
 #include <QList>
 
+#define QZ_DESKTOP -2
 #define QZ_640x480 5
 #define QZ_800x600 9
+#define QZ_1024x640 10
 #define QZ_1024x768 12
 
 #define QA_640x480 3

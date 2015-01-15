@@ -264,11 +264,13 @@ void DtMainOptionsDialog::createPlaybackPage() {
     QVBoxLayout* playerLayout = new QVBoxLayout;
     playerLayout->addWidget( playerTabs );
 
+    qzFullscreenModeCombo->addItem( "desktop", -2 );
+
     for ( int i = 0; i < qzModes.count(); ++i ) {
         QString qzModeStr = QString( "%1x%2" ).arg( qzModes.at( i ).width() )
                                               .arg( qzModes.at( i ).height() );
 
-        qzFullscreenModeCombo->addItem( qzModeStr );
+        qzFullscreenModeCombo->addItem( qzModeStr, i );
         qzWindowedModeCombo->addItem( qzModeStr, i );
 
         if ( i < qaModes.count() ) {
@@ -627,9 +629,9 @@ void DtMainOptionsDialog::readConfig() {
     qzFullscreenCb->setChecked( config.qzFullscreen );
     qaFullscreenCb->setChecked( config.qaFullscreen );
     qzWindowedModeCombo->setCurrentIndex( qzWindowedModeCombo->findData( config.qzWindowedMode ) );
-    qzFullscreenModeCombo->setCurrentIndex( config.qzFullscreenMode );
+    qzFullscreenModeCombo->setCurrentIndex( qzFullscreenModeCombo->findData( config.qzFullscreenMode ) );
     qaWindowedModeCombo->setCurrentIndex( qaWindowedModeCombo->findData( config.qaWindowedMode ) );
-    qaFullscreenModeCombo->setCurrentIndex( config.qaFullscreenMode );
+    qaFullscreenModeCombo->setCurrentIndex( qaFullscreenModeCombo->findData( config.qaFullscreenMode ) );
 
     int cfgIndex = qzConfigCombo->findText( config.qzGameConfig );
 
@@ -700,9 +702,9 @@ void DtMainOptionsDialog::writeConfig() {
     config.qzFullscreen = qzFullscreenCb->isChecked();
     config.qaFullscreen = qaFullscreenCb->isChecked();
     config.qzWindowedMode = qzWindowedModeCombo->itemData( qzWindowedModeCombo->currentIndex() ).toInt();
-    config.qzFullscreenMode = qzFullscreenModeCombo->currentIndex();
+    config.qzFullscreenMode = qzFullscreenModeCombo->itemData( qzFullscreenModeCombo->currentIndex() ).toInt();
     config.qaWindowedMode = qaWindowedModeCombo->itemData( qaWindowedModeCombo->currentIndex() ).toInt();
-    config.qaFullscreenMode = qaFullscreenModeCombo->currentIndex();
+    config.qaFullscreenMode = qaFullscreenModeCombo->itemData( qaFullscreenModeCombo->currentIndex() ).toInt();
 
     config.qzGameConfig = qzConfigCombo->currentText();
 

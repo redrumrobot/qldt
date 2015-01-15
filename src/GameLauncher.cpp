@@ -159,8 +159,6 @@ void DtGameLauncher::runQzDemo() {
         return;
     }
 
-    QString qzMode = config.qzFullscreen ? QString::number( config.qzFullscreenMode ) :
-                                           QString::number( config.qzWindowedMode );
     QStringList args;
 
     QString tmpBasePath = config.getQzFSBasePath();
@@ -171,7 +169,8 @@ void DtGameLauncher::runQzDemo() {
 #endif
 
     args << "+set" << "r_fullscreen" << QString::number( config.qzFullscreen );
-    args << "+set" << "r_mode" << qzMode;
+    args << "+set" << "r_mode" << QString::number( config.qzFullscreenMode );
+    args << "+set" << "r_windowedmode" << QString::number( config.qzWindowedMode );
     args << "+set" << "in_nograb" << QString::number( !config.qzFullscreen );
     args << "+set" << "timescale" << "1";
     args << "+set" << "com_cameramode" << "1";
