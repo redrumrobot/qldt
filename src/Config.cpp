@@ -440,11 +440,19 @@ void DtConfig::textEditorDefaults() {
 }
 
 void DtConfig::updatePaths() {
+    QString prevqzHome = qzHomePath;
+    static bool autoexec_checked = false;
+
     qzHomePath.clear();
     qzBasePath.clear();
     qaBasePath.clear();
     qzDemoPath.clear();
     qaDemoPath.clear();
+
+    if( !qaHomePath.isEmpty() ) {
+        qaBasePath = qaHomePath + "/" + baseSubDir;
+        qaDemoPath = qaBasePath + "/" + demoSubDir;
+    }
 
     if( !qzFSBasePath.isEmpty() ) {
         qzHomePath = qzFSBasePath + "/home";
@@ -460,11 +468,33 @@ void DtConfig::updatePaths() {
         }
         qzBasePath = qzHomePath + "/" + baseSubDir;
         qzDemoPath = qzBasePath + "/" + demoSubDir;
-    }
 
-    if( !qaHomePath.isEmpty() ) {
-        qaBasePath = qaHomePath + "/" + baseSubDir;
-        qaDemoPath = qaBasePath + "/" + demoSubDir;
+        // Check autoexec if we're moving into a new home and when starting QLDT
+        if ( qzHomePath == prevqzHome && autoexec_checked ) return;
+        autoexec_checked = true;
+
+        QFile autoexec( qzBasePath + "/autoexec.cfg" );
+
+        if ( autoexec.exists() ) {
+            if ( !autoexec.open( QFile::ReadOnly | QFile::Text ) ) {
+                printf( "Error while opening autoexec for reading.\n" );
+                return;
+            }
+            QTextStream cfgstream( &autoexec );
+            QString contents = cfgstream.readAll( );
+            autoexec.close();
+            if ( contents.contains( "in_nograb", Qt::CaseInsensitive ) ) {
+                return;
+            }
+        }
+        /* no autoexec or no in_nograb in there, let's add it */
+        printf( "Autoexec has no in_nograb, adding\n" );
+        if ( !autoexec.open( QFile::WriteOnly | QFile::Text | QFile::Append ) ) {
+            printf( "Error opening autoexec for writing.\n" );
+            return;
+        }
+        autoexec.write( "\n// Added by QLDT\nin_nograb 0\n" );
+        autoexec.close( );
     }
 }
 
