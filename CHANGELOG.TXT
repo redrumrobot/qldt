@@ -1,4 +1,4 @@
-1.2.1 (2015-01-16)
+1.2.1 (2015-01-18)
     support for dm_90 demos
     support for standalone QL (including Steam version) for watching demos
     easier integration with WolfcamQL
