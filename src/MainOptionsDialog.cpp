@@ -264,7 +264,9 @@ void DtMainOptionsDialog::createPlaybackPage() {
     QVBoxLayout* playerLayout = new QVBoxLayout;
     playerLayout->addWidget( playerTabs );
 
-    qzFullscreenModeCombo->addItem( "desktop", -2 );
+    qzFullscreenModeCombo->addItem( "don't change", QZ_DONTCHANGE );
+    qzWindowedModeCombo->addItem( "don't change", QZ_DONTCHANGE );
+    qzFullscreenModeCombo->addItem( "desktop", QZ_DESKTOP );
 
     for ( int i = 0; i < qzModes.count(); ++i ) {
         QString qzModeStr = QString( "%1x%2" ).arg( qzModes.at( i ).width() )

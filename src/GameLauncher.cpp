@@ -169,8 +169,10 @@ void DtGameLauncher::runQzDemo() {
 #endif
 
     args << "+set" << "r_fullscreen" << QString::number( config.qzFullscreen );
-    args << "+set" << "r_mode" << QString::number( config.qzFullscreenMode );
-    args << "+set" << "r_windowedmode" << QString::number( config.qzWindowedMode );
+    if ( config.qzFullscreenMode != QZ_DONTCHANGE )
+        args << "+set" << "r_mode" << QString::number( config.qzFullscreenMode );
+    if ( config.qzWindowedMode != QZ_DONTCHANGE )
+        args << "+set" << "r_windowedmode" << QString::number( config.qzWindowedMode );
     args << "+set" << "in_nograb" << QString::number( !config.qzFullscreen );
     args << "+set" << "timescale" << "1";
     args << "+set" << "com_cameramode" << "1";

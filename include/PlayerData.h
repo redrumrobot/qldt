@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <QString>
 #include <QList>
 
+#define QZ_DONTCHANGE -3
 #define QZ_DESKTOP -2
 #define QZ_640x480 5
 #define QZ_800x600 9
