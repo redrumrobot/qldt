@@ -916,24 +916,19 @@ void DtChatTable::setStrings( const QVector< QPair< int, QString > >& chatString
         setItem( row, TC_CLIENTNUM, new QTableWidgetItem( numText ) );
 
         if ( !q3Cpma ) { /* QL/VQ3/OSP */
-            QStringList tokens = chatText.split( chatEscapeChar, QString::SkipEmptyParts );
+            QStringList tokens = chatText.split( QString( chatEscapeChar ) + ":" );
 
-            setItem( row, TC_NAME, new QTableWidgetItem( tokens.at( 0 ) ) );
+            QString msg = tokens.at( 0 );
+            msg.remove( chatEscapeChar );
+            cleanStringColors( msg );
+            setItem( row, TC_NAME, new QTableWidgetItem( msg ) );
 
-            QString msg = tokens.at( 1 );
-
-            if ( chatExp.cap( 1 ) == "chat" ) {
-                msg.remove( 0, 2 );
-            }
-
+            msg = tokens.at( 1 );
+            cleanStringColors( msg );
             setItem( row, TC_STR1, new QTableWidgetItem( msg ) );
 
             msg = ( tokens.count() > 2 ) ? tokens.at( 2 ) : "";
-
-            if ( chatExp.cap( 1 ) == "tchat" ) {
-                msg.remove( 0, 2 );
-            }
-
+            cleanStringColors( msg );
             setItem( row, TC_STR2, new QTableWidgetItem( msg ) );
         }
         else { /* CPMA */
