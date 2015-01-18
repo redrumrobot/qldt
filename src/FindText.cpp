@@ -199,7 +199,7 @@ void DtFindText::scanDemo( int index ) {
                 cleanStringColors( msg );
             }
 
-            if ( textPattern.exactMatch( msg ) ) {
+            if ( textPattern.indexIn( msg ) >= 0 ) {
                 cleanStringColors( playerName );
                 addResult( demo, strTime, playerName, command, msg );
             }
