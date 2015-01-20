@@ -66,7 +66,7 @@ DtPlayerWindow::DtPlayerWindow( QWidget* parent ) : QDialog( parent ) {
     setWindowTitle( defaultWindowTitle );
     updateStyle();
 
-    QSize rMode = qzModes.at( modeNum );
+    QSize rMode = qzModes.at( modeNum >= 0 ? modeNum : 0 );
     QWidget* cWidget = this;
 
 /* OLD    if ( !config.controlPanelAlwaysVisible ) {
