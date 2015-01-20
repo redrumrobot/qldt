@@ -183,8 +183,8 @@ void DtGameLauncher::runQzDemo() {
     args << "+set" << "gt_realm" << "quakelive";
     args << "+set" << "web_sess" << "aaa";
     args << "+set" << "nextdemo" << "quit";
-    if ( !config.qaGameConfig.isEmpty() ) {
-        args << "+exec" << config.qaGameConfig;
+    if ( !config.qzGameConfig.isEmpty() ) {
+        args << "+exec" << config.qzGameConfig;
     }
     args << "+demo" << currentDemo;
 
