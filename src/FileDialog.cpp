@@ -209,8 +209,8 @@ quint64 DtFileDialog::getFreeSpace( const QString& dir ) {
     dirPath[ 2 ] = '\0';
 
     if ( !GetDiskFreeSpaceEx( reinterpret_cast< LPCWSTR >( &dirPath ), &availableBytes, 0, 0 ) ) {
-        QMessageBox::critical( this, "Error", tr( "Unable to get free space on disk %1" )
-                                              .arg( dir.left( 2 ) ) );
+        QMessageBox::critical( this, "Error", tr( "Unable to get free space on disk %1 for dir %2" )
+                                              .arg( dir.left( 2 ), dir ) );
         return 0;
     }
 
