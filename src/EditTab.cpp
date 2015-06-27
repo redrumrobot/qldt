@@ -923,7 +923,7 @@ void DtChatTable::setStrings( const QVector< QPair< int, QString > >& chatString
             cleanStringColors( msg );
             setItem( row, TC_NAME, new QTableWidgetItem( msg ) );
 
-            msg = tokens.at( 1 );
+            msg = ( tokens.count() > 1 ) ? tokens.at( 1 ) : "";
             cleanStringColors( msg );
             setItem( row, TC_STR1, new QTableWidgetItem( msg ) );
 
